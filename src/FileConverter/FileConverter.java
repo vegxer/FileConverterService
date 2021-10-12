@@ -1,5 +1,6 @@
 package FileConverter;
 
+import FileExtension.FileExtension;
 import FileReader.Reader;
 import org.json.simple.parser.ParseException;
 
@@ -14,12 +15,12 @@ import java.io.IOException;
 public abstract class FileConverter {
     protected String fileName = null;
 
-    public abstract void convert(String jsonFileName) throws IOException, XMLStreamException, XMLParseException, ParseException, ParserConfigurationException, TransformerException;
+    public abstract void convert(String fileName) throws IOException, XMLStreamException, XMLParseException, ParseException, ParserConfigurationException, TransformerException;
 
     public static FileConverter create(String fileName) throws IOException {
-        if (Reader.getExtension(fileName).equals("xml"))
+        if (FileExtension.getExtension(fileName).equals("xml"))
             return new XmlToJsonFileConverter(fileName);
-        else if (Reader.getExtension(fileName).equals("json"))
+        else if (FileExtension.getExtension(fileName).equals("json"))
             return new JsonToXmlFileConverter(fileName);
         else
             throw new IllegalArgumentException("Неверное расширение файла");

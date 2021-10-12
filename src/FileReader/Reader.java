@@ -1,5 +1,6 @@
 package FileReader;
 
+import FileExtension.FileExtension;
 import org.json.simple.parser.ParseException;
 
 import javax.management.modelmbean.XMLParseException;
@@ -14,20 +15,12 @@ public abstract class Reader {
     public abstract Object readFile() throws IOException, XMLStreamException, XMLParseException, ParseException;
 
     public static Reader create(String fileName) throws IOException {
-        if (getExtension(fileName).equals("xml"))
+        if (FileExtension.getExtension(fileName).equals("xml"))
             return new MusicBandsReader(fileName);
-        else if (getExtension(fileName).equals("json"))
+        else if (FileExtension.getExtension(fileName).equals("json"))
             return new MusicGenresReader(fileName);
         else
             throw new IllegalArgumentException("Неверное расширение файла");
-    }
-
-    public static String getExtension(String file) throws IOException
-    {
-        if (file.indexOf('.') == -1 || file.indexOf('.') == file.length() - 1)
-            throw new IOException("Incorrect filePath input");
-
-        return file.substring(file.lastIndexOf('.') + 1);
     }
 
 

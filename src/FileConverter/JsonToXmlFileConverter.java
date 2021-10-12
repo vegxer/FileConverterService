@@ -1,6 +1,7 @@
 package FileConverter;
 
 
+import FileExtension.FileExtension;
 import FileReader.Reader;
 import FileWriter.Writer;
 import Music.MusicBand;
@@ -24,7 +25,7 @@ public class JsonToXmlFileConverter extends FileConverter {
     public void convert(String xmlFileName)
             throws IOException, XMLStreamException, XMLParseException,
             ParseException, ParserConfigurationException, TransformerException {
-        if (!Reader.getExtension(xmlFileName).equals("xml"))
+        if (!FileExtension.getExtension(xmlFileName).equals("xml"))
             throw new IllegalArgumentException("Неверное расширение файла");
 
         Reader jsonReader = Reader.create(super.fileName);
