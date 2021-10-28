@@ -1,4 +1,6 @@
 package Music;
+import ListShell.ArrayListShell;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -11,42 +13,23 @@ public class MusicGenre {
     }
 
     public static ArrayList<MusicGenre> convertMusicBandsToGenres(ArrayList<MusicBand> musicBands) {
-        ArrayList<MusicGenre> musicGenres = new ArrayList<>();
+        ArrayListShell<MusicGenre> musicGenres = new ArrayListShell<>();
 
         for (MusicBand musicBand : musicBands) {
             for (MusicGenre musicGenre : musicBand.getGenres()) {
-                if (!contains(musicGenres, musicGenre.getName()))
+                if (!musicGenres.contains(x -> x.getName().equals(musicGenre.getName())))
                     musicGenres.add(musicGenre);
 
                 MusicBand band = new MusicBand();
                 band.setName(musicBand.getName());
                 band.setActivateYear(musicBand.getActivateYear());
                 band.setCountry(musicBand.getCountry());
-                Objects.requireNonNull(getGenre(musicGenres, musicGenre.getName())).addMusicBand(band);
+                Objects.requireNonNull(musicGenres.get(x -> x.getName().equals(musicGenre.getName()))).addMusicBand(band);
             }
         }
 
         return musicGenres;
     }
-
-    public static boolean contains(ArrayList<MusicGenre> musicGenres, String genreName) {
-        for (MusicGenre musicGenre : musicGenres) {
-            if (musicGenre.getName().equals(genreName))
-                return true;
-        }
-
-        return false;
-    }
-
-    public static MusicGenre getGenre(ArrayList<MusicGenre> musicGenres, String genreName) {
-        for (MusicGenre musicGenre : musicGenres) {
-            if (musicGenre.getName().equals(genreName))
-                return musicGenre;
-        }
-
-        return null;
-    }
-
 
     public void addMusicBand(MusicBand musicBand) {
         if (musicBand == null)
