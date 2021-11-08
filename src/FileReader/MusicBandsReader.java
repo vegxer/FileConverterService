@@ -24,8 +24,8 @@ public class MusicBandsReader extends Reader<ArrayList<MusicBand>> {
         XMLInputFactory factory = XMLInputFactory.newInstance();
         FileInputStream inputStream = new FileInputStream(super.fileName);
         XMLEventReader reader = factory.createXMLEventReader(inputStream);
-        inputStream.close();
         XMLEvent xmlEvent = reader.nextEvent();
+        inputStream.close();
 
         return getMusicBands(xmlEvent, reader);
     }
