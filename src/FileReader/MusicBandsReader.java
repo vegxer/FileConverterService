@@ -11,6 +11,7 @@ import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class MusicBandsReader extends Reader<ArrayList<MusicBand>> {
@@ -19,9 +20,11 @@ public class MusicBandsReader extends Reader<ArrayList<MusicBand>> {
     }
 
     @Override
-    public ArrayList<MusicBand> readFile() throws FileNotFoundException, XMLStreamException, XMLParseException {
+    public ArrayList<MusicBand> readFile() throws IOException, XMLStreamException, XMLParseException {
         XMLInputFactory factory = XMLInputFactory.newInstance();
-        XMLEventReader reader = factory.createXMLEventReader(new FileInputStream(super.fileName));
+        FileInputStream inputStream = new FileInputStream(super.fileName);
+        XMLEventReader reader = factory.createXMLEventReader(inputStream);
+        inputStream.close();
         XMLEvent xmlEvent = reader.nextEvent();
 
         return getMusicBands(xmlEvent, reader);

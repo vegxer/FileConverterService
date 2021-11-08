@@ -20,8 +20,9 @@ public class MusicGenresReader extends Reader<ArrayList<MusicGenre>> {
     @Override
     public ArrayList<MusicGenre> readFile() throws IOException, ParseException {
         JSONParser parser = new JSONParser();
-        JSONArray jsonGenres = (JSONArray)(((JSONObject)parser.parse(
-                new FileReader(super.fileName))).get("genres"));
+        FileReader fileReader = new FileReader(super.fileName);
+        JSONArray jsonGenres = (JSONArray)(((JSONObject)parser.parse(fileReader)).get("genres"));
+        fileReader.close();
         ArrayList<MusicGenre> genres = new ArrayList<>();
 
         for (Object obj : jsonGenres) {

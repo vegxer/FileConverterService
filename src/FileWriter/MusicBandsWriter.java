@@ -41,6 +41,7 @@ public class MusicBandsWriter extends Writer<ArrayList<MusicBand>> {
         transformer.transform(domSource, sr);
         FileWriter writer = new FileWriter(super.fileName);
         writer.write(sw.toString());
+        sw.close();
         writer.flush();
         writer.close();
     }
