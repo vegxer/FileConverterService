@@ -9,10 +9,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public abstract class Reader {
+public abstract class Reader<T> {
     protected String fileName = null;
 
-    public abstract Object readFile() throws IOException, XMLStreamException, XMLParseException, ParseException;
+    public abstract T readFile() throws IOException, XMLStreamException, XMLParseException, ParseException;
 
     public static Reader create(String fileName) throws IOException {
         if (FileExtension.getExtension(fileName).equals("xml"))

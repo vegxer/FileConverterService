@@ -15,7 +15,9 @@ import java.io.IOException;
 public abstract class FileConverter {
     protected String fileName = null;
 
-    public abstract void convert(String fileName) throws IOException, XMLStreamException, XMLParseException, ParseException, ParserConfigurationException, TransformerException;
+    public abstract void convert(String fileName)
+            throws IOException, XMLStreamException, XMLParseException,
+            ParseException, ParserConfigurationException, TransformerException;
 
     public static FileConverter create(String fileName) throws IOException {
         if (FileExtension.getExtension(fileName).equals("xml"))

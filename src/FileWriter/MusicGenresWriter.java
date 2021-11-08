@@ -12,15 +12,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class MusicGenresWriter extends Writer {
+public class MusicGenresWriter extends Writer<ArrayList<MusicGenre>> {
     public MusicGenresWriter(String fileName) {
         super.setFileName(fileName);
     }
 
     @Override
-    public void write(Object obj) throws IOException {
-        ArrayList<MusicGenre> musicGenres = (ArrayList<MusicGenre>)obj;
-
+    public void write(ArrayList<MusicGenre> musicGenres) throws IOException {
         JSONObject genresObject = getGenresObject(musicGenres);
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();

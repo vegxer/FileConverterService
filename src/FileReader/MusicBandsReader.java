@@ -13,13 +13,13 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
-public class MusicBandsReader extends Reader {
+public class MusicBandsReader extends Reader<ArrayList<MusicBand>> {
     public MusicBandsReader(String fileName) throws FileNotFoundException {
         super.setFileName(fileName);
     }
 
     @Override
-    public Object readFile() throws FileNotFoundException, XMLStreamException, XMLParseException {
+    public ArrayList<MusicBand> readFile() throws FileNotFoundException, XMLStreamException, XMLParseException {
         XMLInputFactory factory = XMLInputFactory.newInstance();
         XMLEventReader reader = factory.createXMLEventReader(new FileInputStream(super.fileName));
         XMLEvent xmlEvent = reader.nextEvent();

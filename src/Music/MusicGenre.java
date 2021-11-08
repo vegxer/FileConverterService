@@ -1,8 +1,6 @@
 package Music;
-import ListShell.ArrayListShell;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class MusicGenre {
     private String name = null;
@@ -12,24 +10,6 @@ public class MusicGenre {
         musicBands = new ArrayList<>();
     }
 
-    public static ArrayList<MusicGenre> convertMusicBandsToGenres(ArrayList<MusicBand> musicBands) {
-        ArrayListShell<MusicGenre> musicGenres = new ArrayListShell<>();
-
-        for (MusicBand musicBand : musicBands) {
-            for (MusicGenre musicGenre : musicBand.getGenres()) {
-                if (!musicGenres.contains(x -> x.getName().equals(musicGenre.getName())))
-                    musicGenres.add(musicGenre);
-
-                MusicBand band = new MusicBand();
-                band.setName(musicBand.getName());
-                band.setActivateYear(musicBand.getActivateYear());
-                band.setCountry(musicBand.getCountry());
-                Objects.requireNonNull(musicGenres.get(x -> x.getName().equals(musicGenre.getName()))).addMusicBand(band);
-            }
-        }
-
-        return musicGenres;
-    }
 
     public void addMusicBand(MusicBand musicBand) {
         if (musicBand == null)

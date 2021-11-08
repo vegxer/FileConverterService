@@ -2,38 +2,54 @@ package FileConverter;
 
 
 import FileExtension.FileExtension;
-import FileReader.Reader;
-import FileWriter.Writer;
+import FileReader.MusicGenresReader;
+import FileWriter.MusicBandsWriter;
+import ListShell.ArrayListShell;
 import Music.MusicBand;
 import Music.MusicGenre;
 import org.json.simple.parser.ParseException;
 
-import javax.management.modelmbean.XMLParseException;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.stream.XMLStreamException;
 import javax.xml.transform.TransformerException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
-public class JsonToXmlFileConverter extends FileConverter {
+public class JsonToXmlFileConverter extends FileConverter
+        implements StructureChanger<ArrayList<MusicBand>, ArrayList<MusicGenre>> {
     public JsonToXmlFileConverter(String fileName) throws FileNotFoundException {
         super.setFileName(fileName);
     }
 
     @Override
     public void convert(String xmlFileName)
-            throws IOException, XMLStreamException, XMLParseException,
-            ParseException, ParserConfigurationException, TransformerException {
+            throws IOException, ParseException, ParserConfigurationException, TransformerException {
         if (!FileExtension.getExtension(xmlFileName).equals("xml"))
-            throw new IllegalArgumentException("Неверное расширение файла");
+            throw new IllegalArgumentException("Неверное расширение файла " + xmlFileName);
 
-        Reader jsonReader = Reader.create(super.fileName);
+        MusicGenresReader jsonReader = new MusicGenresReader(fileName);
+        ArrayList<MusicBand> musicBands = changeStructure(jsonReader.readFile());
 
-        ArrayList<MusicGenre> musicGenres = (ArrayList<MusicGenre>)jsonReader.readFile();
-        ArrayList<MusicBand> musicBands = MusicBand.convertGenresToMusicBands(musicGenres);
-
-        Writer xmlWriter = Writer.create(xmlFileName);
+        MusicBandsWriter xmlWriter = new MusicBandsWriter(xmlFileName);
         xmlWriter.write(musicBands);
+    }
+
+    @Override
+    public ArrayList<MusicBand> changeStructure(ArrayList<MusicGenre> musicGenres) {
+        ArrayListShell<MusicBand> musicBands = new ArrayListShell<>();
+
+        for (MusicGenre musicGenre : musicGenres) {
+            for (MusicBand musicBand : musicGenre.getMusicBands()) {
+                if (!musicBands.contains(x -> x.getName().equals(musicBand.getName())))
+                    musicBands.add(musicBand);
+
+                MusicGenre genre = new MusicGenre();
+                genre.setName(musicGenre.getName());
+                Objects.requireNonNull(musicBands.get(x -> x.getName().equals(musicBand.getName()))).addGenre(genre);
+            }
+        }
+
+        return musicBands;
     }
 }

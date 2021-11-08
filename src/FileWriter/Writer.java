@@ -7,10 +7,10 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import java.io.IOException;
 
-public abstract class Writer {
+public abstract class Writer<T> {
     protected String fileName = null;
 
-    public abstract void write(Object obj) throws IOException, ParserConfigurationException, TransformerException;
+    public abstract void write(T obj) throws IOException, ParserConfigurationException, TransformerException;
 
     public static Writer create(String fileName) throws IOException {
         if (FileExtension.getExtension(fileName).equals("json"))

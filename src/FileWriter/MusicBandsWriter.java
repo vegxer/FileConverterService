@@ -18,15 +18,14 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.util.ArrayList;
 
-public class MusicBandsWriter extends Writer {
+public class MusicBandsWriter extends Writer<ArrayList<MusicBand>> {
     public MusicBandsWriter(String fileName) {
         super.setFileName(fileName);
     }
 
     @Override
-    public void write(Object obj)
+    public void write(ArrayList<MusicBand> musicBands)
             throws ParserConfigurationException, TransformerException, IOException {
-        ArrayList<MusicBand> musicBands = (ArrayList<MusicBand>) obj;
         Document xmlDoc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
         xmlDoc.appendChild(getMusicBands(xmlDoc, musicBands));
 
