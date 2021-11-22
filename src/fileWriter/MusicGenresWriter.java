@@ -1,7 +1,7 @@
-package FileWriter;
+package fileWriter;
 
-import Music.MusicBand;
-import Music.MusicGenre;
+import music.MusicBand;
+import music.MusicGenre;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParser;

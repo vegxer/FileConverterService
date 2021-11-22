@@ -1,4 +1,4 @@
-package ListShell;
+package listShell;
 
 import java.util.ArrayList;
 

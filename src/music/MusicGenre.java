@@ -1,4 +1,4 @@
-package Music;
+package music;
 
 import java.util.ArrayList;
 

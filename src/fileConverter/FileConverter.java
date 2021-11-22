@@ -1,24 +1,28 @@
-package FileReader;
+package fileConverter;
 
-import FileExtension.FileExtension;
+import fileExtension.FileExtension;
 import org.json.simple.parser.ParseException;
 
 import javax.management.modelmbean.XMLParseException;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.stream.XMLStreamException;
+import javax.xml.transform.TransformerException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public abstract class Reader<T> {
+public abstract class FileConverter {
     protected String fileName = null;
 
-    public abstract T readFile() throws IOException, XMLStreamException, XMLParseException, ParseException;
+    public abstract void convert(String fileName)
+            throws IOException, XMLStreamException, XMLParseException,
+            ParseException, ParserConfigurationException, TransformerException;
 
-    public static Reader create(String fileName) throws IOException {
+    public static FileConverter create(String fileName) throws IOException {
         if (FileExtension.getExtension(fileName).equals("xml"))
-            return new MusicBandsReader(fileName);
+            return new XmlToJsonFileConverter(fileName);
         else if (FileExtension.getExtension(fileName).equals("json"))
-            return new MusicGenresReader(fileName);
+            return new JsonToXmlFileConverter(fileName);
         else
             throw new IllegalArgumentException("Неверное расширение файла");
     }
@@ -26,7 +30,7 @@ public abstract class Reader<T> {
 
     public String getFileName() {
         if (fileName == null)
-            throw new NullPointerException("Имя файла не было установлено");
+            throw new NullPointerException("Файл не был установлен");
 
         return fileName;
     }

@@ -1,12 +1,12 @@
-package FileConverter;
+package fileConverter;
 
 
-import FileExtension.FileExtension;
-import FileReader.MusicGenresReader;
-import FileWriter.MusicBandsWriter;
-import ListShell.ArrayListShell;
-import Music.MusicBand;
-import Music.MusicGenre;
+import fileExtension.FileExtension;
+import fileReader.MusicGenresReader;
+import fileWriter.MusicBandsWriter;
+import listShell.ArrayListShell;
+import music.MusicBand;
+import music.MusicGenre;
 import org.json.simple.parser.ParseException;
 
 import javax.xml.parsers.ParserConfigurationException;

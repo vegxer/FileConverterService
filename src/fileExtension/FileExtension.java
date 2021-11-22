@@ -1,4 +1,4 @@
-package FileExtension;
+package fileExtension;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

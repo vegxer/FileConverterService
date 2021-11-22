@@ -1,4 +1,4 @@
-import FileConverter.FileConverter;
+import fileConverter.FileConverter;
 
 public class Main {
     public static void main(String[] args) {

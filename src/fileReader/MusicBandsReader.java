@@ -1,7 +1,7 @@
-package FileReader;
+package fileReader;
 
-import Music.MusicBand;
-import Music.MusicGenre;
+import music.MusicBand;
+import music.MusicGenre;
 
 import javax.management.modelmbean.XMLParseException;
 import javax.xml.stream.XMLEventReader;
@@ -79,20 +79,11 @@ public class MusicBandsReader extends Reader<ArrayList<MusicBand>> {
                 String tagName = startElement.getName().getLocalPart();
 
                 switch (tagName) {
-                    case "year":
-                        musicBand.setActivateYear(Integer.parseInt(reader.nextEvent().asCharacters().getData()));
-                        break;
-                    case "name":
-                        musicBand.setName(reader.nextEvent().asCharacters().getData());
-                        break;
-                    case "country":
-                        musicBand.setCountry(reader.nextEvent().asCharacters().getData());
-                        break;
-                    case "Genres":
-                        musicBand.setGenres(getGenres(xmlEvent, reader));
-                        break;
-                    default:
-                        throw new XMLParseException("Incorrect tag");
+                    case "year" -> musicBand.setActivateYear(Integer.parseInt(reader.nextEvent().asCharacters().getData()));
+                    case "name" -> musicBand.setName(reader.nextEvent().asCharacters().getData());
+                    case "country" -> musicBand.setCountry(reader.nextEvent().asCharacters().getData());
+                    case "Genres" -> musicBand.setGenres(getGenres(xmlEvent, reader));
+                    default -> throw new XMLParseException("Incorrect tag");
                 }
             }
         }

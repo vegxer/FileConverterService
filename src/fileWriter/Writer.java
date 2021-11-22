@@ -1,7 +1,6 @@
-package FileWriter;
+package fileWriter;
 
-import FileExtension.FileExtension;
-import FileReader.Reader;
+import fileExtension.FileExtension;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;

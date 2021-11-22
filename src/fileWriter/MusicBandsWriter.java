@@ -1,7 +1,7 @@
-package FileWriter;
+package fileWriter;
 
-import Music.MusicBand;
-import Music.MusicGenre;
+import music.MusicBand;
+import music.MusicGenre;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 

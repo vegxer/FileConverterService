@@ -1,11 +1,11 @@
-package FileConverter;
+package fileConverter;
 
-import FileExtension.FileExtension;
-import FileReader.MusicBandsReader;
-import FileWriter.MusicGenresWriter;
-import ListShell.ArrayListShell;
-import Music.MusicBand;
-import Music.MusicGenre;
+import fileExtension.FileExtension;
+import fileReader.MusicBandsReader;
+import fileWriter.MusicGenresWriter;
+import listShell.ArrayListShell;
+import music.MusicBand;
+import music.MusicGenre;
 
 import javax.management.modelmbean.XMLParseException;
 import javax.xml.stream.XMLStreamException;
