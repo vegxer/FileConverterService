@@ -11,15 +11,6 @@ public abstract class Writer<T> {
 
     public abstract void write(T obj) throws IOException, ParserConfigurationException, TransformerException;
 
-    public static Writer create(String fileName) throws IOException {
-        if (FileExtension.getExtension(fileName).equals("json"))
-            return new MusicGenresWriter(fileName);
-        else if (FileExtension.getExtension(fileName).equals("xml"))
-            return new MusicBandsWriter(fileName);
-        else
-            throw new IllegalArgumentException("Неверное расширение файла");
-    }
-
 
     public String getFileName() {
         if (fileName == null)

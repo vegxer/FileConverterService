@@ -14,15 +14,6 @@ public abstract class Reader<T> {
 
     public abstract T readFile() throws IOException, XMLStreamException, XMLParseException, ParseException;
 
-    public static Reader create(String fileName) throws IOException {
-        if (FileExtension.getExtension(fileName).equals("xml"))
-            return new MusicBandsReader(fileName);
-        else if (FileExtension.getExtension(fileName).equals("json"))
-            return new MusicGenresReader(fileName);
-        else
-            throw new IllegalArgumentException("Неверное расширение файла");
-    }
-
 
     public String getFileName() {
         if (fileName == null)
