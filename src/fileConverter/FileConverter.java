@@ -18,15 +18,6 @@ public abstract class FileConverter {
             throws IOException, XMLStreamException, XMLParseException,
             ParseException, ParserConfigurationException, TransformerException;
 
-    public static FileConverter create(String fileName) throws IOException {
-        if (FileExtension.getExtension(fileName).equals("xml"))
-            return new XmlToJsonFileConverter(fileName);
-        else if (FileExtension.getExtension(fileName).equals("json"))
-            return new JsonToXmlFileConverter(fileName);
-        else
-            throw new IllegalArgumentException("Неверное расширение файла");
-    }
-
 
     public String getFileName() {
         if (fileName == null)
