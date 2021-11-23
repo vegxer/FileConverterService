@@ -1,7 +1,5 @@
 package fileWriter;
 
-import fileExtension.FileExtension;
-
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import java.io.IOException;

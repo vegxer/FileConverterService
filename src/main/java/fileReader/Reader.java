@@ -1,6 +1,5 @@
 package fileReader;
 
-import fileExtension.FileExtension;
 import org.json.simple.parser.ParseException;
 
 import javax.management.modelmbean.XMLParseException;
