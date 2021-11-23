@@ -1,7 +1,7 @@
-package fileWriter;
+package converterService.fileWriter;
 
-import music.MusicBand;
-import music.MusicGenre;
+import converterService.music.MusicBand;
+import converterService.music.MusicGenre;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -17,14 +17,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.Collection;
 
-public class MusicBandsWriter extends Writer<ArrayList<MusicBand>> {
+public class MusicBandsWriter extends Writer<Collection<MusicBand>> {
     public MusicBandsWriter(String fileName) {
         super.setFileName(fileName);
     }
 
     @Override
-    public void write(ArrayList<MusicBand> musicBands)
+    public void write(Collection<MusicBand> musicBands)
             throws ParserConfigurationException, TransformerException, IOException {
         Document xmlDoc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
         xmlDoc.appendChild(getMusicBands(xmlDoc, musicBands));
@@ -45,7 +46,7 @@ public class MusicBandsWriter extends Writer<ArrayList<MusicBand>> {
         }
     }
 
-    public Element getMusicBands(Document xmlDoc, ArrayList<MusicBand> musicBands) {
+    public Element getMusicBands(Document xmlDoc, Collection<MusicBand> musicBands) {
         Element root = xmlDoc.createElement("Bands");
 
         for (MusicBand musicBand : musicBands) {

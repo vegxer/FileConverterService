@@ -1,21 +1,21 @@
-package fileConverter;
+package converterService.fileConverter;
 
-import fileExtension.FileExtension;
-import fileReader.MusicBandsReader;
-import fileWriter.MusicGenresWriter;
-import listShell.ArrayListShell;
-import music.MusicBand;
-import music.MusicGenre;
+import converterService.FileExtension;
+import converterService.fileReader.MusicBandsReader;
+import converterService.fileWriter.MusicGenresWriter;
+import converterService.music.MusicBand;
+import converterService.music.MusicGenre;
 
 import javax.management.modelmbean.XMLParseException;
 import javax.xml.stream.XMLStreamException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Objects;
+import java.util.Collection;
+import java.util.HashMap;
 
 public class XmlToJsonFileConverter extends FileConverter
-        implements StructureChanger<ArrayList<MusicGenre>, ArrayList<MusicBand>> {
+        implements StructureChanger<Collection<MusicGenre>, ArrayList<MusicBand>> {
     public XmlToJsonFileConverter(String fileName) throws FileNotFoundException {
         super.setFileName(fileName);
     }
@@ -27,29 +27,31 @@ public class XmlToJsonFileConverter extends FileConverter
             throw new IllegalArgumentException("Неверное расширение файла " + jsonFileName);
 
         MusicBandsReader jsonReader = new MusicBandsReader(fileName);
-        ArrayList<MusicGenre> musicGenres = changeStructure(jsonReader.readFile());
+        Collection<MusicGenre> musicGenres = changeStructure(jsonReader.readFile());
 
         MusicGenresWriter jsonWriter = new MusicGenresWriter(jsonFileName);
         jsonWriter.write(musicGenres);
     }
 
     @Override
-    public ArrayList<MusicGenre> changeStructure(ArrayList<MusicBand> musicBands) {
-        ArrayListShell<MusicGenre> musicGenres = new ArrayListShell<>();
+    public Collection<MusicGenre> changeStructure(ArrayList<MusicBand> musicBands) {
+        HashMap<String, MusicGenre> musicGenres = new HashMap<>();
 
         for (MusicBand musicBand : musicBands) {
             for (MusicGenre musicGenre : musicBand.getGenres()) {
-                if (!musicGenres.contains(x -> x.getName().equals(musicGenre.getName())))
-                    musicGenres.add(musicGenre);
+                if (!musicGenres.containsKey(musicGenre.getName()))
+                    musicGenres.put(musicGenre.getName(), musicGenre);
 
                 MusicBand band = new MusicBand();
                 band.setName(musicBand.getName());
                 band.setActivateYear(musicBand.getActivateYear());
                 band.setCountry(musicBand.getCountry());
-                Objects.requireNonNull(musicGenres.get(x -> x.getName().equals(musicGenre.getName()))).addMusicBand(band);
+                MusicGenre updatedMusicGenre = musicGenres.get(musicGenre.getName());
+                updatedMusicGenre.addMusicBand(band);
+                musicGenres.put(musicGenre.getName(), updatedMusicGenre);
             }
         }
 
-        return musicGenres;
+        return musicGenres.values();
     }
 }

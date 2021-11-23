@@ -1,7 +1,7 @@
-package fileReader;
+package converterService.fileReader;
 
-import music.MusicBand;
-import music.MusicGenre;
+import converterService.music.MusicBand;
+import converterService.music.MusicGenre;
 
 import javax.management.modelmbean.XMLParseException;
 import javax.xml.stream.XMLEventReader;
@@ -13,6 +13,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MusicBandsReader extends Reader<ArrayList<MusicBand>> {
     public MusicBandsReader(String fileName) throws FileNotFoundException {

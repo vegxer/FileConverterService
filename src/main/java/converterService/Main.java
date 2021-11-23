@@ -1,5 +1,7 @@
-import fileConverter.FileConverter;
-import fileConverter.FileConverterFactory;
+package converterService;
+
+import converterService.fileConverter.FileConverter;
+import converterService.fileConverter.FileConverterFactory;
 import org.json.simple.parser.ParseException;
 
 import javax.management.modelmbean.XMLParseException;

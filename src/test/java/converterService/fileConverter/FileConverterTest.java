@@ -1,4 +1,4 @@
-package fileConverter;
+package converterService.fileConverter;
 
 import org.junit.Test;
 

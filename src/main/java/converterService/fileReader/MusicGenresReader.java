@@ -1,7 +1,7 @@
-package fileReader;
+package converterService.fileReader;
 
-import music.MusicBand;
-import music.MusicGenre;
+import converterService.music.MusicBand;
+import converterService.music.MusicGenre;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;

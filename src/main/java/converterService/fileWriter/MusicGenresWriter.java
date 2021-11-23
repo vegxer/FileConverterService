@@ -1,7 +1,7 @@
-package fileWriter;
+package converterService.fileWriter;
 
-import music.MusicBand;
-import music.MusicGenre;
+import converterService.music.MusicBand;
+import converterService.music.MusicGenre;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParser;
@@ -11,14 +11,15 @@ import org.json.simple.JSONObject;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 
-public class MusicGenresWriter extends Writer<ArrayList<MusicGenre>> {
+public class MusicGenresWriter extends Writer<Collection<MusicGenre>> {
     public MusicGenresWriter(String fileName) {
         super.setFileName(fileName);
     }
 
     @Override
-    public void write(ArrayList<MusicGenre> musicGenres) throws IOException {
+    public void write(Collection<MusicGenre> musicGenres) throws IOException {
         JSONObject genresObject = getGenresObject(musicGenres);
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -30,7 +31,7 @@ public class MusicGenresWriter extends Writer<ArrayList<MusicGenre>> {
         }
     }
 
-    private JSONObject getGenresObject(ArrayList<MusicGenre> musicGenres) {
+    private JSONObject getGenresObject(Collection<MusicGenre> musicGenres) {
         JSONArray jsonGenres = new JSONArray();
         for (MusicGenre musicGenre : musicGenres) {
             JSONObject jsonGenre = new JSONObject();

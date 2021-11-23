@@ -1,6 +1,6 @@
-package fileConverter;
+package converterService.fileConverter;
 
-import fileExtension.FileExtension;
+import converterService.FileExtension;
 
 import java.io.IOException;
 
