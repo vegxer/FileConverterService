@@ -1,23 +1,22 @@
 package fileWriter;
 
+import org.jetbrains.annotations.NotNull;
+
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import java.io.IOException;
 
 public abstract class Writer<T> {
-    protected String fileName = null;
+    protected String fileName;
 
     public abstract void write(T obj) throws IOException, ParserConfigurationException, TransformerException;
 
 
     public String getFileName() {
-        if (fileName == null)
-            throw new NullPointerException("Имя файла не было установлено");
-
         return fileName;
     }
 
-    public void setFileName(String fileName) {
+    public void setFileName(@NotNull String fileName) {
         this.fileName = fileName;
     }
 }

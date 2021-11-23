@@ -1,5 +1,6 @@
 package fileReader;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.simple.parser.ParseException;
 
 import javax.management.modelmbean.XMLParseException;
@@ -9,19 +10,16 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public abstract class Reader<T> {
-    protected String fileName = null;
+    protected String fileName;
 
     public abstract T readFile() throws IOException, XMLStreamException, XMLParseException, ParseException;
 
 
     public String getFileName() {
-        if (fileName == null)
-            throw new NullPointerException("Имя файла не было установлено");
-
         return fileName;
     }
 
-    public void setFileName(String fileName) throws FileNotFoundException {
+    public void setFileName(@NotNull String fileName) throws FileNotFoundException {
         if (!new File(fileName).exists())
             throw new FileNotFoundException("Такого файла не существует");
 

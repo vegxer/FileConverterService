@@ -25,10 +25,9 @@ public class MusicGenresWriter extends Writer<ArrayList<MusicGenre>> {
         JsonParser parser = new JsonParser();
         String prettyJsonString = gson.toJson(parser.parse(genresObject.toJSONString()));
 
-        FileWriter writer = new FileWriter(super.fileName);
-        writer.write(prettyJsonString);
-        writer.flush();
-        writer.close();
+        try (FileWriter writer = new FileWriter(super.fileName)) {
+            writer.write(prettyJsonString);
+        }
     }
 
     private JSONObject getGenresObject(ArrayList<MusicGenre> musicGenres) {

@@ -36,14 +36,13 @@ public class MusicBandsWriter extends Writer<ArrayList<MusicBand>> {
         transformer.setOutputProperty(OutputKeys.ENCODING, "ISO-8859-1");
         transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
         transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-        StringWriter sw = new StringWriter();
-        StreamResult sr = new StreamResult(sw);
-        transformer.transform(domSource, sr);
-        FileWriter writer = new FileWriter(super.fileName);
-        writer.write(sw.toString());
-        sw.close();
-        writer.flush();
-        writer.close();
+        try (StringWriter sw = new StringWriter()) {
+            StreamResult sr = new StreamResult(sw);
+            transformer.transform(domSource, sr);
+            try (FileWriter writer = new FileWriter(super.fileName)) {
+                writer.write(sw.toString());
+            }
+        }
     }
 
     public Element getMusicBands(Document xmlDoc, ArrayList<MusicBand> musicBands) {

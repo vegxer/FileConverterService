@@ -45,22 +45,16 @@ public class MusicBand {
 
     public void setActivateYear(int activateYear) {
         if (activateYear < 0)
-            throw new IllegalArgumentException("Неверный ввод года");
+            throw new IllegalArgumentException("Неверный ввод года, необходимо неотрицательное число");
 
         this.activateYear = activateYear;
     }
 
     public ArrayList<MusicGenre> getGenres() {
-        if (musicGenres == null)
-            throw new NullPointerException("Жанры не были установлены");
-
         return musicGenres;
     }
 
-    public void setGenres(ArrayList<MusicGenre> musicGenres) {
-        if (musicGenres == null)
-            throw new NullPointerException();
-
+    public void setGenres(@NotNull ArrayList<MusicGenre> musicGenres) {
         this.musicGenres = musicGenres;
     }
 }

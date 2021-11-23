@@ -22,13 +22,11 @@ public class MusicBandsReader extends Reader<ArrayList<MusicBand>> {
     @Override
     public ArrayList<MusicBand> readFile() throws IOException, XMLStreamException, XMLParseException {
         XMLInputFactory factory = XMLInputFactory.newInstance();
-        FileInputStream inputStream = new FileInputStream(super.fileName);
-        XMLEventReader reader = factory.createXMLEventReader(inputStream);
-        XMLEvent xmlEvent = reader.nextEvent();
-
-        ArrayList<MusicBand> musicBands = getMusicBands(xmlEvent, reader);
-        inputStream.close();
-        return musicBands;
+        try (FileInputStream inputStream = new FileInputStream(super.fileName)) {
+            XMLEventReader reader = factory.createXMLEventReader(inputStream);
+            XMLEvent xmlEvent = reader.nextEvent();
+            return getMusicBands(xmlEvent, reader);
+        }
     }
 
     private ArrayList<MusicBand> getMusicBands(XMLEvent xmlEvent, XMLEventReader reader)
