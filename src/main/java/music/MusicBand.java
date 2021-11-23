@@ -1,10 +1,12 @@
 package music;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 
 public class MusicBand {
-    private String name = null, country = null;
-    private int activateYear = -1;
+    private String name, country;
+    private Integer activateYear;
     private ArrayList<MusicGenre> musicGenres;
 
     public MusicBand() {
@@ -12,53 +14,32 @@ public class MusicBand {
     }
 
 
-    public void addGenre(MusicGenre musicGenre) {
-        if (musicGenre == null)
-            throw new NullPointerException();
-
+    public void addGenre(@NotNull MusicGenre musicGenre) {
         musicGenres.add(musicGenre);
     }
 
-    public void removeGenre(MusicGenre musicGenre) {
-        if (musicGenre == null)
-            throw new NullPointerException();
-
+    public void removeGenre(@NotNull MusicGenre musicGenre) {
         musicGenres.remove(musicGenre);
     }
 
 
     public String getName() {
-        if (name == null)
-            throw new NullPointerException("Название не было установлено");
-
         return name;
     }
 
-    public void setName(String name) {
-        if (name == null)
-            throw new NullPointerException();
-
+    public void setName(@NotNull String name) {
         this.name = name;
     }
 
     public String getCountry() {
-        if (country == null)
-            throw new NullPointerException("Страна не была установлена");
-
         return country;
     }
 
-    public void setCountry(String country) {
-        if (country == null)
-            throw new NullPointerException();
-
+    public void setCountry(@NotNull String country) {
         this.country = country;
     }
 
     public int getActivateYear() {
-        if (activateYear == -1)
-            throw new NullPointerException("Год не был установлен");
-
         return activateYear;
     }
 
