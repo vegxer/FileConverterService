@@ -2,6 +2,7 @@ package converterService.fileWriter;
 
 import converterService.music.MusicBand;
 import converterService.music.MusicGenre;
+import org.jetbrains.annotations.NotNull;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -21,7 +22,7 @@ public final class MusicBandsWriter extends Writer<Collection<MusicBand>> {
     }
 
     @Override
-    public void write(Collection<MusicBand> musicBands)
+    public void write(@NotNull Collection<MusicBand> musicBands)
             throws ParserConfigurationException, TransformerException, IOException {
         Document xmlDoc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
         xmlDoc.appendChild(getMusicBands(xmlDoc, musicBands));

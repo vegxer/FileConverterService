@@ -6,6 +6,7 @@ import converterService.fileWriter.MusicBandsWriter;
 import converterService.music.MusicBand;
 import converterService.music.MusicGenre;
 import org.apache.commons.io.FilenameUtils;
+import org.jetbrains.annotations.NotNull;
 import org.json.simple.parser.ParseException;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -24,7 +25,7 @@ public final class JsonToXmlFileConverter extends FileConverter
     }
 
     @Override
-    public void convert(String xmlFileName)
+    public void convert(@NotNull String xmlFileName)
             throws IOException, ParseException, ParserConfigurationException, TransformerException {
         if (!FilenameUtils.getExtension(xmlFileName).equals("xml"))
             throw new IllegalArgumentException("Неверное расширение файла " + xmlFileName);
@@ -37,7 +38,7 @@ public final class JsonToXmlFileConverter extends FileConverter
     }
 
     @Override
-    public Collection<MusicBand> changeStructure(List<MusicGenre> musicGenres) {
+    public Collection<MusicBand> changeStructure(@NotNull List<MusicGenre> musicGenres) {
         HashMap<String, MusicBand> musicBands = new HashMap<>();
 
         for (MusicGenre musicGenre : musicGenres) {

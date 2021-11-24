@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParser;
 import converterService.music.MusicBand;
 import converterService.music.MusicGenre;
+import org.jetbrains.annotations.NotNull;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -18,7 +19,7 @@ public final class MusicGenresWriter extends Writer<Collection<MusicGenre>> {
     }
 
     @Override
-    public void write(Collection<MusicGenre> musicGenres) throws IOException {
+    public void write(@NotNull Collection<MusicGenre> musicGenres) throws IOException {
         JSONObject genresObject = getGenresObject(musicGenres);
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
