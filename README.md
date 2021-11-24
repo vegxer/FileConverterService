@@ -1,7 +1,7 @@
-This program converts file sorted by music bands to file sorted by music genres, and vice versa (see example in folder "MusicFiles")
+Данная программа соверкирует файл, отсортированный по мызкальным группам в файл, отсортированный по музыкальным жанрам
 
-Use FileConverterService.jar to run program from command line with arguments:
+Используйте bin/FileConverterService.jar чтобы запустить программу из командной строки со следующими параметрами:
 
-There are two input arguments in program:
-1) The file you want to convert (.xml or .json)
-2) The conversion result file (.json or .xml, respectively with first argument)
+Всего необходимо два параметра:
+1) Файл, из которого вы хотите ковертировать данные (.xml или .json)
+2) Файл, в который вы хотите записать результат конвертации (.json или .xml, соответственно с первым параметром)
