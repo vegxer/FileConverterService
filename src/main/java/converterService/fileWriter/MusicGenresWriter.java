@@ -14,7 +14,7 @@ import java.util.Collection;
 
 public class MusicGenresWriter extends Writer<Collection<MusicGenre>> {
     public MusicGenresWriter(String fileName) {
-        super.setFileName(fileName);
+        super(fileName);
     }
 
     @Override
@@ -22,8 +22,7 @@ public class MusicGenresWriter extends Writer<Collection<MusicGenre>> {
         JSONObject genresObject = getGenresObject(musicGenres);
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        JsonParser parser = new JsonParser();
-        String prettyJsonString = gson.toJson(parser.parse(genresObject.toJSONString()));
+        String prettyJsonString = gson.toJson(new JsonParser().parse(genresObject.toJSONString()));
 
         try (FileWriter writer = new FileWriter(super.fileName)) {
             writer.write(prettyJsonString);

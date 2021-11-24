@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class MusicGenresReader extends Reader<ArrayList<MusicGenre>> {
     public MusicGenresReader(String fileName) throws FileNotFoundException {
-        super.setFileName(fileName);
+        super(fileName);
     }
 
     @Override

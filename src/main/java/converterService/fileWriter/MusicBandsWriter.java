@@ -7,21 +7,17 @@ import org.w3c.dom.Element;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringWriter;
-import java.util.ArrayList;
 import java.util.Collection;
 
 public class MusicBandsWriter extends Writer<Collection<MusicBand>> {
     public MusicBandsWriter(String fileName) {
-        super.setFileName(fileName);
+        super(fileName);
     }
 
     @Override
@@ -30,20 +26,23 @@ public class MusicBandsWriter extends Writer<Collection<MusicBand>> {
         Document xmlDoc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
         xmlDoc.appendChild(getMusicBands(xmlDoc, musicBands));
 
-        DOMSource domSource = new DOMSource(xmlDoc);
+        try (StringWriter sw = new StringWriter()) {
+            getPrettyOutputTransformer().transform(new DOMSource(xmlDoc), new StreamResult(sw));
+            try (FileWriter writer = new FileWriter(super.fileName)) {
+                writer.write(sw.toString());
+            }
+        }
+    }
+
+    private Transformer getPrettyOutputTransformer() throws TransformerConfigurationException {
         Transformer transformer = TransformerFactory.newInstance().newTransformer();
         transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
         transformer.setOutputProperty(OutputKeys.METHOD, "xml");
         transformer.setOutputProperty(OutputKeys.ENCODING, "ISO-8859-1");
         transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
         transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-        try (StringWriter sw = new StringWriter()) {
-            StreamResult sr = new StreamResult(sw);
-            transformer.transform(domSource, sr);
-            try (FileWriter writer = new FileWriter(super.fileName)) {
-                writer.write(sw.toString());
-            }
-        }
+
+        return transformer;
     }
 
     public Element getMusicBands(Document xmlDoc, Collection<MusicBand> musicBands) {

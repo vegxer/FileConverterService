@@ -12,6 +12,12 @@ import java.io.IOException;
 public abstract class Reader<T> {
     protected String fileName;
 
+
+    public Reader(String fileName) throws FileNotFoundException {
+        setFileName(fileName);
+    }
+
+
     public abstract T readFile() throws IOException, XMLStreamException, XMLParseException, ParseException;
 
 

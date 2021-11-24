@@ -17,7 +17,7 @@ import java.util.HashMap;
 
 public class MusicBandsReader extends Reader<ArrayList<MusicBand>> {
     public MusicBandsReader(String fileName) throws FileNotFoundException {
-        super.setFileName(fileName);
+        super(fileName);
     }
 
     @Override
