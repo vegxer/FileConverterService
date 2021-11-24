@@ -17,7 +17,8 @@ public class Main {
 
             FileConverterFactory.create(args[0]).convert(args[1]);
             System.out.println("Преобразование прошло успешно, файл " + args[1] + " создан");
-        } catch (XMLStreamException | IOException | ParseException | ParserConfigurationException | XMLParseException
+        }
+        catch (XMLStreamException | IOException | ParseException | ParserConfigurationException | XMLParseException
                 | TransformerException e) {
             e.printStackTrace();
         }
