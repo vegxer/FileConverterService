@@ -4,7 +4,7 @@ import org.apache.commons.io.FilenameUtils;
 
 import java.io.IOException;
 
-public class FileConverterFactory {
+public final class FileConverterFactory {
 
     public static FileConverter create(String fileName) throws IOException {
         return switch (FilenameUtils.getExtension(fileName)) {

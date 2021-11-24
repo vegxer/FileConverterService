@@ -4,7 +4,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-public class MusicGenre {
+public final class MusicGenre {
     private String name;
     private ArrayList<MusicBand> musicBands;
 

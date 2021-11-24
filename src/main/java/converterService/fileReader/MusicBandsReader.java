@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class MusicBandsReader extends Reader<List<MusicBand>> {
+public final class MusicBandsReader extends Reader<List<MusicBand>> {
     public MusicBandsReader(String fileName) throws FileNotFoundException {
         super(fileName);
     }

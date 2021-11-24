@@ -12,7 +12,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Collection;
 
-public class MusicGenresWriter extends Writer<Collection<MusicGenre>> {
+public final class MusicGenresWriter extends Writer<Collection<MusicGenre>> {
     public MusicGenresWriter(String fileName) {
         super(fileName);
     }

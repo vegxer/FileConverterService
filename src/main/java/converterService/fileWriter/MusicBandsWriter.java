@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.util.Collection;
 
-public class MusicBandsWriter extends Writer<Collection<MusicBand>> {
+public final class MusicBandsWriter extends Writer<Collection<MusicBand>> {
     public MusicBandsWriter(String fileName) {
         super(fileName);
     }

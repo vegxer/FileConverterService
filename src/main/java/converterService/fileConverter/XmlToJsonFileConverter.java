@@ -10,12 +10,11 @@ import javax.management.modelmbean.XMLParseException;
 import javax.xml.stream.XMLStreamException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
-public class XmlToJsonFileConverter extends FileConverter
+public final class XmlToJsonFileConverter extends FileConverter
         implements StructureChanger<Collection<MusicGenre>, List<MusicBand>> {
     public XmlToJsonFileConverter(String fileName) throws FileNotFoundException {
         super.setFileName(fileName);

@@ -4,7 +4,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-public class MusicBand {
+public final class MusicBand {
     private String name, country;
     private Integer activateYear;
     private ArrayList<MusicGenre> musicGenres;

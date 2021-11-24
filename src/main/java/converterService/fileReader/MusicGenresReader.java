@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MusicGenresReader extends Reader<List<MusicGenre>> {
+public final class MusicGenresReader extends Reader<List<MusicGenre>> {
     public MusicGenresReader(String fileName) throws FileNotFoundException {
         super(fileName);
     }

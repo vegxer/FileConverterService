@@ -17,7 +17,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
-public class JsonToXmlFileConverter extends FileConverter
+public final class JsonToXmlFileConverter extends FileConverter
         implements StructureChanger<Collection<MusicBand>, List<MusicGenre>> {
     public JsonToXmlFileConverter(String fileName) throws FileNotFoundException {
         super.setFileName(fileName);
