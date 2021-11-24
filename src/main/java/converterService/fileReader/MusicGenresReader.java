@@ -1,5 +1,6 @@
 package converterService.fileReader;
 
+import com.google.gson.JsonParseException;
 import converterService.music.MusicBand;
 import converterService.music.MusicGenre;
 import org.json.simple.JSONArray;
@@ -21,7 +22,11 @@ public class MusicGenresReader extends Reader<ArrayList<MusicGenre>> {
     public ArrayList<MusicGenre> readFile() throws IOException, ParseException {
         JSONArray jsonGenres;
         try (FileReader fileReader = new FileReader(super.fileName)) {
-            jsonGenres = (JSONArray) (((JSONObject) new JSONParser().parse(fileReader)).get("genres"));
+            Object genres = ((JSONObject) new JSONParser().parse(fileReader)).get("genres");
+            if (genres == null)
+                throw new JsonParseException("Key genres is not found");
+
+            jsonGenres = (JSONArray)genres;
         }
 
         ArrayList<MusicGenre> genres = new ArrayList<>();
@@ -35,7 +40,7 @@ public class MusicGenresReader extends Reader<ArrayList<MusicGenre>> {
         }
 
         if (genres.isEmpty())
-            throw new IllegalArgumentException("Genres are not found");
+            throw new JsonParseException("Genres are not found");
 
         return genres;
     }
@@ -56,7 +61,7 @@ public class MusicGenresReader extends Reader<ArrayList<MusicGenre>> {
         }
 
         if (musicBands.isEmpty())
-            throw new IllegalArgumentException("Empty array of bands");
+            throw new JsonParseException("Empty array of bands");
 
         return musicBands;
     }

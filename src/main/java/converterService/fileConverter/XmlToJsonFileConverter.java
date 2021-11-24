@@ -1,10 +1,10 @@
 package converterService.fileConverter;
 
-import converterService.FileExtension;
 import converterService.fileReader.MusicBandsReader;
 import converterService.fileWriter.MusicGenresWriter;
 import converterService.music.MusicBand;
 import converterService.music.MusicGenre;
+import org.apache.commons.io.FilenameUtils;
 
 import javax.management.modelmbean.XMLParseException;
 import javax.xml.stream.XMLStreamException;
@@ -23,7 +23,7 @@ public class XmlToJsonFileConverter extends FileConverter
     @Override
     public void convert(String jsonFileName)
             throws IOException, XMLStreamException, XMLParseException {
-        if (!FileExtension.getExtension(jsonFileName).equals("json"))
+        if (!FilenameUtils.getExtension(jsonFileName).equals("json"))
             throw new IllegalArgumentException("Неверное расширение файла " + jsonFileName);
 
         MusicBandsReader jsonReader = new MusicBandsReader(fileName);

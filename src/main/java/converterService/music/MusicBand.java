@@ -22,6 +22,15 @@ public class MusicBand {
         musicGenres.remove(musicGenre);
     }
 
+    @Override
+    public boolean equals(Object band) {
+        if (!(band instanceof MusicBand musicBand))
+            throw new IllegalArgumentException("Необходим объект класса MusicBand");
+
+        return name.equals(musicBand.getName()) && country.equals(musicBand.getCountry())
+                && activateYear.equals(musicBand.getActivateYear()) && musicGenres.equals(musicBand.getGenres());
+    }
+
 
     public String getName() {
         return name;
@@ -39,7 +48,7 @@ public class MusicBand {
         this.country = country;
     }
 
-    public int getActivateYear() {
+    public Integer getActivateYear() {
         return activateYear;
     }
 

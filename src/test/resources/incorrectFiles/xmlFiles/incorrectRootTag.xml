@@ -1,0 +1,26 @@
+<Groups>
+    <Band>
+        <name>Daft Punk</name>
+        <country>UK</country>
+        <year>1993</year>
+        <Genres>
+            <genre>house</genre>
+        </Genres>
+    </Band>
+    <Band>
+        <name>The Rolling Stones</name>
+        <country>UK</country>
+        <year>1962</year>
+        <Genres>
+            <genre>rock and roll</genre>
+        </Genres>
+    </Band>
+    <Band>
+        <name>The Jazz Messengers</name>
+        <country>USA</country>
+        <year>1955</year>
+        <Genres>
+            <genre>jazz</genre>
+        </Genres>
+    </Band>
+</Groups>

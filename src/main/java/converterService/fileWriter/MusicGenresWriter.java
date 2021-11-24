@@ -1,16 +1,15 @@
 package converterService.fileWriter;
 
-import converterService.music.MusicBand;
-import converterService.music.MusicGenre;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParser;
+import converterService.music.MusicBand;
+import converterService.music.MusicGenre;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
 
 public class MusicGenresWriter extends Writer<Collection<MusicGenre>> {

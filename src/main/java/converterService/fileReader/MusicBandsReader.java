@@ -88,7 +88,8 @@ public class MusicBandsReader extends Reader<ArrayList<MusicBand>> {
         }
         while (!xmlEvent.isEndElement() || !xmlEvent.asEndElement().getName().getLocalPart().equals("Band"));
 
-        if (musicBand.getName() == null || musicBand.getActivateYear() == -1 || musicBand.getCountry() == null)
+        if (musicBand.getName() == null || musicBand.getActivateYear() == null || musicBand.getCountry() == null
+                || musicBand.getGenres().isEmpty())
             throw new XMLParseException("Not enough tags in Band tag");
 
         return musicBand;

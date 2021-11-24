@@ -1,0 +1,52 @@
+{
+  "genres": [
+    {
+      "genre": {
+        "bands": [
+          {
+            "country": "UK",
+            "year": "1980",
+            "name": "Depeche Mode"
+          },
+          {
+            "country": "USA",
+            "year": "1996",
+            "name": "Nirvana"
+          },
+          {
+            "country": "UK",
+            "year": "1968",
+            "name": "Led Zeppelin"
+          },
+          {
+            "country": "UK",
+            "year": "1962",
+            "name": "The Rolling Stones"
+          },
+          {
+            "country": "UK",
+            "year": "1960",
+            "name": "The Beatles"
+          }
+        ]
+      }
+    },
+    {
+      "genre": {
+        "name": "new wave",
+        "bands": [
+          {
+            "country": "Germany",
+            "year": "1983",
+            "name": "Modern Talking"
+          },
+          {
+            "country": "UK",
+            "year": "1980",
+            "name": "Depeche Mode"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,6 +1,5 @@
 package converterService;
 
-import converterService.fileConverter.FileConverter;
 import converterService.fileConverter.FileConverterFactory;
 import org.json.simple.parser.ParseException;
 
@@ -15,8 +14,8 @@ public class Main {
         try {
             if (args.length != 2)
                 throw new IllegalArgumentException("Некорректное количество аргументов. Необходимо 2 аргумента");
-            FileConverter fileConverter = FileConverterFactory.create(args[0]);
-            fileConverter.convert(args[1]);
+
+            FileConverterFactory.create(args[0]).convert(args[1]);
             System.out.println("Преобразование прошло успешно, файл " + args[1] + " создан");
         } catch (XMLStreamException | IOException | ParseException | ParserConfigurationException | XMLParseException
                 | TransformerException e) {

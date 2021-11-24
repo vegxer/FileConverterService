@@ -1,0 +1,50 @@
+<Bands>
+    <Band>
+        <country>UK</country>
+        <year>1980</year>
+        <Genres>
+            <genre>rock</genre>
+            <genre>new wave</genre>
+        </Genres>
+    </Band>
+    <Band>
+        <name>Led Zeppelin</name>
+        <country>UK</country>
+        <year>1968</year>
+        <Genres>
+            <genre>rock</genre>
+        </Genres>
+    </Band>
+    <Band>
+        <name>Nirvana</name>
+        <country>USA</country>
+        <year>1996</year>
+        <Genres>
+            <genre>rock</genre>
+        </Genres>
+    </Band>
+    <Band>
+        <name>The Rolling Stones</name>
+        <country>UK</country>
+        <year>1962</year>
+        <Genres>
+            <genre>rock</genre>
+        </Genres>
+    </Band>
+    <Band>
+        <name>The Beatles</name>
+        <country>UK</country>
+        <year>1960</year>
+        <Genres>
+            <genre>rock</genre>
+        </Genres>
+    </Band>
+    <Band>
+        <name>Modern Talking</name>
+        <country>Germany</country>
+        <year>1983</year>
+        <Genres>
+            <genre>new wave</genre>
+        </Genres>
+    </Band>
+</Bands>

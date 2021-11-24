@@ -1,0 +1,51 @@
+<Bands>
+    <Band>
+        <name>Daft Punk</name>
+        <country>UK</country>
+        <year>1993</year>
+        <Genres>
+        </Genres>
+    </Band>
+    <Band>
+        <name>Clean Bandit</name>
+        <country>UK</country>
+        <year>2008</year>
+        <Genres>
+            <genre>dance</genre>
+            <genre>house</genre>
+            <genre>jazz</genre>
+        </Genres>
+    </Band>
+    <Band>
+        <name>The Rolling Stones</name>
+        <country>UK</country>
+        <year>1962</year>
+        <Genres>
+            <genre>rock and roll</genre>
+        </Genres>
+    </Band>
+    <Band>
+        <name>The Beatles</name>
+        <country>UK</country>
+        <year>1960</year>
+        <Genres>
+            <genre>rock and roll</genre>
+        </Genres>
+    </Band>
+    <Band>
+        <name>ABBA</name>
+        <country>Sweden</country>
+        <year>1972</year>
+        <Genres>
+            <genre>dance</genre>
+        </Genres>
+    </Band>
+    <Band>
+        <name>The Jazz Messengers</name>
+        <country>USA</country>
+        <year>1955</year>
+        <Genres>
+            <genre>jazz</genre>
+        </Genres>
+    </Band>
+</Bands>
