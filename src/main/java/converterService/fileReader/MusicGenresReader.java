@@ -12,14 +12,15 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
-public class MusicGenresReader extends Reader<ArrayList<MusicGenre>> {
+public class MusicGenresReader extends Reader<List<MusicGenre>> {
     public MusicGenresReader(String fileName) throws FileNotFoundException {
         super(fileName);
     }
 
     @Override
-    public ArrayList<MusicGenre> readFile() throws IOException, ParseException {
+    public List<MusicGenre> readFile() throws IOException, ParseException {
         JSONArray jsonGenres;
         try (FileReader fileReader = new FileReader(super.fileName)) {
             Object genres = ((JSONObject) new JSONParser().parse(fileReader)).get("genres");

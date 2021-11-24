@@ -14,14 +14,15 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
-public class MusicBandsReader extends Reader<ArrayList<MusicBand>> {
+public class MusicBandsReader extends Reader<List<MusicBand>> {
     public MusicBandsReader(String fileName) throws FileNotFoundException {
         super(fileName);
     }
 
     @Override
-    public ArrayList<MusicBand> readFile() throws IOException, XMLStreamException, XMLParseException {
+    public List<MusicBand> readFile() throws IOException, XMLStreamException, XMLParseException {
         XMLInputFactory factory = XMLInputFactory.newInstance();
         try (FileInputStream inputStream = new FileInputStream(super.fileName)) {
             XMLEventReader reader = factory.createXMLEventReader(inputStream);

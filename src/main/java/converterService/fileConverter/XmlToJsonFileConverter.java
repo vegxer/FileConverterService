@@ -13,9 +13,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 
 public class XmlToJsonFileConverter extends FileConverter
-        implements StructureChanger<Collection<MusicGenre>, ArrayList<MusicBand>> {
+        implements StructureChanger<Collection<MusicGenre>, List<MusicBand>> {
     public XmlToJsonFileConverter(String fileName) throws FileNotFoundException {
         super.setFileName(fileName);
     }
@@ -34,7 +35,7 @@ public class XmlToJsonFileConverter extends FileConverter
     }
 
     @Override
-    public Collection<MusicGenre> changeStructure(ArrayList<MusicBand> musicBands) {
+    public Collection<MusicGenre> changeStructure(List<MusicBand> musicBands) {
         HashMap<String, MusicGenre> musicGenres = new HashMap<>();
 
         for (MusicBand musicBand : musicBands) {
