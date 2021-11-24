@@ -34,28 +34,28 @@ public class CorrectFilesTest {
     }
 
     @Test
-    public void TestTwoGenres()
+    public void twoGenres()
             throws IOException, XMLStreamException, ParseException, ParserConfigurationException, XMLParseException,
             TransformerException, JSONException, SAXException {
         testEquality(XML_PATH + "/differentGenres.xml", JSON_PATH + "/differentGenres.json");
     }
 
     @Test
-    public void TestManyBands()
+    public void manyBands()
             throws IOException, XMLStreamException, ParseException, ParserConfigurationException, XMLParseException,
             TransformerException, JSONException, SAXException {
         testEquality(XML_PATH + "/manyBands.xml", JSON_PATH + "/manyBands.json");
     }
 
     @Test
-    public void TestDifferentGenres()
+    public void differentGenres()
             throws IOException, XMLStreamException, ParseException, ParserConfigurationException, XMLParseException,
             TransformerException, JSONException, SAXException {
         testEquality(XML_PATH + "/differentGenres.xml", JSON_PATH + "/differentGenres.json");
     }
 
     @Test
-    public void TestInitialFiles()
+    public void initialFiles()
             throws IOException, XMLStreamException, ParseException, ParserConfigurationException, XMLParseException,
             TransformerException, JSONException, SAXException {
         testEquality(XML_PATH + "/initial.xml", JSON_PATH + "/initial.json");
