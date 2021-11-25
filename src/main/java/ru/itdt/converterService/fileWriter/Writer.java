@@ -1,4 +1,4 @@
-package converterService.fileWriter;
+package ru.itdt.converterService.fileWriter;
 
 import org.jetbrains.annotations.NotNull;
 

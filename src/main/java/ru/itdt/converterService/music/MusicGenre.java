@@ -1,4 +1,4 @@
-package converterService.music;
+package ru.itdt.converterService.music;
 
 import org.jetbrains.annotations.NotNull;
 

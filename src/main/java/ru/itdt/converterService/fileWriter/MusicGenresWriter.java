@@ -1,10 +1,10 @@
-package converterService.fileWriter;
+package ru.itdt.converterService.fileWriter;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParser;
-import converterService.music.MusicBand;
-import converterService.music.MusicGenre;
+import ru.itdt.converterService.music.MusicBand;
+import ru.itdt.converterService.music.MusicGenre;
 import org.jetbrains.annotations.NotNull;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;

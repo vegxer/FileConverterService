@@ -1,7 +1,7 @@
-package converterService.fileReader;
+package ru.itdt.converterService.fileReader;
 
-import converterService.music.MusicBand;
-import converterService.music.MusicGenre;
+import ru.itdt.converterService.music.MusicBand;
+import ru.itdt.converterService.music.MusicGenre;
 
 import javax.management.modelmbean.XMLParseException;
 import javax.xml.stream.XMLEventReader;
@@ -13,7 +13,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public final class MusicBandsReader extends Reader<List<MusicBand>> {

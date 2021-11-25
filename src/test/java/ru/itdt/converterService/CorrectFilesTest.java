@@ -1,9 +1,8 @@
-package converterService;
+package ru.itdt.converterService;
 
-import converterService.fileConverter.FileConverterFactory;
+import ru.itdt.converterService.fileConverter.FileConverterFactory;
 import org.apache.commons.io.FileUtils;
 import org.custommonkey.xmlunit.Diff;
-import org.custommonkey.xmlunit.ElementNameAndAttributeQualifier;
 import org.custommonkey.xmlunit.XMLUnit;
 import org.json.JSONException;
 import org.json.simple.parser.ParseException;
@@ -61,7 +60,7 @@ public class CorrectFilesTest {
         testEquality(XML_PATH + "/initial.xml", JSON_PATH + "/initial.json");
     }
 
-    //ковертация из xml в json (и наоборот) и сверение конвертированного файла с корректным
+    //конвертация из xml в json (и наоборот) и сверение конвертированного файла с корректным
     private void testEquality(String xmlPath, String jsonPath)
             throws IOException, XMLStreamException, ParseException, ParserConfigurationException,
             XMLParseException, TransformerException, SAXException, JSONException {

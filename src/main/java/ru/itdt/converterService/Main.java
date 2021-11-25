@@ -1,6 +1,6 @@
-package converterService;
+package ru.itdt.converterService;
 
-import converterService.fileConverter.FileConverterFactory;
+import ru.itdt.converterService.fileConverter.FileConverterFactory;
 import org.json.simple.parser.ParseException;
 
 import javax.management.modelmbean.XMLParseException;

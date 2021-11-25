@@ -1,9 +1,9 @@
-package converterService.fileConverter;
+package ru.itdt.converterService.fileConverter;
 
-import converterService.fileReader.MusicBandsReader;
-import converterService.fileWriter.MusicGenresWriter;
-import converterService.music.MusicBand;
-import converterService.music.MusicGenre;
+import ru.itdt.converterService.fileReader.MusicBandsReader;
+import ru.itdt.converterService.fileWriter.MusicGenresWriter;
+import ru.itdt.converterService.music.MusicBand;
+import ru.itdt.converterService.music.MusicGenre;
 import org.apache.commons.io.FilenameUtils;
 import org.jetbrains.annotations.NotNull;
 

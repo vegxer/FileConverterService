@@ -1,4 +1,4 @@
-package converterService.fileConverter;
+package ru.itdt.converterService.fileConverter;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.simple.parser.ParseException;

@@ -11,8 +11,8 @@
       <excludeFolder url="file://$MODULE_DIR$/src/main/java/META-INF" />
       <excludeFolder url="file://$MODULE_DIR$/input" />
       <excludeFolder url="file://$MODULE_DIR$/output" />
-      <excludeFolder url="file://$MODULE_DIR$/target" />
       <excludeFolder url="file://$MODULE_DIR$/bin" />
+      <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

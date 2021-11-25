@@ -1,7 +1,7 @@
-package converterService;
+package ru.itdt.converterService;
 
 import com.google.gson.JsonParseException;
-import converterService.fileConverter.FileConverterFactory;
+import ru.itdt.converterService.fileConverter.FileConverterFactory;
 import org.json.simple.parser.ParseException;
 import org.junit.Rule;
 import org.junit.Test;
@@ -64,7 +64,7 @@ public class IncorrectFilesTest {
     public void noCountry() throws IOException, XMLStreamException, ParseException, ParserConfigurationException,
             XMLParseException, TransformerException {
         thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage("parameter 'country' of converterService/music/MusicBand.setCountry must not be null");
+        thrown.expectMessage("parameter 'country' of ru/itdt/converterService/music/MusicBand.setCountry must not be null");
         FileConverterFactory.create(JSON_PATH + "/noCountry.json").convert(OUTPUT_PATH + "/out.xml");
     }
 
@@ -72,7 +72,7 @@ public class IncorrectFilesTest {
     public void noGenreName() throws IOException, XMLStreamException, ParseException, ParserConfigurationException,
             XMLParseException, TransformerException {
         thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage("parameter 'name' of converterService/music/MusicGenre.setName must not be null");
+        thrown.expectMessage("parameter 'name' of ru/itdt/converterService/music/MusicGenre.setName must not be null");
         FileConverterFactory.create(JSON_PATH + "/noGenreName.json").convert(OUTPUT_PATH + "/out.xml");
     }
 

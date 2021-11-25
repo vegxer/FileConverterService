@@ -1,8 +1,8 @@
-package converterService.fileReader;
+package ru.itdt.converterService.fileReader;
 
 import com.google.gson.JsonParseException;
-import converterService.music.MusicBand;
-import converterService.music.MusicGenre;
+import ru.itdt.converterService.music.MusicBand;
+import ru.itdt.converterService.music.MusicGenre;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;

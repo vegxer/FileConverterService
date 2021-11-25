@@ -1,7 +1,7 @@
-package converterService.fileWriter;
+package ru.itdt.converterService.fileWriter;
 
-import converterService.music.MusicBand;
-import converterService.music.MusicGenre;
+import ru.itdt.converterService.music.MusicBand;
+import ru.itdt.converterService.music.MusicGenre;
 import org.jetbrains.annotations.NotNull;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
