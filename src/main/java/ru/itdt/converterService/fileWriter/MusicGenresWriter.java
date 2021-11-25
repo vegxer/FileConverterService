@@ -22,7 +22,8 @@ public final class MusicGenresWriter extends Writer<Collection<MusicGenre>> {
     public void write(@NotNull Collection<MusicGenre> musicGenres) throws IOException {
         JSONObject genresObject = getGenresObject(musicGenres);
 
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        Gson gson = new GsonBuilder().setPrettyPrinting()
+                .create();
         String prettyJsonString = gson.toJson(new JsonParser().parse(genresObject.toJSONString()));
 
         try (FileWriter writer = new FileWriter(super.fileName)) {

@@ -19,7 +19,8 @@ public class Main {
                     2) Файл, в который вы хотите записать результат конвертации (.json или .xml, соответственно с первым параметром)""");
         }
 
-        FileConverterFactory.create(args[0]).convert(args[1]);
+        FileConverterFactory.create(args[0])
+                .convert(args[1]);
         System.out.println(String.format("Преобразование прошло успешно, файл %s создан", args[1]));
     }
 }

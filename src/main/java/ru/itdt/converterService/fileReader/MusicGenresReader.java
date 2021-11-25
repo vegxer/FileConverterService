@@ -23,7 +23,8 @@ public final class MusicGenresReader extends Reader<List<MusicGenre>> {
     public List<MusicGenre> readFile() throws IOException, ParseException {
         JSONArray jsonGenres;
         try (FileReader fileReader = new FileReader(super.fileName)) {
-            Object genres = ((JSONObject) new JSONParser().parse(fileReader)).get("genres");
+            Object genres = ((JSONObject) new JSONParser().parse(fileReader))
+                    .get("genres");
             if (genres == null) {
                 throw new JsonParseException("Key genres is not found");
             }
@@ -35,7 +36,8 @@ public final class MusicGenresReader extends Reader<List<MusicGenre>> {
         for (Object obj : jsonGenres) {
             JSONObject jsonGenre = (JSONObject)((JSONObject)obj).get("genre");
             MusicGenre genre = new MusicGenre();
-            genre.setName((String)jsonGenre.get("name"));
+            genre.setName((String)jsonGenre
+                    .get("name"));
             genre.setMusicBands(getMusicBands(jsonGenre));
 
             genres.add(genre);

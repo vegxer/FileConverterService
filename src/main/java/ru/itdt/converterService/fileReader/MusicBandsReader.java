@@ -37,19 +37,28 @@ public final class MusicBandsReader extends Reader<List<MusicBand>> {
         if (reader.hasNext()) {
             xmlEvent = reader.nextEvent();
 
-            if (!xmlEvent.isStartElement() || !xmlEvent.asStartElement().getName().getLocalPart().equals("Bands")) {
+            if (!xmlEvent.isStartElement() ||
+                    !xmlEvent.asStartElement()
+                    .getName()
+                    .getLocalPart()
+                    .equals("Bands")) {
                 throw new XMLParseException("Bands tag must be first tag");
             }
         }
         else
             throw new XMLParseException("File is empty");
 
-        while (!xmlEvent.isEndElement() || !xmlEvent.asEndElement().getName().getLocalPart().equals("Bands"))
+        while (!xmlEvent.isEndElement() ||
+                !xmlEvent.asEndElement()
+                        .getName()
+                        .getLocalPart()
+                        .equals("Bands"))
         {
             xmlEvent = reader.nextEvent();
             if (xmlEvent.isStartElement()) {
                 StartElement startElement = xmlEvent.asStartElement();
-                String tagName = startElement.getName().getLocalPart();
+                String tagName = startElement.getName()
+                        .getLocalPart();
 
                 if ("Band".equals(tagName)) {
                     musicBands.add(getMusicBand(xmlEvent, reader));
@@ -68,7 +77,10 @@ public final class MusicBandsReader extends Reader<List<MusicBand>> {
 
     private MusicBand getMusicBand(XMLEvent xmlEvent, XMLEventReader reader)
             throws XMLStreamException, XMLParseException {
-        if (!xmlEvent.asStartElement().getName().getLocalPart().equals("Band")) {
+        if (!xmlEvent.asStartElement()
+                .getName()
+                .getLocalPart()
+                .equals("Band")) {
             throw new IllegalArgumentException();
         }
 
@@ -79,18 +91,29 @@ public final class MusicBandsReader extends Reader<List<MusicBand>> {
 
             if (xmlEvent.isStartElement()) {
                 StartElement startElement = xmlEvent.asStartElement();
-                String tagName = startElement.getName().getLocalPart();
+                String tagName = startElement.getName()
+                        .getLocalPart();
 
                 switch (tagName) {
-                    case "year" -> musicBand.setActivateYear(Integer.parseInt(reader.nextEvent().asCharacters().getData()));
-                    case "name" -> musicBand.setName(reader.nextEvent().asCharacters().getData());
-                    case "country" -> musicBand.setCountry(reader.nextEvent().asCharacters().getData());
+                    case "year" -> musicBand.setActivateYear(Integer.parseInt(reader.nextEvent()
+                            .asCharacters()
+                            .getData()));
+                    case "name" -> musicBand.setName(reader.nextEvent()
+                            .asCharacters()
+                            .getData());
+                    case "country" -> musicBand.setCountry(reader.nextEvent()
+                            .asCharacters()
+                            .getData());
                     case "Genres" -> musicBand.setGenres(getGenres(xmlEvent, reader));
                     default -> throw new XMLParseException("Incorrect tag");
                 }
             }
         }
-        while (!xmlEvent.isEndElement() || !xmlEvent.asEndElement().getName().getLocalPart().equals("Band"));
+        while (!xmlEvent.isEndElement() ||
+                !xmlEvent.asEndElement()
+                        .getName()
+                        .getLocalPart()
+                        .equals("Band"));
 
         if (musicBand.getName() == null || musicBand.getActivateYear() == null || musicBand.getCountry() == null
                 || musicBand.getGenres().isEmpty()) {
@@ -102,7 +125,10 @@ public final class MusicBandsReader extends Reader<List<MusicBand>> {
 
     private ArrayList<MusicGenre> getGenres(XMLEvent xmlEvent, XMLEventReader reader)
             throws XMLStreamException, XMLParseException {
-        if (!xmlEvent.asStartElement().getName().getLocalPart().equals("Genres")) {
+        if (!xmlEvent.asStartElement()
+                .getName()
+                .getLocalPart()
+                .equals("Genres")) {
             throw new IllegalArgumentException();
         }
 
@@ -113,18 +139,25 @@ public final class MusicBandsReader extends Reader<List<MusicBand>> {
 
             if (xmlEvent.isStartElement()) {
                 StartElement startElement = xmlEvent.asStartElement();
-                String tagName = startElement.getName().getLocalPart();
+                String tagName = startElement.getName()
+                        .getLocalPart();
 
                 if (tagName.equals("genre")) {
                     MusicGenre musicGenre = new MusicGenre();
-                    musicGenre.setName(reader.nextEvent().asCharacters().getData());
+                    musicGenre.setName(reader.nextEvent()
+                            .asCharacters()
+                            .getData());
                     musicGenres.add(musicGenre);
                 } else {
                     throw new XMLParseException("Incorrect tag");
                 }
             }
         }
-        while (!xmlEvent.isEndElement() || !xmlEvent.asEndElement().getName().getLocalPart().equals("Genres"));
+        while (!xmlEvent.isEndElement() ||
+                !xmlEvent.asEndElement()
+                        .getName()
+                        .getLocalPart()
+                        .equals("Genres"));
 
         if (musicGenres.isEmpty()) {
             throw new XMLParseException("Genres are not found");

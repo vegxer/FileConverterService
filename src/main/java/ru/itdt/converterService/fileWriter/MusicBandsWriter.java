@@ -36,7 +36,8 @@ public final class MusicBandsWriter extends Writer<Collection<MusicBand>> {
     }
 
     private Transformer getPrettyOutputTransformer() throws TransformerConfigurationException {
-        Transformer transformer = TransformerFactory.newInstance().newTransformer();
+        Transformer transformer = TransformerFactory.newInstance()
+                .newTransformer();
         transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
         transformer.setOutputProperty(OutputKeys.METHOD, "xml");
         transformer.setOutputProperty(OutputKeys.ENCODING, "ISO-8859-1");
