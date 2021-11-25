@@ -24,8 +24,9 @@ public final class MusicGenresReader extends Reader<List<MusicGenre>> {
         JSONArray jsonGenres;
         try (FileReader fileReader = new FileReader(super.fileName)) {
             Object genres = ((JSONObject) new JSONParser().parse(fileReader)).get("genres");
-            if (genres == null)
+            if (genres == null) {
                 throw new JsonParseException("Key genres is not found");
+            }
 
             jsonGenres = (JSONArray)genres;
         }
@@ -40,8 +41,9 @@ public final class MusicGenresReader extends Reader<List<MusicGenre>> {
             genres.add(genre);
         }
 
-        if (genres.isEmpty())
+        if (genres.isEmpty()) {
             throw new JsonParseException("Genres are not found");
+        }
 
         return genres;
     }
@@ -61,8 +63,9 @@ public final class MusicGenresReader extends Reader<List<MusicGenre>> {
             musicBands.add(musicBand);
         }
 
-        if (musicBands.isEmpty())
+        if (musicBands.isEmpty()) {
             throw new JsonParseException("Empty array of bands");
+        }
 
         return musicBands;
     }

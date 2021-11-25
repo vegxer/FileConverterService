@@ -26,8 +26,9 @@ public final class JsonToXmlFileConverter extends FileConverter
     @Override
     public void convert(@NotNull String xmlFileName)
             throws IOException, ParseException, ParserConfigurationException, TransformerException {
-        if (!FilenameUtils.getExtension(xmlFileName).equals("xml"))
-            throw new IllegalArgumentException("Неверное расширение файла " + xmlFileName);
+        if (!FilenameUtils.getExtension(xmlFileName).equals("xml")) {
+            throw new IllegalArgumentException(String.format("Неверное расширение файла %s", xmlFileName));
+        }
 
         MusicGenresReader jsonReader = new MusicGenresReader(fileName);
         Collection<MusicBand> musicBands = changeStructure(jsonReader.readFile());
@@ -42,8 +43,9 @@ public final class JsonToXmlFileConverter extends FileConverter
 
         for (MusicGenre musicGenre : musicGenres) {
             for (MusicBand musicBand : musicGenre.getMusicBands()) {
-                if (!musicBands.containsKey(musicBand.getName()))
+                if (!musicBands.containsKey(musicBand.getName())) {
                     musicBands.put(musicBand.getName(), musicBand);
+                }
 
                 MusicGenre genre = new MusicGenre();
                 genre.setName(musicGenre.getName());

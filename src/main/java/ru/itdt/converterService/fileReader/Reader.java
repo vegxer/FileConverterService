@@ -26,8 +26,9 @@ public abstract class Reader<T> {
     }
 
     public void setFileName(@NotNull String fileName) throws FileNotFoundException {
-        if (!new File(fileName).exists())
+        if (!new File(fileName).exists()) {
             throw new FileNotFoundException("Такого файла не существует");
+        }
 
         this.fileName = fileName;
     }

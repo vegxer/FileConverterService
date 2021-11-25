@@ -59,8 +59,9 @@ public final class MusicGenresWriter extends Writer<Collection<MusicGenre>> {
             genreArray.add(jsonBand);
         }
 
-        if (genreArray.isEmpty())
+        if (genreArray.isEmpty()) {
             throw new IllegalArgumentException("Пустой список жанров");
+        }
 
         return genreArray;
     }

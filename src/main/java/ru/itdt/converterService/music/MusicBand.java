@@ -24,8 +24,9 @@ public final class MusicBand {
 
     @Override
     public boolean equals(Object band) {
-        if (!(band instanceof MusicBand musicBand))
+        if (!(band instanceof MusicBand musicBand)) {
             throw new IllegalArgumentException("Необходим объект класса MusicBand");
+        }
 
         return name.equals(musicBand.getName()) && country.equals(musicBand.getCountry())
                 && activateYear.equals(musicBand.getActivateYear()) && musicGenres.equals(musicBand.getGenres());
@@ -53,8 +54,9 @@ public final class MusicBand {
     }
 
     public void setActivateYear(int activateYear) {
-        if (activateYear < 0)
+        if (activateYear < 0) {
             throw new IllegalArgumentException("Неверный ввод года, необходимо неотрицательное число");
+        }
 
         this.activateYear = activateYear;
     }
