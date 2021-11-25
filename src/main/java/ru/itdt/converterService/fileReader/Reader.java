@@ -9,7 +9,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public abstract class Reader<T> {
+public abstract class Reader<T> implements AutoCloseable {
     protected String fileName;
 
 

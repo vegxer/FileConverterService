@@ -19,10 +19,6 @@ public abstract class FileConverter {
             ParseException, ParserConfigurationException, TransformerException;
 
 
-    public String getFileName() {
-        return fileName;
-    }
-
     public void setFileName(@NotNull String fileName) throws FileNotFoundException {
         if (!new File(fileName).exists()) {
             throw new FileNotFoundException("Такого файла не существует");

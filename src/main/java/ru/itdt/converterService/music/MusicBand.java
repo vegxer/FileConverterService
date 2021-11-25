@@ -2,6 +2,7 @@ package ru.itdt.converterService.music;
 
 import org.jetbrains.annotations.NotNull;
 
+import javax.validation.constraints.Min;
 import java.util.ArrayList;
 
 public final class MusicBand {
@@ -53,11 +54,7 @@ public final class MusicBand {
         return activateYear;
     }
 
-    public void setActivateYear(int activateYear) {
-        if (activateYear < 0) {
-            throw new IllegalArgumentException("Неверный ввод года, необходимо неотрицательное число");
-        }
-
+    public void setActivateYear(@Min(0) int activateYear) {
         this.activateYear = activateYear;
     }
 

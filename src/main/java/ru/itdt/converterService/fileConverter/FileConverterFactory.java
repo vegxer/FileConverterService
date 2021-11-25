@@ -11,7 +11,7 @@ public final class FileConverterFactory {
         return switch (FilenameUtils.getExtension(fileName)) {
             case "xml" -> new XmlToJsonFileConverter(fileName);
             case "json" -> new JsonToXmlFileConverter(fileName);
-            default -> throw new IllegalArgumentException("Неверное расширение файла");
+            default -> throw new IllegalArgumentException("Неподдерживаемое расширение файла");
         };
     }
 }

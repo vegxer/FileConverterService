@@ -165,4 +165,9 @@ public final class MusicBandsReader extends Reader<List<MusicBand>> {
 
         return musicGenres;
     }
+
+    @Override
+    public void close() throws Exception {
+
+    }
 }
