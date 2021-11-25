@@ -1,7 +1,7 @@
-#Сервис конвертации файлов
+# Сервис конвертации файлов
 Данная программа конвертирует файл, отсортированный по мызыкальным группам в файл, отсортированный по музыкальным жанрам.
-##Создание JAR файла при помощи Maven
-###Установка Maven
+## Создание JAR файла при помощи Maven
+### Установка Maven
 Если у Вас не установлен Maven, то
 1) Скачайте архив по ссылке https://maven.apache.org/download.cgi и распакуйте его по пути
 C:\Program Files;
@@ -11,14 +11,14 @@ C:\Program Files;
    ```
    x.x.x - номер версии Maven.
 
-###Создание JAR файла
+### Создание JAR файла
 1) Перейдите в директорию FileConverterService и введите в командную строку
    ```
    mvn package -Dmaven.test.skip 
    ```
    Эта команда сгенерирует jar файл по пути target/FileConverterService-1.0-SNAPSHOT-jar-with-dependencies.jar
 
-##Запуск JAR файла
+## Запуск JAR файла
 В командной строке напишите следующее:
 ```
 java -jar target/FileConverterService-1.0-SNAPSHOT-jar-with-dependencies.jar <путь к файлу> <путь к файлу>
