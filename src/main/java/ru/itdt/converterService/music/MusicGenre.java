@@ -3,14 +3,11 @@ package ru.itdt.converterService.music;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public final class MusicGenre {
     private String name;
-    private ArrayList<MusicBand> musicBands;
-
-    public MusicGenre() {
-        musicBands = new ArrayList<>();
-    }
+    private List<MusicBand> musicBands;
 
 
     public void addMusicBand(@NotNull MusicBand musicBand) {
@@ -39,11 +36,10 @@ public final class MusicGenre {
         this.name = name;
     }
 
-    public ArrayList<MusicBand> getMusicBands() {
-        return musicBands;
-    }
+    public List<MusicBand> getMusicBands() {
+        if (musicBands == null)
+            musicBands = new ArrayList<>();
 
-    public void setMusicBands(@NotNull ArrayList<MusicBand> musicBands) {
-        this.musicBands = musicBands;
+        return musicBands;
     }
 }

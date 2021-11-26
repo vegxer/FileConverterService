@@ -2,7 +2,7 @@ package ru.itdt.converterService.Validators;
 
 import java.io.File;
 
-public class FilePathValidator implements Validator<String> {
+public final class FilePathValidator implements Validator<String> {
     @Override
     public ValidationResult validate(String filePath) {
         if (filePath == null)

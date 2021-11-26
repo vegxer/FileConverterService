@@ -1,6 +1,6 @@
 package ru.itdt.converterService.Validators;
 
-public class YearValidator implements Validator<Integer> {
+public final class YearValidator implements Validator<Integer> {
 
     @Override
     public ValidationResult validate(Integer year) {

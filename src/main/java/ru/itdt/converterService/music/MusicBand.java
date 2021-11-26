@@ -7,22 +7,16 @@ import ru.itdt.converterService.Validators.YearValidator;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.List;
 
 public final class MusicBand {
     private String name, country;
     private Integer activateYear;
-    private ArrayList<MusicGenre> musicGenres;
+    private List<MusicGenre> musicGenres;
 
-    public MusicBand() {
-        musicGenres = new ArrayList<>();
-    }
 
     public void addGenre(@NotNull MusicGenre musicGenre) {
         musicGenres.add(musicGenre);
-    }
-
-    public void removeGenre(@NotNull MusicGenre musicGenre) {
-        musicGenres.remove(musicGenre);
     }
 
     @Override
@@ -64,11 +58,10 @@ public final class MusicBand {
         this.activateYear = activateYear;
     }
 
-    public ArrayList<MusicGenre> getGenres() {
-        return musicGenres;
-    }
+    public List<MusicGenre> getGenres() {
+        if (musicGenres == null)
+            musicGenres = new ArrayList<>();
 
-    public void setGenres(@NotNull ArrayList<MusicGenre> musicGenres) {
-        this.musicGenres = musicGenres;
+        return musicGenres;
     }
 }
