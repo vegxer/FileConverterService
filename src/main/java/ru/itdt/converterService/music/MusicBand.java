@@ -1,26 +1,21 @@
 package ru.itdt.converterService.music;
 
 import org.jetbrains.annotations.NotNull;
+import ru.itdt.converterService.Validators.ValidationResult;
 import ru.itdt.converterService.Validators.Validator;
 import ru.itdt.converterService.Validators.YearValidator;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public final class MusicBand {
     private String name, country;
     private Integer activateYear;
-    private final Validator<Integer> yearValidator;
     private ArrayList<MusicGenre> musicGenres;
 
-    public MusicBand(@NotNull Validator<Integer> yearValidator) {
-        this.yearValidator = yearValidator;
-    }
-
     public MusicBand() {
-        this(new YearValidator());
         musicGenres = new ArrayList<>();
     }
-
 
     public void addGenre(@NotNull MusicGenre musicGenre) {
         musicGenres.add(musicGenre);
@@ -62,8 +57,9 @@ public final class MusicBand {
     }
 
     public void setActivateYear(int activateYear) {
-        if (!yearValidator.isValid(activateYear))
-            throw new IllegalArgumentException("Год должен быть неотрицательным числом");
+        ValidationResult result = new YearValidator().validate(activateYear);
+        if (!result.isValid())
+            throw new IllegalArgumentException(result.exceptionMessage());
 
         this.activateYear = activateYear;
     }
