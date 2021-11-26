@@ -1,6 +1,7 @@
 package ru.itdt.converterService.fileReader;
 
 import com.google.gson.JsonParseException;
+import org.apache.commons.io.input.ReaderInputStream;
 import ru.itdt.converterService.music.MusicBand;
 import ru.itdt.converterService.music.MusicGenre;
 import org.json.simple.JSONArray;
@@ -8,35 +9,30 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public final class MusicGenresReader extends Reader<List<MusicGenre>> {
-    public MusicGenresReader(String fileName) throws FileNotFoundException {
-        super(fileName);
+    public MusicGenresReader(InputStream inputStream) {
+        super(inputStream);
     }
 
     @Override
     public List<MusicGenre> readFile() throws IOException, ParseException {
         JSONArray jsonGenres;
-        try (FileReader fileReader = new FileReader(super.fileName)) {
-            Object genres = ((JSONObject) new JSONParser().parse(fileReader))
-                    .get("genres");
-            if (genres == null) {
-                throw new JsonParseException("Key genres is not found");
-            }
-
-            jsonGenres = (JSONArray)genres;
+        Object genresObj = ((JSONObject) new JSONParser().parse(new InputStreamReader(inputStream)))
+                .get("genres");
+        if (genresObj == null) {
+            throw new JsonParseException("Key genres is not found");
         }
+        jsonGenres = (JSONArray) genresObj;
 
         ArrayList<MusicGenre> genres = new ArrayList<>();
         for (Object obj : jsonGenres) {
-            JSONObject jsonGenre = (JSONObject)((JSONObject)obj).get("genre");
+            JSONObject jsonGenre = (JSONObject) ((JSONObject) obj).get("genre");
             MusicGenre genre = new MusicGenre();
-            genre.setName((String)jsonGenre
+            genre.setName((String) jsonGenre
                     .get("name"));
             genre.setMusicBands(getMusicBands(jsonGenre));
 

@@ -9,7 +9,9 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.management.modelmbean.XMLParseException;
 import javax.xml.stream.XMLStreamException;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
@@ -29,10 +31,10 @@ public final class XmlToJsonFileConverter extends FileConverter
             throw new IllegalArgumentException(String.format("Неверное расширение файла %s", jsonFileName));
         }
 
-        MusicBandsReader jsonReader = new MusicBandsReader(fileName);
+        MusicBandsReader jsonReader = new MusicBandsReader(new FileInputStream(fileName));
         Collection<MusicGenre> musicGenres = changeStructure(jsonReader.readFile());
 
-        MusicGenresWriter jsonWriter = new MusicGenresWriter(jsonFileName);
+        MusicGenresWriter jsonWriter = new MusicGenresWriter(new FileOutputStream(jsonFileName));
         jsonWriter.write(musicGenres);
     }
 

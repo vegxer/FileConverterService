@@ -11,14 +11,12 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.StringWriter;
+import java.io.*;
 import java.util.Collection;
 
 public final class MusicBandsWriter extends Writer<Collection<MusicBand>> {
-    public MusicBandsWriter(String fileName) {
-        super(fileName);
+    public MusicBandsWriter(OutputStream outputStream) {
+        super(outputStream);
     }
 
     @Override
@@ -29,9 +27,7 @@ public final class MusicBandsWriter extends Writer<Collection<MusicBand>> {
 
         try (StringWriter sw = new StringWriter()) {
             getPrettyOutputTransformer().transform(new DOMSource(xmlDoc), new StreamResult(sw));
-            try (FileWriter writer = new FileWriter(super.fileName)) {
-                writer.write(sw.toString());
-            }
+            new OutputStreamWriter(outputStream).write(sw.toString());
         }
     }
 

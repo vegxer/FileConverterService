@@ -12,28 +12,27 @@ import javax.xml.stream.events.XMLEvent;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 public final class MusicBandsReader extends Reader<List<MusicBand>> {
-    public MusicBandsReader(String fileName) throws FileNotFoundException {
-        super(fileName);
+    public MusicBandsReader(InputStream inputStream) {
+        super(inputStream);
     }
 
     @Override
-    public List<MusicBand> readFile() throws IOException, XMLStreamException, XMLParseException {
+    public List<MusicBand> readFile() throws XMLStreamException, XMLParseException {
         XMLInputFactory factory = XMLInputFactory.newInstance();
-        try (FileInputStream inputStream = new FileInputStream(super.fileName)) {
-            XMLEventReader reader = factory.createXMLEventReader(inputStream);
-            XMLEvent xmlEvent = reader.nextEvent();
-            return getMusicBands(xmlEvent, reader);
-        }
+        XMLEventReader reader = factory.createXMLEventReader(inputStream);
+        return getMusicBands(reader);
     }
 
-    private ArrayList<MusicBand> getMusicBands(XMLEvent xmlEvent, XMLEventReader reader)
+    private ArrayList<MusicBand> getMusicBands(XMLEventReader reader)
             throws XMLStreamException, XMLParseException {
         ArrayList<MusicBand> musicBands = new ArrayList<>();
 
+        XMLEvent xmlEvent;
         if (reader.hasNext()) {
             xmlEvent = reader.nextEvent();
 
@@ -164,10 +163,5 @@ public final class MusicBandsReader extends Reader<List<MusicBand>> {
         }
 
         return musicGenres;
-    }
-
-    @Override
-    public void close() throws Exception {
-
     }
 }

@@ -1,6 +1,5 @@
 package ru.itdt.converterService.fileConverter;
 
-import org.jetbrains.annotations.NotNull;
 import org.json.simple.parser.ParseException;
 
 import javax.management.modelmbean.XMLParseException;
@@ -19,11 +18,14 @@ public abstract class FileConverter {
             ParseException, ParserConfigurationException, TransformerException;
 
 
-    public void setFileName(@NotNull String fileName) throws FileNotFoundException {
-        if (!new File(fileName).exists()) {
-            throw new FileNotFoundException("Такого файла не существует");
-        }
-
+    public void setFileName(String fileName) throws FileNotFoundException {
+        validateFileName(fileName);
         this.fileName = fileName;
+    }
+
+    private void validateFileName(String fileName) throws FileNotFoundException {
+        if (!new File(fileName).exists()) {
+            throw new FileNotFoundException(String.format("Файл %s не существует", fileName));
+        }
     }
 }

@@ -5,24 +5,19 @@ import org.jetbrains.annotations.NotNull;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import java.io.IOException;
+import java.io.OutputStream;
 
-public abstract class Writer<T> {
-    protected String fileName;
+public abstract class Writer<T> implements AutoCloseable {
+    protected OutputStream outputStream;
 
-
-    public Writer(String fileName) {
-        setFileName(fileName);
+    public Writer(@NotNull OutputStream outputStream) {
+        this.outputStream = outputStream;
     }
-
 
     public abstract void write(T obj) throws IOException, ParserConfigurationException, TransformerException;
 
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    public void setFileName(@NotNull String fileName) {
-        this.fileName = fileName;
+    @Override
+    public void close() throws IOException {
+        outputStream.close();
     }
 }

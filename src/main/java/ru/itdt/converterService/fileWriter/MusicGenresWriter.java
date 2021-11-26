@@ -3,19 +3,20 @@ package ru.itdt.converterService.fileWriter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParser;
-import ru.itdt.converterService.music.MusicBand;
-import ru.itdt.converterService.music.MusicGenre;
 import org.jetbrains.annotations.NotNull;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import ru.itdt.converterService.music.MusicBand;
+import ru.itdt.converterService.music.MusicGenre;
 
-import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.util.Collection;
 
 public final class MusicGenresWriter extends Writer<Collection<MusicGenre>> {
-    public MusicGenresWriter(String fileName) {
-        super(fileName);
+    public MusicGenresWriter(OutputStream outputStream) {
+        super(outputStream);
     }
 
     @Override
@@ -24,11 +25,8 @@ public final class MusicGenresWriter extends Writer<Collection<MusicGenre>> {
 
         Gson gson = new GsonBuilder().setPrettyPrinting()
                 .create();
-        String prettyJsonString = gson.toJson(new JsonParser().parse(genresObject.toJSONString()));
-
-        try (FileWriter writer = new FileWriter(super.fileName)) {
-            writer.write(prettyJsonString);
-        }
+        new OutputStreamWriter(outputStream).write(
+                gson.toJson(new JsonParser().parse(genresObject.toJSONString())));
     }
 
     private JSONObject getGenresObject(Collection<MusicGenre> musicGenres) {

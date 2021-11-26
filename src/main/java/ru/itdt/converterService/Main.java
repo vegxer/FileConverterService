@@ -2,6 +2,7 @@ package ru.itdt.converterService;
 
 import ru.itdt.converterService.fileConverter.FileConverterFactory;
 import org.json.simple.parser.ParseException;
+import ru.itdt.converterService.music.MusicBand;
 
 import javax.management.modelmbean.XMLParseException;
 import javax.xml.parsers.ParserConfigurationException;
@@ -19,6 +20,8 @@ public class Main {
                     2) Файл, в который вы хотите записать результат конвертации (.json или .xml, соответственно с первым параметром)""");
         }
 
+        MusicBand band = new MusicBand();
+        band.setActivateYear(-1);
         FileConverterFactory.create(args[0])
                 .convert(args[1]);
         System.out.println(String.format("Преобразование прошло успешно, файл %s создан", args[1]));

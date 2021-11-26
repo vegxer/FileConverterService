@@ -8,28 +8,19 @@ import javax.xml.stream.XMLStreamException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 
 public abstract class Reader<T> implements AutoCloseable {
-    protected String fileName;
+    protected InputStream inputStream;
 
-
-    public Reader(String fileName) throws FileNotFoundException {
-        setFileName(fileName);
+    public Reader(@NotNull InputStream inputStream) {
+        this.inputStream = inputStream;
     }
-
 
     public abstract T readFile() throws IOException, XMLStreamException, XMLParseException, ParseException;
 
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    public void setFileName(@NotNull String fileName) throws FileNotFoundException {
-        if (!new File(fileName).exists()) {
-            throw new FileNotFoundException("Такого файла не существует");
-        }
-
-        this.fileName = fileName;
+    @Override
+    public void close() throws IOException {
+        inputStream.close();
     }
 }
