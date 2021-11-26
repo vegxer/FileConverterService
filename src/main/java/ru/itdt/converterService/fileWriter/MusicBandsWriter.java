@@ -27,7 +27,9 @@ public final class MusicBandsWriter extends Writer<Collection<MusicBand>> {
 
         try (StringWriter sw = new StringWriter()) {
             getPrettyOutputTransformer().transform(new DOMSource(xmlDoc), new StreamResult(sw));
-            new OutputStreamWriter(outputStream).write(sw.toString());
+            OutputStreamWriter writer = new OutputStreamWriter(outputStream);
+            writer.write(sw.toString());
+            writer.flush();
         }
     }
 
@@ -50,13 +52,30 @@ public final class MusicBandsWriter extends Writer<Collection<MusicBand>> {
             Element musicBandElem = xmlDoc.createElement("Band");
 
             Element name = xmlDoc.createElement("name");
-            name.setTextContent(musicBand.getName());
+            if (musicBand.getBandName() == null) {
+                System.err.println("Значение 'name' не было установлено");
+                name.setTextContent("");
+            } else {
+                name.setTextContent(musicBand.getBandName());
+            }
             musicBandElem.appendChild(name);
+
             Element country = xmlDoc.createElement("country");
-            country.setTextContent(musicBand.getCountry());
+            if (musicBand.getCountry() == null) {
+                System.err.println("Значение 'country' не было установлено");
+                country.setTextContent("");
+            } else {
+                country.setTextContent(musicBand.getCountry());
+            }
             musicBandElem.appendChild(country);
+
             Element year = xmlDoc.createElement("year");
-            year.setTextContent(Integer.toString(musicBand.getActivateYear()));
+            if (musicBand.getActivateYear() == null) {
+                System.err.println("Значение 'year' не было установлено");
+                year.setTextContent("");
+            } else {
+                year.setTextContent(Integer.toString(musicBand.getActivateYear()));
+            }
             musicBandElem.appendChild(year);
 
             musicBandElem.appendChild(getBandGenres(xmlDoc, musicBand));
@@ -69,10 +88,13 @@ public final class MusicBandsWriter extends Writer<Collection<MusicBand>> {
 
     public Element getBandGenres(Document xmlDoc, MusicBand musicBand) {
         Element genresElem = xmlDoc.createElement("Genres");
+        if (musicBand.getMusicGenres().isEmpty()) {
+            System.err.println("Значение 'Genres' не было установлено");
+        }
 
-        for (MusicGenre musicGenre : musicBand.getGenres()) {
+        for (MusicGenre musicGenre : musicBand.getMusicGenres()) {
             Element genreElem = xmlDoc.createElement("genre");
-            genreElem.setTextContent(musicGenre.getName());
+            genreElem.setTextContent(musicGenre.getGenreName());
 
             genresElem.appendChild(genreElem);
         }

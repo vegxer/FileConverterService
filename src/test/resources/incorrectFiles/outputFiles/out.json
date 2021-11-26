@@ -2,72 +2,6 @@
   "genres": [
     {
       "genre": {
-        "name": "rock",
-        "bands": [
-          {
-            "country": "UK",
-            "year": "1968",
-            "name": "Led Zeppelin"
-          },
-          {
-            "country": "USA",
-            "year": "1996",
-            "name": "Nirvana"
-          },
-          {
-            "country": "UK",
-            "year": "1962",
-            "name": "The Rolling Stones"
-          },
-          {
-            "country": "UK",
-            "year": "1960",
-            "name": "The Beatles"
-          }
-        ]
-      }
-    },
-    {
-      "genre": {
-        "name": "pop",
-        "bands": [
-          {
-            "country": "UK",
-            "year": "2008",
-            "name": "Clean Bandit"
-          },
-          {
-            "country": "UK",
-            "year": "1960",
-            "name": "The Beatles"
-          },
-          {
-            "country": "Germany",
-            "year": "1983",
-            "name": "Modern Talking"
-          },
-          {
-            "country": "Sweden",
-            "year": "1972",
-            "name": "ABBA"
-          }
-        ]
-      }
-    },
-    {
-      "genre": {
-        "name": "grunge",
-        "bands": [
-          {
-            "country": "USA",
-            "year": "1996",
-            "name": "Nirvana"
-          }
-        ]
-      }
-    },
-    {
-      "genre": {
         "name": "jazz",
         "bands": [
           {
@@ -80,102 +14,12 @@
     },
     {
       "genre": {
-        "name": "metal",
-        "bands": [
-          {
-            "country": "UK",
-            "year": "1968",
-            "name": "Led Zeppelin"
-          },
-          {
-            "country": "Germany",
-            "year": "1994",
-            "name": "Rammstein"
-          }
-        ]
-      }
-    },
-    {
-      "genre": {
-        "name": "electronic",
-        "bands": [
-          {
-            "country": "UK",
-            "year": "1993",
-            "name": "Daft Punk"
-          },
-          {
-            "country": "UK",
-            "year": "2008",
-            "name": "Clean Bandit"
-          }
-        ]
-      }
-    },
-    {
-      "genre": {
-        "name": "disco",
-        "bands": [
-          {
-            "country": "UK",
-            "year": "1993",
-            "name": "Daft Punk"
-          },
-          {
-            "country": "Germany",
-            "year": "1983",
-            "name": "Modern Talking"
-          },
-          {
-            "country": "Sweden",
-            "year": "1972",
-            "name": "ABBA"
-          }
-        ]
-      }
-    },
-    {
-      "genre": {
-        "name": "new wave",
-        "bands": [
-          {
-            "country": "Germany",
-            "year": "1983",
-            "name": "Modern Talking"
-          }
-        ]
-      }
-    },
-    {
-      "genre": {
         "name": "rock and roll",
         "bands": [
           {
             "country": "UK",
             "year": "1962",
             "name": "The Rolling Stones"
-          },
-          {
-            "country": "UK",
-            "year": "1960",
-            "name": "The Beatles"
-          }
-        ]
-      }
-    },
-    {
-      "genre": {
-        "name": "dance",
-        "bands": [
-          {
-            "country": "UK",
-            "year": "1993",
-            "name": "Daft Punk"
-          },
-          {
-            "country": "Sweden",
-            "year": "1972",
-            "name": "ABBA"
           }
         ]
       }
@@ -188,28 +32,6 @@
             "country": "UK",
             "year": "1993",
             "name": "Daft Punk"
-          },
-          {
-            "country": "UK",
-            "year": "2008",
-            "name": "Clean Bandit"
-          }
-        ]
-      }
-    },
-    {
-      "genre": {
-        "name": "blues",
-        "bands": [
-          {
-            "country": "UK",
-            "year": "1968",
-            "name": "Led Zeppelin"
-          },
-          {
-            "country": "UK",
-            "year": "1962",
-            "name": "The Rolling Stones"
           }
         ]
       }

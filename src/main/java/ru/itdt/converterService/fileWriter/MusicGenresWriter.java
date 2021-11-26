@@ -25,15 +25,24 @@ public final class MusicGenresWriter extends Writer<Collection<MusicGenre>> {
 
         Gson gson = new GsonBuilder().setPrettyPrinting()
                 .create();
-        new OutputStreamWriter(outputStream).write(
-                gson.toJson(new JsonParser().parse(genresObject.toJSONString())));
+        OutputStreamWriter writer = new OutputStreamWriter(outputStream);
+        writer.write(gson.toJson(new JsonParser().parse(genresObject.toJSONString())));
+        writer.flush();
     }
 
+    @SuppressWarnings("unchecked")
     private JSONObject getGenresObject(Collection<MusicGenre> musicGenres) {
         JSONArray jsonGenres = new JSONArray();
         for (MusicGenre musicGenre : musicGenres) {
             JSONObject jsonGenre = new JSONObject();
-            jsonGenre.put("name", musicGenre.getName());
+
+            if (musicGenre.getGenreName() == null) {
+                System.err.println("Значение 'genre' не было установлено");
+                jsonGenre.put("name", "");
+            } else {
+                jsonGenre.put("name", musicGenre.getGenreName());
+            }
+
             jsonGenre.put("bands", getMusicBandsArray(musicGenre));
 
             JSONObject genreObject = new JSONObject();
@@ -46,20 +55,38 @@ public final class MusicGenresWriter extends Writer<Collection<MusicGenre>> {
         return genresObject;
     }
 
+    @SuppressWarnings("unchecked")
     private JSONArray getMusicBandsArray(MusicGenre musicGenre) {
         JSONArray genreArray = new JSONArray();
+        if (musicGenre.getMusicBands().isEmpty()) {
+            System.err.println("Значение 'bands' не было установлено");
+        }
 
         for (MusicBand band : musicGenre.getMusicBands()) {
             JSONObject jsonBand = new JSONObject();
-            jsonBand.put("year", Integer.toString(band.getActivateYear()));
-            jsonBand.put("country", band.getCountry());
-            jsonBand.put("name", band.getName());
+
+            if (band.getActivateYear() == null) {
+                System.err.println("Значение 'year' не было установлено");
+                jsonBand.put("year", "");
+            } else {
+                jsonBand.put("year", Integer.toString(band.getActivateYear()));
+            }
+
+            if (band.getCountry() == null) {
+                System.err.println("Значение 'country' не было установлено");
+                jsonBand.put("country", "");
+            } else {
+                jsonBand.put("country", band.getCountry());
+            }
+
+            if (band.getBandName() == null) {
+                System.err.println("Значение 'name' не было установлено");
+                jsonBand.put("name", "");
+            } else {
+                jsonBand.put("name", band.getBandName());
+            }
 
             genreArray.add(jsonBand);
-        }
-
-        if (genreArray.isEmpty()) {
-            throw new IllegalArgumentException("Пустой список жанров");
         }
 
         return genreArray;

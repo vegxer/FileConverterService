@@ -8,7 +8,7 @@ public final class YearValidator implements Validator<Integer> {
             return new ValidationResult(false, "Год был равен null");
 
         if (year < 0)
-            return new ValidationResult(false, "Год был меньше нуля");
+            return new ValidationResult(false, "Год должен быть не меньше нуля");
 
         return new ValidationResult(true, "");
     }

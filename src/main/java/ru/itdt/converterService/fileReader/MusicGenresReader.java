@@ -1,46 +1,52 @@
 package ru.itdt.converterService.fileReader;
 
-import com.google.gson.JsonParseException;
-import org.apache.commons.io.input.ReaderInputStream;
-import ru.itdt.converterService.music.MusicBand;
-import ru.itdt.converterService.music.MusicGenre;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import ru.itdt.converterService.music.MusicBand;
+import ru.itdt.converterService.music.MusicGenre;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
-public final class MusicGenresReader extends Reader<List<MusicGenre>> {
+public final class MusicGenresReader extends Reader<Collection<MusicGenre>> {
     public MusicGenresReader(InputStream inputStream) {
         super(inputStream);
     }
 
     @Override
-    public List<MusicGenre> readFile() throws IOException, ParseException {
-        JSONArray jsonGenres;
+    public Collection<MusicGenre> readFile() throws IOException, ParseException {
         Object genresObj = ((JSONObject) new JSONParser().parse(new InputStreamReader(inputStream)))
                 .get("genres");
         if (genresObj == null) {
-            throw new JsonParseException("Key genres is not found");
+            System.err.println("Ключ 'genres' не найден");
+            return new ArrayList<>();
         }
-        jsonGenres = (JSONArray) genresObj;
 
+        JSONArray jsonGenres = (JSONArray) genresObj;
         ArrayList<MusicGenre> genres = new ArrayList<>();
         for (Object obj : jsonGenres) {
             JSONObject jsonGenre = (JSONObject) ((JSONObject) obj).get("genre");
             MusicGenre genre = new MusicGenre();
-            genre.setName((String) jsonGenre
-                    .get("name"));
-            genre.setMusicBands(getMusicBands(jsonGenre));
+
+            Object name = jsonGenre.get("name");
+            if (name == null) {
+                System.err.println("Ключ 'name' не найден");
+            } else {
+                genre.setGenreName((String)name);
+            }
+
+            genre.getMusicBands().addAll(getMusicBands(jsonGenre));
 
             genres.add(genre);
         }
 
         if (genres.isEmpty()) {
-            throw new JsonParseException("Genres are not found");
+            System.err.println("Жанры не найдены");
         }
 
         return genres;
@@ -52,17 +58,34 @@ public final class MusicGenresReader extends Reader<List<MusicGenre>> {
 
         for (Object band : jsonBands) {
             JSONObject jsonBand = (JSONObject)band;
-
             MusicBand musicBand = new MusicBand();
-            musicBand.setName((String)jsonBand.get("name"));
-            musicBand.setCountry((String)jsonBand.get("country"));
-            musicBand.setActivateYear(Integer.parseInt((String)jsonBand.get("year")));
+
+            Object name = jsonBand.get("name");
+            if (name == null) {
+                System.err.println("Ключ 'name' не найден");
+            } else {
+                musicBand.setBandName((String)name);
+            }
+
+            Object country = jsonBand.get("country");
+            if (country == null) {
+                System.err.println("Ключ 'country' не найден");
+            } else {
+                musicBand.setCountry((String)country);
+            }
+
+            Object year = jsonBand.get("year");
+            if (year == null) {
+                System.err.println("Ключ 'year' не найден");
+            } else {
+                musicBand.setActivateYear(Integer.parseInt((String)year));
+            }
 
             musicBands.add(musicBand);
         }
 
         if (musicBands.isEmpty()) {
-            throw new JsonParseException("Empty array of bands");
+            System.err.println("Музыкальные группы не найдены");
         }
 
         return musicBands;

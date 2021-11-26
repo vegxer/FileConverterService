@@ -22,7 +22,7 @@ public class IncorrectFilesTest {
 
     @Test
     public void emptyGenres() throws IOException, XMLStreamException, ParseException, ParserConfigurationException,
-            XMLParseException, TransformerException {
+            TransformerException {
         thrown.expect(XMLParseException.class);
         thrown.expectMessage("Genres are not found");
         FileConverterFactory.create(XML_PATH + "/emptyGenres.xml").convert(OUTPUT_PATH + "/out.json");
@@ -30,7 +30,7 @@ public class IncorrectFilesTest {
 
     @Test
     public void incorrectRootTag() throws IOException, XMLStreamException, ParseException, ParserConfigurationException,
-            XMLParseException, TransformerException {
+            TransformerException {
         thrown.expect(XMLParseException.class);
         thrown.expectMessage("Bands tag must be first tag");
         FileConverterFactory.create(XML_PATH + "/incorrectRootTag.xml").convert(OUTPUT_PATH + "/out.json");
@@ -38,7 +38,7 @@ public class IncorrectFilesTest {
 
     @Test
     public void noGenresXML() throws IOException, XMLStreamException, ParseException, ParserConfigurationException,
-            XMLParseException, TransformerException {
+            TransformerException {
         thrown.expect(XMLParseException.class);
         thrown.expectMessage("Not enough tags in Band tag");
         FileConverterFactory.create(XML_PATH + "/noGenres.xml").convert(OUTPUT_PATH + "/out.json");
@@ -46,7 +46,7 @@ public class IncorrectFilesTest {
 
     @Test
     public void noBandName() throws IOException, XMLStreamException, ParseException, ParserConfigurationException,
-            XMLParseException, TransformerException {
+            TransformerException {
         thrown.expect(XMLParseException.class);
         thrown.expectMessage("Not enough tags in Band tag");
         FileConverterFactory.create(XML_PATH + "/noBandName.xml").convert(OUTPUT_PATH + "/out.json");
@@ -54,7 +54,7 @@ public class IncorrectFilesTest {
 
     @Test
     public void emptyBands() throws IOException, XMLStreamException, ParseException, ParserConfigurationException,
-            XMLParseException, TransformerException {
+            TransformerException {
         thrown.expect(JsonParseException.class);
         thrown.expectMessage("Empty array of bands");
         FileConverterFactory.create(JSON_PATH + "/emptyBands.json").convert(OUTPUT_PATH + "/out.xml");
@@ -62,7 +62,7 @@ public class IncorrectFilesTest {
 
     @Test
     public void noCountry() throws IOException, XMLStreamException, ParseException, ParserConfigurationException,
-            XMLParseException, TransformerException {
+            TransformerException {
         thrown.expect(IllegalArgumentException.class);
         thrown.expectMessage("parameter 'country' of ru/itdt/converterService/music/MusicBand.setCountry must not be null");
         FileConverterFactory.create(JSON_PATH + "/noCountry.json").convert(OUTPUT_PATH + "/out.xml");
@@ -70,7 +70,7 @@ public class IncorrectFilesTest {
 
     @Test
     public void noGenreName() throws IOException, XMLStreamException, ParseException, ParserConfigurationException,
-            XMLParseException, TransformerException {
+            TransformerException {
         thrown.expect(IllegalArgumentException.class);
         thrown.expectMessage("parameter 'name' of ru/itdt/converterService/music/MusicGenre.setName must not be null");
         FileConverterFactory.create(JSON_PATH + "/noGenreName.json").convert(OUTPUT_PATH + "/out.xml");
@@ -78,7 +78,7 @@ public class IncorrectFilesTest {
 
     @Test
     public void noGenresJSON() throws IOException, XMLStreamException, ParseException, ParserConfigurationException,
-            XMLParseException, TransformerException {
+            TransformerException {
         thrown.expect(JsonParseException.class);
         thrown.expectMessage("Key genres is not found");
         FileConverterFactory.create(JSON_PATH + "/noGenres.json").convert(OUTPUT_PATH + "/out.xml");

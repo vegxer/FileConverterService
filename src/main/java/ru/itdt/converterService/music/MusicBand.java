@@ -5,19 +5,15 @@ import ru.itdt.converterService.Validators.ValidationResult;
 import ru.itdt.converterService.Validators.Validator;
 import ru.itdt.converterService.Validators.YearValidator;
 
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public final class MusicBand {
-    private String name, country;
+    private String bandName, country;
     private Integer activateYear;
-    private List<MusicGenre> musicGenres;
+    private Set<MusicGenre> musicGenres;
+    private static final Validator<Integer> yearValidator = new YearValidator();
 
-
-    public void addGenre(@NotNull MusicGenre musicGenre) {
-        musicGenres.add(musicGenre);
-    }
 
     @Override
     public boolean equals(Object band) {
@@ -25,17 +21,17 @@ public final class MusicBand {
             throw new IllegalArgumentException("Необходим объект класса MusicBand");
         }
 
-        return name.equals(musicBand.getName()) && country.equals(musicBand.getCountry())
-                && activateYear.equals(musicBand.getActivateYear()) && musicGenres.equals(musicBand.getGenres());
+        return bandName.equals(musicBand.getBandName()) && country.equals(musicBand.getCountry())
+                && activateYear.equals(musicBand.getActivateYear()) && musicGenres.equals(musicBand.getMusicGenres());
     }
 
 
-    public String getName() {
-        return name;
+    public String getBandName() {
+        return bandName;
     }
 
-    public void setName(@NotNull String name) {
-        this.name = name;
+    public void setBandName(@NotNull String bandName) {
+        this.bandName = bandName;
     }
 
     public String getCountry() {
@@ -51,16 +47,17 @@ public final class MusicBand {
     }
 
     public void setActivateYear(int activateYear) {
-        ValidationResult result = new YearValidator().validate(activateYear);
+        ValidationResult result = yearValidator.validate(activateYear);
         if (!result.isValid())
             throw new IllegalArgumentException(result.exceptionMessage());
 
         this.activateYear = activateYear;
     }
 
-    public List<MusicGenre> getGenres() {
-        if (musicGenres == null)
-            musicGenres = new ArrayList<>();
+    public Set<MusicGenre> getMusicGenres() {
+        if (musicGenres == null) {
+            musicGenres = new HashSet<>();
+        }
 
         return musicGenres;
     }
