@@ -15,21 +15,26 @@ import java.io.*;
 import java.util.Collection;
 
 public final class MusicBandsWriter extends Writer<Collection<MusicBand>> {
-    public MusicBandsWriter(OutputStream outputStream) {
+    public MusicBandsWriter(FileOutputStream outputStream) {
         super(outputStream);
     }
 
     @Override
-    public void write(@NotNull Collection<MusicBand> musicBands)
-            throws ParserConfigurationException, TransformerException, IOException {
+    public void write(@NotNull Collection<MusicBand> musicBands) throws ParserConfigurationException {
         Document xmlDoc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
         xmlDoc.appendChild(getMusicBands(xmlDoc, musicBands));
 
         try (StringWriter sw = new StringWriter()) {
-            getPrettyOutputTransformer().transform(new DOMSource(xmlDoc), new StreamResult(sw));
             OutputStreamWriter writer = new OutputStreamWriter(outputStream);
-            writer.write(sw.toString());
-            writer.flush();
+            try {
+                getPrettyOutputTransformer().transform(new DOMSource(xmlDoc), new StreamResult(sw));
+                writer.write(sw.toString());
+                writer.flush();
+            } catch (TransformerException | IOException writeException) {
+                System.out.println("Ошибка Writer'а при записи в xml файл");
+            }
+        } catch (IOException writerException) {
+            System.out.println("Ошибка создания StringWriter");
         }
     }
 

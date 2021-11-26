@@ -8,10 +8,7 @@ import ru.itdt.converterService.music.MusicBand;
 import ru.itdt.converterService.music.MusicGenre;
 
 import javax.xml.stream.XMLStreamException;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.Collection;
 import java.util.HashMap;
 
@@ -22,14 +19,13 @@ public final class XmlToJsonFileConverter extends FileConverter
     }
 
     @Override
-    public void convert(@NotNull String jsonFileName)
-            throws IOException, XMLStreamException {
+    public void convert(@NotNull String jsonFileName) throws XMLStreamException, IOException {
         if (!FilenameUtils.getExtension(jsonFileName)
                 .equals("json")) {
-            throw new IllegalArgumentException(String.format("Неверное расширение файла %s", jsonFileName));
+            throw new IllegalArgumentException(String.format("Неверное расширение файла %s, необходимо json", jsonFileName));
         }
 
-        Collection<MusicGenre> musicGenres;
+        Collection<MusicGenre> musicGenres = null;
         try (MusicBandsReader xmlReader = new MusicBandsReader(new FileInputStream(file))) {
             Logger logger = null;
             try {
@@ -43,8 +39,13 @@ public final class XmlToJsonFileConverter extends FileConverter
                     logger.close();
                 }
             }
+        } catch (FileNotFoundException fileNotFoundException) {
+            throw new FileNotFoundException(String.format("Файл %s не найден", file.getName()));
+        } catch (IOException inputException) {
+            System.out.println("Ошибка закрытия входного потока чтения музыкальных групп");
         }
 
+        new File(jsonFileName).createNewFile();
         try (MusicGenresWriter jsonWriter = new MusicGenresWriter(new FileOutputStream(jsonFileName))) {
             Logger logger = null;
             try {
@@ -58,6 +59,10 @@ public final class XmlToJsonFileConverter extends FileConverter
                     logger.close();
                 }
             }
+        } catch (FileNotFoundException fileNotFoundException) {
+            throw new FileNotFoundException(String.format("Не удалось создать выходной файл %s", jsonFileName));
+        } catch (IOException outputCloseException) {
+            System.out.println("Ошибка закрытия выходного потока записи музыкальных жанров");
         }
     }
 

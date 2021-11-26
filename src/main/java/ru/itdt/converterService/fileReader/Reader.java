@@ -3,21 +3,18 @@ package ru.itdt.converterService.fileReader;
 import org.jetbrains.annotations.NotNull;
 import org.json.simple.parser.ParseException;
 
-import javax.management.modelmbean.XMLParseException;
 import javax.xml.stream.XMLStreamException;
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 
 public abstract class Reader<T> implements AutoCloseable {
-    protected InputStream inputStream;
+    protected FileInputStream inputStream;
 
-    public Reader(@NotNull InputStream inputStream) {
+    public Reader(@NotNull FileInputStream inputStream) {
         this.inputStream = inputStream;
     }
 
-    public abstract T readFile() throws IOException, XMLStreamException, XMLParseException, ParseException;
+    public abstract T readFile() throws IOException, XMLStreamException,  ParseException;
 
     @Override
     public void close() throws IOException {

@@ -7,12 +7,11 @@ import ru.itdt.converterService.Validators.Validator;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 
 public final class FileConverterFactory {
     private static final Validator<String> filePathValidator = new FilePathValidator();
 
-    public static FileConverter create(String fileName) throws IOException {
+    public static FileConverter create(String fileName) throws FileNotFoundException {
         ValidationResult result = filePathValidator.validate(fileName);
         if (!result.isValid())
             throw new FileNotFoundException(result.exceptionMessage());

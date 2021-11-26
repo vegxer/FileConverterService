@@ -8,12 +8,12 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
-import java.io.InputStream;
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 
 public final class MusicBandsReader extends Reader<Collection<MusicBand>> {
-    public MusicBandsReader(InputStream inputStream) {
+    public MusicBandsReader(FileInputStream inputStream) {
         super(inputStream);
     }
 
@@ -25,8 +25,7 @@ public final class MusicBandsReader extends Reader<Collection<MusicBand>> {
         return getMusicBands(reader);
     }
 
-    private ArrayList<MusicBand> getMusicBands(XMLEventReader reader)
-            throws XMLStreamException {
+    private ArrayList<MusicBand> getMusicBands(XMLEventReader reader) throws XMLStreamException {
         ArrayList<MusicBand> musicBands = new ArrayList<>();
 
         XMLEvent xmlEvent;
@@ -115,6 +114,9 @@ public final class MusicBandsReader extends Reader<Collection<MusicBand>> {
         if (musicBand.getCountry() == null) {
             System.err.println(String.format("Не найден тег 'country'"));
         }
+        if (musicBand.getMusicGenres().isEmpty()) {
+            System.err.println(String.format("Жанров не нашлось"));
+        }
 
         return musicBand;
     }
@@ -148,10 +150,6 @@ public final class MusicBandsReader extends Reader<Collection<MusicBand>> {
                         .getName()
                         .getLocalPart()
                         .equals("Genres"));
-
-        if (musicGenres.isEmpty()) {
-            System.err.println(String.format("Пустой тег Genres"));
-        }
 
         return musicGenres;
     }

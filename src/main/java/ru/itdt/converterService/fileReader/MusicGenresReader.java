@@ -7,19 +7,19 @@ import org.json.simple.parser.ParseException;
 import ru.itdt.converterService.music.MusicBand;
 import ru.itdt.converterService.music.MusicGenre;
 
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collection;
 
 public final class MusicGenresReader extends Reader<Collection<MusicGenre>> {
-    public MusicGenresReader(InputStream inputStream) {
+    public MusicGenresReader(FileInputStream inputStream) {
         super(inputStream);
     }
 
     @Override
-    public Collection<MusicGenre> readFile() throws IOException, ParseException {
+    public Collection<MusicGenre> readFile() throws ParseException, IOException {
         Object genresObj = ((JSONObject) new JSONParser().parse(new InputStreamReader(inputStream)))
                 .get("genres");
         if (genresObj == null) {

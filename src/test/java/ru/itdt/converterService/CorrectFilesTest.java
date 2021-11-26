@@ -1,6 +1,5 @@
 package ru.itdt.converterService;
 
-import ru.itdt.converterService.fileConverter.FileConverterFactory;
 import org.apache.commons.io.FileUtils;
 import org.custommonkey.xmlunit.Diff;
 import org.custommonkey.xmlunit.XMLUnit;
@@ -12,11 +11,9 @@ import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.xml.sax.SAXException;
+import ru.itdt.converterService.fileConverter.FileConverterFactory;
 
-import javax.management.modelmbean.XMLParseException;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.stream.XMLStreamException;
-import javax.xml.transform.TransformerException;
 import java.io.File;
 import java.io.IOException;
 
@@ -33,37 +30,28 @@ public class CorrectFilesTest {
     }
 
     @Test
-    public void twoGenres()
-            throws IOException, XMLStreamException, ParseException, ParserConfigurationException, XMLParseException,
-            TransformerException, JSONException, SAXException {
+    public void twoGenres() throws IOException, XMLStreamException, ParseException, JSONException, SAXException {
         testEquality(XML_PATH + "/differentGenres.xml", JSON_PATH + "/differentGenres.json");
     }
 
     @Test
-    public void manyBands()
-            throws IOException, XMLStreamException, ParseException, ParserConfigurationException, XMLParseException,
-            TransformerException, JSONException, SAXException {
+    public void manyBands() throws IOException, XMLStreamException, ParseException, JSONException, SAXException {
         testEquality(XML_PATH + "/manyBands.xml", JSON_PATH + "/manyBands.json");
     }
 
     @Test
-    public void differentGenres()
-            throws IOException, XMLStreamException, ParseException, ParserConfigurationException, XMLParseException,
-            TransformerException, JSONException, SAXException {
+    public void differentGenres() throws IOException, XMLStreamException, ParseException, JSONException, SAXException {
         testEquality(XML_PATH + "/differentGenres.xml", JSON_PATH + "/differentGenres.json");
     }
 
     @Test
-    public void initialFiles()
-            throws IOException, XMLStreamException, ParseException, ParserConfigurationException, XMLParseException,
-            TransformerException, JSONException, SAXException {
+    public void initialFiles() throws IOException, XMLStreamException, ParseException, JSONException, SAXException {
         testEquality(XML_PATH + "/initial.xml", JSON_PATH + "/initial.json");
     }
 
     //конвертация из xml в json (и наоборот) и сверение конвертированного файла с корректным
-    private void testEquality(String xmlPath, String jsonPath)
-            throws IOException, XMLStreamException, ParseException, ParserConfigurationException,
-            XMLParseException, TransformerException, SAXException, JSONException {
+    private void testEquality(String xmlPath, String jsonPath) throws IOException, XMLStreamException, ParseException,
+            SAXException, JSONException {
 
         FileConverterFactory.create(jsonPath)
                 .convert(OUTPUT_PATH + "/out.xml");

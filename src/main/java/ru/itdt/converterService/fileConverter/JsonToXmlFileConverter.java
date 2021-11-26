@@ -2,7 +2,6 @@ package ru.itdt.converterService.fileConverter;
 
 
 import org.apache.commons.io.FilenameUtils;
-import org.dozer.DozerBeanMapper;
 import org.jetbrains.annotations.NotNull;
 import org.json.simple.parser.ParseException;
 import ru.itdt.converterService.fileReader.MusicGenresReader;
@@ -11,12 +10,9 @@ import ru.itdt.converterService.music.MusicBand;
 import ru.itdt.converterService.music.MusicGenre;
 
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerException;
 import java.io.*;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.stream.Stream;
 
 public final class JsonToXmlFileConverter extends FileConverter
         implements StructureChanger<Collection<MusicBand>, Collection<MusicGenre>> {
@@ -25,14 +21,13 @@ public final class JsonToXmlFileConverter extends FileConverter
     }
 
     @Override
-    public void convert(@NotNull String xmlFileName)
-            throws IOException, ParseException, ParserConfigurationException, TransformerException {
+    public void convert(@NotNull String xmlFileName) throws ParseException, IOException {
         if (!FilenameUtils.getExtension(xmlFileName)
                 .equals("xml")) {
-            throw new IllegalArgumentException(String.format("Неверное расширение файла %s", xmlFileName));
+            throw new IllegalArgumentException(String.format("Неверное расширение файла %s, необходимо xml", xmlFileName));
         }
 
-        Collection<MusicBand> musicBands;
+        Collection<MusicBand> musicBands = null;
         try (MusicGenresReader jsonReader = new MusicGenresReader(new FileInputStream(file))) {
             Logger logger = null;
             try {
@@ -46,8 +41,11 @@ public final class JsonToXmlFileConverter extends FileConverter
                     logger.close();
                 }
             }
+        } catch (IOException inputException) {
+            System.out.println("Ошибка закрытия входного потока");
         }
 
+        new File(xmlFileName).createNewFile();
         try (MusicBandsWriter xmlWriter = new MusicBandsWriter(new FileOutputStream(xmlFileName))) {
             Logger logger = null;
             try {
@@ -61,6 +59,12 @@ public final class JsonToXmlFileConverter extends FileConverter
                     logger.close();
                 }
             }
+        } catch (FileNotFoundException fileNotFoundException) {
+            throw new FileNotFoundException(String.format("Не удалось создать выходной файл %s", xmlFileName));
+        } catch (IOException outputException) {
+            System.out.println("Ошибка закрытия выходного потока");
+        } catch (ParserConfigurationException parserConfigurationException) {
+            System.out.println("Ошибка конфигурации Writer'а музыкальных групп");
         }
     }
 

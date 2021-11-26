@@ -9,25 +9,29 @@ import org.json.simple.JSONObject;
 import ru.itdt.converterService.music.MusicBand;
 import ru.itdt.converterService.music.MusicGenre;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.util.Collection;
 
 public final class MusicGenresWriter extends Writer<Collection<MusicGenre>> {
-    public MusicGenresWriter(OutputStream outputStream) {
+    public MusicGenresWriter(FileOutputStream outputStream) {
         super(outputStream);
     }
 
     @Override
-    public void write(@NotNull Collection<MusicGenre> musicGenres) throws IOException {
+    public void write(@NotNull Collection<MusicGenre> musicGenres) {
         JSONObject genresObject = getGenresObject(musicGenres);
 
         Gson gson = new GsonBuilder().setPrettyPrinting()
                 .create();
         OutputStreamWriter writer = new OutputStreamWriter(outputStream);
-        writer.write(gson.toJson(new JsonParser().parse(genresObject.toJSONString())));
-        writer.flush();
+        try {
+            writer.write(gson.toJson(new JsonParser().parse(genresObject.toJSONString())));
+            writer.flush();
+        } catch (IOException writeException) {
+            System.out.println("Ошибка Writer'а при записи в json файл");
+        }
     }
 
     @SuppressWarnings("unchecked")
