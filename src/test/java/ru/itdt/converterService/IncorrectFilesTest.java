@@ -18,7 +18,7 @@ public class IncorrectFilesTest {
     @Test
     public void emptyGenres() throws IOException, XMLStreamException, ParseException {
         FileConverterFactory.create(XML_PATH + "/emptyGenres.xml").convert(OUTPUT_PATH + "/out.json");
-        Assert.assertEquals("Жанров не нашлось\r\n", FileUtils.readFileToString(
+        Assert.assertEquals("Не найдены жанры группы\r\n", FileUtils.readFileToString(
                 new File("xml reading log.txt"), "utf-8"));
     }
 
@@ -32,14 +32,14 @@ public class IncorrectFilesTest {
     @Test
     public void noGenresXML() throws IOException, XMLStreamException, ParseException {
         FileConverterFactory.create(XML_PATH + "/noGenres.xml").convert(OUTPUT_PATH + "/out.json");
-        Assert.assertEquals("Жанров не нашлось\r\n", FileUtils.readFileToString(
+        Assert.assertEquals("Не найдены жанры группы\r\n", FileUtils.readFileToString(
                 new File("xml reading log.txt"), "utf-8"));
     }
 
     @Test
     public void noBandName() throws IOException, XMLStreamException, ParseException {
         FileConverterFactory.create(XML_PATH + "/noBandName.xml").convert(OUTPUT_PATH + "/out.json");
-        Assert.assertEquals("Не найден тег 'name'\r\n", FileUtils.readFileToString(
+        Assert.assertEquals("Не найдено название группы\r\n", FileUtils.readFileToString(
                 new File("xml reading log.txt"), "utf-8"));
     }
 

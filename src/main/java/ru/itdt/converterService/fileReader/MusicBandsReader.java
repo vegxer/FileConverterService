@@ -51,7 +51,7 @@ public final class MusicBandsReader extends Reader<Collection<MusicBand>> {
                         .getLocalPart()
                         .equals("Bands"))) {
             xmlEvent = reader.nextEvent();
-            if (xmlEvent.isStartElement()) {
+            if (xmlEvent.isStartElement() && !xmlEvent.isEndElement()) {
                 StartElement startElement = xmlEvent.asStartElement();
                 String tagName = startElement.getName()
                         .getLocalPart();
@@ -79,21 +79,36 @@ public final class MusicBandsReader extends Reader<Collection<MusicBand>> {
         do {
             xmlEvent = reader.nextEvent();
 
-            if (xmlEvent.isStartElement()) {
+            if (xmlEvent.isStartElement() && !xmlEvent.isEndElement()) {
                 StartElement startElement = xmlEvent.asStartElement();
                 String tagName = startElement.getName()
                         .getLocalPart();
 
                 switch (tagName) {
-                    case "year" -> musicBand.setActivateYear(Integer.parseInt(reader.nextEvent()
-                            .asCharacters()
-                            .getData()));
-                    case "name" -> musicBand.setBandName(reader.nextEvent()
-                            .asCharacters()
-                            .getData());
-                    case "country" -> musicBand.setCountry(reader.nextEvent()
-                            .asCharacters()
-                            .getData());
+                    case "year" -> {
+                        XMLEvent event = reader.nextEvent();
+                        if (event.isCharacters()) {
+                            musicBand.setActivateYear(Integer.parseInt(
+                                    event.asCharacters()
+                                    .getData()));
+                        }
+                    }
+                    case "name" -> {
+                        XMLEvent event = reader.nextEvent();
+                        if (event.isCharacters()) {
+                            musicBand.setBandName(event
+                                    .asCharacters()
+                                    .getData());
+                        }
+                    }
+                    case "country" -> {
+                        XMLEvent event = reader.nextEvent();
+                        if (event.isCharacters()) {
+                            musicBand.setCountry(event
+                                    .asCharacters()
+                                    .getData());
+                        }
+                    }
                     case "Genres" -> musicBand.getMusicGenres().addAll(getGenres(reader));
                     default -> System.err.println(String.format("Необрабатываемый тег %s", tagName));
                 }
@@ -106,16 +121,16 @@ public final class MusicBandsReader extends Reader<Collection<MusicBand>> {
                         .equals("Band"));
 
         if (musicBand.getBandName() == null) {
-            System.err.println(String.format("Не найден тег 'name'"));
+            System.err.println(String.format("Не найдено название группы"));
         }
         if (musicBand.getActivateYear() == null) {
-            System.err.println(String.format("Не найден тег 'year'"));
+            System.err.println(String.format("Не найден год создания группы"));
         }
         if (musicBand.getCountry() == null) {
-            System.err.println(String.format("Не найден тег 'country'"));
+            System.err.println(String.format("Не найдена страна группы"));
         }
         if (musicBand.getMusicGenres().isEmpty()) {
-            System.err.println(String.format("Жанров не нашлось"));
+            System.err.println(String.format("Не найдены жанры группы"));
         }
 
         return musicBand;
@@ -129,7 +144,7 @@ public final class MusicBandsReader extends Reader<Collection<MusicBand>> {
         do {
             xmlEvent = reader.nextEvent();
 
-            if (xmlEvent.isStartElement()) {
+            if (xmlEvent.isStartElement() && !xmlEvent.isEndElement()) {
                 StartElement startElement = xmlEvent.asStartElement();
                 String tagName = startElement.getName()
                         .getLocalPart();

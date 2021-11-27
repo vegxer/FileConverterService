@@ -78,10 +78,10 @@ public final class JsonToXmlFileConverter extends FileConverter
                     musicBands.put(musicBand.getBandName(), musicBand);
                 }
 
-                MusicGenre genre = new MusicGenre();
-                genre.setGenreName(musicGenre.getGenreName());
+                /*MusicGenre genre = new MusicGenre();
+                genre.setGenreName(musicGenre.getGenreName());*/
                 MusicBand updatedMusicBand = musicBands.get(musicBand.getBandName());
-                updatedMusicBand.getMusicGenres().add(genre);
+                updatedMusicBand.getMusicGenres().add(musicGenre);
                 musicBands.put(musicBand.getBandName(), updatedMusicBand);
             }
         }
