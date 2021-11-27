@@ -15,6 +15,7 @@ import ru.itdt.converterService.music.MusicGenre;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.stream.XMLStreamException;
 import java.io.*;
+import java.nio.file.FileSystemException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,53 +25,39 @@ public final class JsonToXmlFileConverter extends FileConverter {
         super(file);
     }
 
-    @SuppressWarnings({"ResultOfMethodCallIgnored", "TryFinallyCanBeTryWithResources"})
+    @SuppressWarnings({"ResultOfMethodCallIgnored"})
     @Override
-    public void convert(@NotNull String xmlFileName) throws ParseException, IOException, XMLStreamException {
+    public void convert(@NotNull String xmlFileName) throws ParseException, XMLStreamException, ParserConfigurationException, IOException {
         if (!FilenameUtils.getExtension(xmlFileName)
                 .equals("xml")) {
             throw new IllegalArgumentException(
                     String.format("Неподдерживаемое расширение файла %s, необходимо xml", xmlFileName));
         }
 
-        Collection<MusicBand> musicBands = null;
+        Collection<MusicBand> musicBands;
         try (Reader<Collection<MusicGenre>> jsonReader = new MusicGenresReader(new FileInputStream(file))) {
-            Logger logger = null;
-            try {
-                logger = new Logger("json reading log.txt");
-            } catch (IOException logExc) {
-                System.out.println("Ошибка логирования процесса чтения. Процесс продолжится без логирования");
-            }
-            finally {
+            try (Logger logger = new Logger("json reading log.txt")) {
                 musicBands = changeStructure(jsonReader.readFile());
-                if (logger != null) {
-                    logger.close();
-                }
+            } catch (FileSystemException logExc) {
+                System.out.printf("Ошибка логирования процесса чтения файла %s. " +
+                        "Процесс продолжится без логирования%n", file.getName());
+                musicBands = changeStructure(jsonReader.readFile());
             }
-        } catch (IOException inputException) {
-            System.out.println("Ошибка закрытия входного потока");
+        } catch (FileNotFoundException fileNotFoundException) {
+            throw new FileNotFoundException(String.format("Файл %s не найден", file.getName()));
         }
 
         new File(xmlFileName).createNewFile();
         try (Writer<Collection<MusicBand>> xmlWriter = new MusicBandsWriter(new FileOutputStream(xmlFileName))) {
-            Logger logger = null;
-            try {
-                logger = new Logger("xml writing log.txt");
-            } catch (IOException logExc) {
-                System.out.println("Ошибка логирования процесса записи. Процесс продолжится без логирования");
-            }
-            finally {
+            try (Logger logger = new Logger("xml writing log.txt")) {
                 xmlWriter.write(musicBands);
-                if (logger != null) {
-                    logger.close();
-                }
+            } catch (FileSystemException logExc) {
+                System.out.printf("Ошибка логирования процесса записи файла %s. " +
+                        "Процесс продолжится без логирования%n", xmlFileName);
+                xmlWriter.write(musicBands);
             }
         } catch (FileNotFoundException fileNotFoundException) {
             throw new FileNotFoundException(String.format("Не удалось создать выходной файл %s", xmlFileName));
-        } catch (IOException outputException) {
-            System.out.println("Ошибка закрытия выходного потока");
-        } catch (ParserConfigurationException parserConfigurationException) {
-            System.out.println("Ошибка конфигурации Writer'а музыкальных групп");
         }
     }
 

@@ -20,7 +20,7 @@ public final class MusicBandsWriter extends Writer<Collection<MusicBand>> {
     }
 
     @Override
-    public void write(@NotNull Collection<MusicBand> musicBands) throws ParserConfigurationException {
+    public void write(@NotNull Collection<MusicBand> musicBands) throws ParserConfigurationException, IOException {
         Document xmlDoc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
         xmlDoc.appendChild(getMusicBands(xmlDoc, musicBands));
 
@@ -31,10 +31,13 @@ public final class MusicBandsWriter extends Writer<Collection<MusicBand>> {
                 writer.write(sw.toString());
                 writer.flush();
             } catch (TransformerException | IOException writeException) {
-                System.out.println("Ошибка Writer'а при записи в xml файл");
+                throw new IOException(String.format("Ошибка записи успешно созданного xml документа в файл: ",
+                        writeException.getMessage()), writeException);
             }
         } catch (IOException writerException) {
-            System.out.println("Ошибка создания StringWriter");
+            throw new IOException(
+                    String.format("Ошибка создания StringWriter для записи успешно созданного xml документа в файл: ",
+                            writerException.getMessage()), writerException);
         }
     }
 

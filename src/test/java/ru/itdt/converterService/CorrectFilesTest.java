@@ -12,6 +12,7 @@ import org.xmlunit.diff.ElementSelectors;
 import org.xmlunit.matchers.CompareMatcher;
 import ru.itdt.converterService.fileConverter.FileConverterFactory;
 
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.stream.XMLStreamException;
 import java.io.File;
 import java.io.IOException;
@@ -24,28 +25,28 @@ public class CorrectFilesTest {
 
 
     @Test
-    public void twoGenres() throws IOException, XMLStreamException, ParseException, JSONException {
+    public void twoGenres() throws IOException, XMLStreamException, ParseException, JSONException, ParserConfigurationException {
         testEquality(XML_PATH + "/twoGenres.xml", JSON_PATH + "/twoGenres.json");
     }
 
     @Test
-    public void manyBands() throws IOException, XMLStreamException, ParseException, JSONException {
+    public void manyBands() throws IOException, XMLStreamException, ParseException, JSONException, ParserConfigurationException {
         testEquality(XML_PATH + "/manyBands.xml", JSON_PATH + "/manyBands.json");
     }
 
     @Test
-    public void differentGenres() throws IOException, XMLStreamException, ParseException, JSONException {
+    public void differentGenres() throws IOException, XMLStreamException, ParseException, JSONException, ParserConfigurationException {
         testEquality(XML_PATH + "/differentGenres.xml", JSON_PATH + "/differentGenres.json");
     }
 
     @Test
-    public void initialFiles() throws IOException, XMLStreamException, ParseException, JSONException {
+    public void initialFiles() throws IOException, XMLStreamException, ParseException, JSONException, ParserConfigurationException {
         testEquality(XML_PATH + "/initial.xml", JSON_PATH + "/initial.json");
     }
 
     //конвертирование из xml в json (и наоборот) и сверение текста конвертированного файла
     //с эталонным без учёта порядка элементов, пробелов и переносов строк
-    private void testEquality(String xmlPath, String jsonPath) throws IOException, XMLStreamException, ParseException, JSONException {
+    private void testEquality(String xmlPath, String jsonPath) throws IOException, XMLStreamException, ParseException, JSONException, ParserConfigurationException {
         FileConverterFactory.create(jsonPath)
                 .convert(OUTPUT_PATH + "/out.xml");
         MatcherAssert.assertThat(

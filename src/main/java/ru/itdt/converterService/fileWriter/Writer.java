@@ -13,7 +13,7 @@ public abstract class Writer<T> implements AutoCloseable {
         this.outputStream = outputStream;
     }
 
-    public abstract void write(T obj) throws ParserConfigurationException;
+    public abstract void write(T obj) throws ParserConfigurationException, IOException;
 
     @Override
     public void close() throws IOException {

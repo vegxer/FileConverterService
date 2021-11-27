@@ -20,8 +20,15 @@ public final class MusicGenresReader extends Reader<Collection<MusicGenre>> {
 
     @Override
     public Collection<MusicGenre> readFile() throws ParseException, IOException {
-        Object genresObj = ((JSONObject) new JSONParser().parse(new InputStreamReader(inputStream)))
-                .get("genres");
+        Object genresObj;
+        try {
+            genresObj = ((JSONObject) new JSONParser().parse(new InputStreamReader(inputStream)))
+                    .get("genres");
+        } catch (IOException readException) {
+            throw new IOException(String.format("Ошибка создания входного потока чтения xml файла: %s",
+                    readException.getMessage()), readException);
+        }
+
         if (genresObj == null) {
             System.err.println("Ключ 'genres' не найден");
             return new ArrayList<>();

@@ -136,8 +136,7 @@ public final class MusicBandsReader extends Reader<Collection<MusicBand>> {
         return musicBand;
     }
 
-    private Collection<MusicGenre> getGenres(XMLEventReader reader, int bandsCount)
-            throws XMLStreamException {
+    private Collection<MusicGenre> getGenres(XMLEventReader reader, int bandsCount) throws XMLStreamException {
         Collection<MusicGenre> musicGenres = new ArrayList<>();
 
         XMLEvent xmlEvent;

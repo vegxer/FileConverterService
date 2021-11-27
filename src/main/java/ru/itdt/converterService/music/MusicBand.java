@@ -37,7 +37,7 @@ public final class MusicBand {
 
     public void setActivateYear(int activateYear) {
         if (!yearValidator.validate(activateYear))
-            throw new IllegalArgumentException("Год должен быть неотрицательным числом");
+            throw new IllegalArgumentException("Год основания музыкальной группы должен быть неотрицательным числом");
 
         this.activateYear = activateYear;
     }

@@ -21,7 +21,7 @@ public final class MusicGenresWriter extends Writer<Collection<MusicGenre>> {
     }
 
     @Override
-    public void write(@NotNull Collection<MusicGenre> musicGenres) {
+    public void write(@NotNull Collection<MusicGenre> musicGenres) throws IOException {
         JSONObject genresObject = getGenresObject(musicGenres);
 
         Gson gson = new GsonBuilder().setPrettyPrinting()
@@ -32,7 +32,8 @@ public final class MusicGenresWriter extends Writer<Collection<MusicGenre>> {
             writer.write(gson.toJson(new JsonParser().parse(genresObject.toJSONString())));
             writer.flush();
         } catch (IOException writeException) {
-            System.out.println("Ошибка Writer'а при записи в json файл");
+            throw new IOException(String.format("Ошибка записи успешно созданного json документа в файл: ",
+                    writeException.getMessage()), writeException);
         }
     }
 

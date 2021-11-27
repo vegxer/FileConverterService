@@ -14,6 +14,7 @@ import ru.itdt.converterService.music.MusicGenre;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.stream.XMLStreamException;
 import java.io.*;
+import java.nio.file.FileSystemException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,57 +24,40 @@ public final class XmlToJsonFileConverter extends FileConverter {
         super(file);
     }
 
-    @SuppressWarnings({"ResultOfMethodCallIgnored", "TryFinallyCanBeTryWithResources"})
+    @SuppressWarnings({"ResultOfMethodCallIgnored"})
     @Override
-    public void convert(@NotNull String jsonFileName) throws XMLStreamException, IOException, ParseException {
+    public void convert(@NotNull String jsonFileName) throws XMLStreamException, IOException, ParseException,
+            ParserConfigurationException {
         if (!FilenameUtils.getExtension(jsonFileName)
                 .equals("json")) {
             throw new IllegalArgumentException(
                     String.format("Неподдерживамое расширение файла %s, необходимо json", jsonFileName));
         }
 
-        Collection<MusicGenre> musicGenres = null;
+        Collection<MusicGenre> musicGenres;
         try (Reader<Collection<MusicBand>> xmlReader = new MusicBandsReader(new FileInputStream(file))) {
-            Logger logger = null;
-            try {
-                logger = new Logger("xml reading log.txt");
-            } catch (IOException logExc) {
-                System.out.println("Ошибка логирования процесса чтения. Процесс продолжится без логирования");
-            }
-            finally {
+            try (Logger logger = new Logger("xml reading log.txt")) {
                 musicGenres = changeStructure(xmlReader.readFile());
-                if (logger != null) {
-                    logger.close();
-                }
+            } catch (FileSystemException logExc) {
+                System.out.printf("Ошибка логирования процесса чтения файла %s. " +
+                        "Процесс продолжится без логирования%n", file.getName());
+                musicGenres = changeStructure(xmlReader.readFile());
             }
         } catch (FileNotFoundException fileNotFoundException) {
             throw new FileNotFoundException(String.format("Файл %s не найден", file.getName()));
-        } catch (IOException inputException) {
-            System.out.println("Ошибка закрытия входного потока чтения музыкальных групп");
-        } catch (XMLStreamException xmlStreamException) {
-            throw new XMLStreamException("Ошибка чтения XML потока", xmlStreamException);
         }
 
         new File(jsonFileName).createNewFile();
         try (Writer<Collection<MusicGenre>> jsonWriter = new MusicGenresWriter(new FileOutputStream(jsonFileName))) {
-            Logger logger = null;
-            try {
-                logger = new Logger("json writing log.txt");
-            } catch (IOException logExc) {
-                System.out.println("Ошибка логирования процесса записи. Процесс продолжится без логирования");
-            }
-            finally {
+            try (Logger logger = new Logger("json writing log.txt")) {
                 jsonWriter.write(musicGenres);
-                if (logger != null) {
-                    logger.close();
-                }
+            } catch (FileSystemException logExc) {
+                System.out.printf("Ошибка логирования процесса записи файла %s. " +
+                        "Процесс продолжится без логирования%n", jsonFileName);
+                jsonWriter.write(musicGenres);
             }
         } catch (FileNotFoundException fileNotFoundException) {
             throw new FileNotFoundException(String.format("Не удалось создать выходной файл %s", jsonFileName));
-        } catch (IOException outputCloseException) {
-            System.out.println("Ошибка закрытия выходного потока записи музыкальных жанров");
-        } catch (ParserConfigurationException parserConfigurationException) {
-            System.out.println("Ошибка конфигурации Writer'а жанров");
         }
     }
 
