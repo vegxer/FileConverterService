@@ -23,6 +23,7 @@ public final class XmlToJsonFileConverter extends FileConverter {
         super(file);
     }
 
+    @SuppressWarnings({"ResultOfMethodCallIgnored", "TryFinallyCanBeTryWithResources"})
     @Override
     public void convert(@NotNull String jsonFileName) throws XMLStreamException, IOException, ParseException {
         if (!FilenameUtils.getExtension(jsonFileName)
@@ -34,9 +35,8 @@ public final class XmlToJsonFileConverter extends FileConverter {
         Collection<MusicGenre> musicGenres = null;
         try (Reader<Collection<MusicBand>> xmlReader = new MusicBandsReader(new FileInputStream(file))) {
             Logger logger = null;
-            //noinspection TryFinallyCanBeTryWithResources
             try {
-                logger = new Logger(new File("xml reading log.txt"));
+                logger = new Logger("xml reading log.txt");
             } catch (IOException logExc) {
                 System.out.println("Ошибка логирования процесса чтения. Процесс продолжится без логирования");
             }
@@ -54,13 +54,11 @@ public final class XmlToJsonFileConverter extends FileConverter {
             throw new XMLStreamException("Ошибка чтения XML потока", xmlStreamException);
         }
 
-        //noinspection ResultOfMethodCallIgnored
         new File(jsonFileName).createNewFile();
         try (Writer<Collection<MusicGenre>> jsonWriter = new MusicGenresWriter(new FileOutputStream(jsonFileName))) {
             Logger logger = null;
-            //noinspection TryFinallyCanBeTryWithResources
             try {
-                logger = new Logger(new File("json writing log.txt"));
+                logger = new Logger("json writing log.txt");
             } catch (IOException logExc) {
                 System.out.println("Ошибка логирования процесса записи. Процесс продолжится без логирования");
             }

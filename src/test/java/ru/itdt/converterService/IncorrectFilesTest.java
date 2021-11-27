@@ -16,13 +16,14 @@ public class IncorrectFilesTest {
     private static final String JSON_PATH = "src/test/resources/incorrectFiles/jsonFiles";
     private static final String XML_PATH = "src/test/resources/incorrectFiles/xmlFiles";
     private static final String OUTPUT_PATH = "src/test/resources/incorrectFiles/outputFiles";
+    private static final String LOGS_PATH = "out/logs/";
 
     @Test
     public void emptyGenres() throws IOException, XMLStreamException, ParseException {
         FileConverterFactory.create(XML_PATH + "/emptyGenres.xml").convert(OUTPUT_PATH + "/out.json");
 
         Assert.assertEquals("Не найдены жанры группы в 1-м теге Band\r\n", FileUtils.readFileToString(
-                new File("xml reading log.txt"), "utf-8"));
+                new File(LOGS_PATH + "xml reading log.txt"), "utf-8"));
     }
 
     @Test
@@ -30,7 +31,7 @@ public class IncorrectFilesTest {
         FileConverterFactory.create(XML_PATH + "/incorrectRootTag.xml").convert(OUTPUT_PATH + "/out.json");
 
         Assert.assertEquals("Тег Bands должен быть корневым тегом файла\r\n", FileUtils.readFileToString(
-                new File("xml reading log.txt"), "utf-8"));
+                new File(LOGS_PATH + "xml reading log.txt"), "utf-8"));
     }
 
     @Test
@@ -38,7 +39,7 @@ public class IncorrectFilesTest {
         FileConverterFactory.create(XML_PATH + "/noGenres.xml").convert(OUTPUT_PATH + "/out.json");
 
         Assert.assertEquals("Не найдены жанры группы в 1-м теге Band\r\n", FileUtils.readFileToString(
-                new File("xml reading log.txt"), "utf-8"));
+                new File(LOGS_PATH + "xml reading log.txt"), "utf-8"));
     }
 
     @Test
@@ -46,13 +47,13 @@ public class IncorrectFilesTest {
         FileConverterFactory.create(XML_PATH + "/noBandName.xml").convert(OUTPUT_PATH + "/out.json");
 
         Assert.assertEquals("Не найдено название группы в 1-м теге Band\r\n", FileUtils.readFileToString(
-                new File("xml reading log.txt"), "utf-8"));
+                new File(LOGS_PATH + "xml reading log.txt"), "utf-8"));
 
         Assert.assertEquals("""
                 Значение 'name' не было установлено в 1-м объекте 'genre'\r
                 Значение 'name' не было установлено в 2-м объекте 'genre'\r
                 """,
-                FileUtils.readFileToString(new File("json writing log.txt"), "utf-8"));
+                FileUtils.readFileToString(new File(LOGS_PATH + "json writing log.txt"), "utf-8"));
     }
 
     @Test
@@ -60,7 +61,7 @@ public class IncorrectFilesTest {
         FileConverterFactory.create(JSON_PATH + "/emptyBands.json").convert(OUTPUT_PATH + "/out.xml");
 
         Assert.assertEquals("Музыкальные группы не найдены в 1 объекте 'genre'\r\n", FileUtils.readFileToString(
-                new File("json reading log.txt"), "utf-8"));
+                new File(LOGS_PATH + "json reading log.txt"), "utf-8"));
     }
 
     @Test
@@ -68,23 +69,23 @@ public class IncorrectFilesTest {
         FileConverterFactory.create(JSON_PATH + "/noCountry.json").convert(OUTPUT_PATH + "/out.xml");
 
         Assert.assertEquals("Ключ 'country' музыкальной группы не найден в 1 объекте 'genre'\r\n",
-                FileUtils.readFileToString(new File("json reading log.txt"), "utf-8"));
+                FileUtils.readFileToString(new File(LOGS_PATH + "json reading log.txt"), "utf-8"));
 
         Assert.assertEquals("Значение 'country' не было установлено в 2-м теге Band\r\n",
-                FileUtils.readFileToString(new File("xml writing log.txt"), "utf-8"));
+                FileUtils.readFileToString(new File(LOGS_PATH + "xml writing log.txt"), "utf-8"));
     }
 
     @Test
     public void noGenreName() throws IOException, XMLStreamException, ParseException {
         FileConverterFactory.create(JSON_PATH + "/noGenreName.json").convert(OUTPUT_PATH + "/out.xml");
         Assert.assertEquals("Ключ 'name' не найден в 1-м объекте 'genre'\r\n", FileUtils.readFileToString(
-                new File("json reading log.txt"), "utf-8"));
+                new File(LOGS_PATH + "json reading log.txt"), "utf-8"));
     }
 
     @Test
     public void noGenresJSON() throws IOException, XMLStreamException, ParseException {
         FileConverterFactory.create(JSON_PATH + "/noGenres.json").convert(OUTPUT_PATH + "/out.xml");
         Assert.assertEquals("Ключ 'genres' не найден\r\n", FileUtils.readFileToString(
-                new File("json reading log.txt"), "utf-8"));
+                new File(LOGS_PATH + "json reading log.txt"), "utf-8"));
     }
 }

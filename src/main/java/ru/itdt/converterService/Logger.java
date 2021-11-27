@@ -8,11 +8,14 @@ import java.io.PrintStream;
 
 public final class Logger implements AutoCloseable {
     private final PrintStream logStream;
+    private static final String PATH = "out/logs";
 
-    public Logger(@NotNull File file) throws IOException {
-        if (!file.createNewFile())
-            throw new IOException("Не удалось создать файл");
-        logStream = new PrintStream(file);
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    public Logger(@NotNull String fileName) throws IOException {
+        new File(PATH).mkdirs();
+        new File(PATH + "/" + fileName).createNewFile();
+
+        logStream = new PrintStream(PATH + "/" + fileName);
         System.setErr(logStream);
     }
 
