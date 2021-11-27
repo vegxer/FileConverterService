@@ -1,7 +1,6 @@
 package ru.itdt.converterService.music;
 
 import org.jetbrains.annotations.NotNull;
-import ru.itdt.converterService.Validators.ValidationResult;
 import ru.itdt.converterService.Validators.Validator;
 import ru.itdt.converterService.Validators.YearValidator;
 
@@ -47,9 +46,8 @@ public final class MusicBand {
     }
 
     public void setActivateYear(int activateYear) {
-        ValidationResult result = yearValidator.validate(activateYear);
-        if (!result.isValid())
-            throw new IllegalArgumentException(result.exceptionMessage());
+        if (!yearValidator.validate(activateYear))
+            throw new IllegalArgumentException("Год должен быть неотрицательным числом");
 
         this.activateYear = activateYear;
     }

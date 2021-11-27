@@ -3,13 +3,10 @@ package ru.itdt.converterService.Validators;
 public final class YearValidator implements Validator<Integer> {
 
     @Override
-    public ValidationResult validate(Integer year) {
+    public boolean validate(Integer year) {
         if (year == null)
-            return new ValidationResult(false, "Год был равен null");
+            return false;
 
-        if (year < 0)
-            return new ValidationResult(false, "Год должен быть не меньше нуля");
-
-        return new ValidationResult(true, "");
+        return year >= 0;
     }
 }

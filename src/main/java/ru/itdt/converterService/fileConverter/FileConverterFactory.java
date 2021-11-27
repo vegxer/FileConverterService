@@ -1,8 +1,8 @@
 package ru.itdt.converterService.fileConverter;
 
 import org.apache.commons.io.FilenameUtils;
+import org.jetbrains.annotations.NotNull;
 import ru.itdt.converterService.Validators.FilePathValidator;
-import ru.itdt.converterService.Validators.ValidationResult;
 import ru.itdt.converterService.Validators.Validator;
 
 import java.io.File;
@@ -11,10 +11,9 @@ import java.io.FileNotFoundException;
 public final class FileConverterFactory {
     private static final Validator<String> filePathValidator = new FilePathValidator();
 
-    public static FileConverter create(String fileName) throws FileNotFoundException {
-        ValidationResult result = filePathValidator.validate(fileName);
-        if (!result.isValid())
-            throw new FileNotFoundException(result.exceptionMessage());
+    public static FileConverter create(@NotNull String fileName) throws FileNotFoundException {
+        if (!filePathValidator.validate(fileName))
+            throw new FileNotFoundException(String.format("Файл %s не найден", fileName));
 
         File file = new File(fileName);
         return switch (FilenameUtils.getExtension(fileName)) {

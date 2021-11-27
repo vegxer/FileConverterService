@@ -4,13 +4,10 @@ import java.io.File;
 
 public final class FilePathValidator implements Validator<String> {
     @Override
-    public ValidationResult validate(String filePath) {
+    public boolean validate(String filePath) {
         if (filePath == null)
-            return new ValidationResult(false, "Путь к файлу был null");
+            return false;
 
-        if (!new File(filePath).exists())
-            return new ValidationResult(false, String.format("Файла %s не существует", filePath));
-
-        return new ValidationResult(true, "");
+        return new File(filePath).exists();
     }
 }
