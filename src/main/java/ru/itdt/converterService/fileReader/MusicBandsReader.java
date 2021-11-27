@@ -60,7 +60,7 @@ public final class MusicBandsReader extends Reader<Collection<MusicBand>> {
                 if ("Band".equals(tagName)) {
                     musicBands.add(getMusicBand(reader, ++bandsCount));
                 } else {
-                    System.err.println(String.format("Необрабатываемый тег %s", tagName));
+                    System.err.printf("Необрабатываемый тег %s%n", tagName);
                 }
             }
         }
@@ -110,8 +110,7 @@ public final class MusicBandsReader extends Reader<Collection<MusicBand>> {
                         }
                     }
                     case "Genres" -> musicBand.getMusicGenres().addAll(getGenres(reader, bandsCount));
-                    default -> System.err.println(
-                            String.format("Необрабатываемый тег %s в %d-м теге Band", tagName, bandsCount));
+                    default -> System.err.printf("Необрабатываемый тег %s в %d-м теге Band%n", tagName, bandsCount);
                 }
             }
         }
@@ -122,16 +121,16 @@ public final class MusicBandsReader extends Reader<Collection<MusicBand>> {
                         .equals("Band"));
 
         if (musicBand.getBandName() == null) {
-            System.err.println(String.format("Не найдено название группы в %d-м теге Band", bandsCount));
+            System.err.printf("Не найдено название группы в %d-м теге Band%n", bandsCount);
         }
         if (musicBand.getActivateYear() == null) {
-            System.err.println(String.format("Не найден год создания группы в %d-м теге Band", bandsCount));
+            System.err.printf("Не найден год создания группы в %d-м теге Band%n", bandsCount);
         }
         if (musicBand.getCountry() == null) {
-            System.err.println(String.format("Не найдена страна группы в %d-м теге Band", bandsCount));
+            System.err.printf("Не найдена страна группы в %d-м теге Band%n", bandsCount);
         }
         if (musicBand.getMusicGenres().isEmpty()) {
-            System.err.println(String.format("Не найдены жанры группы в %d-м теге Band", bandsCount));
+            System.err.printf("Не найдены жанры группы в %d-м теге Band%n", bandsCount);
         }
 
         return musicBand;
@@ -157,8 +156,7 @@ public final class MusicBandsReader extends Reader<Collection<MusicBand>> {
                             .getData());
                     musicGenres.add(musicGenre);
                 } else {
-                    System.err.println(
-                            String.format("Необрабатываемый тег %s в %d-м теге Band в теге Genres", tagName, bandsCount));
+                    System.err.printf("Необрабатываемый тег %s в %d-м теге Band в теге Genres%n", tagName, bandsCount);
                 }
             }
         }

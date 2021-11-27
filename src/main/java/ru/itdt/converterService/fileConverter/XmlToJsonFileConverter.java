@@ -18,8 +18,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public final class XmlToJsonFileConverter extends FileConverter
-        implements StructureChanger<Collection<MusicGenre>, Collection<MusicBand>> {
+public final class XmlToJsonFileConverter extends FileConverter {
     public XmlToJsonFileConverter(File file) {
         super(file);
     }
@@ -35,6 +34,7 @@ public final class XmlToJsonFileConverter extends FileConverter
         Collection<MusicGenre> musicGenres = null;
         try (Reader<Collection<MusicBand>> xmlReader = new MusicBandsReader(new FileInputStream(file))) {
             Logger logger = null;
+            //noinspection TryFinallyCanBeTryWithResources
             try {
                 logger = new Logger(new File("xml reading log.txt"));
             } catch (IOException logExc) {
@@ -54,9 +54,11 @@ public final class XmlToJsonFileConverter extends FileConverter
             throw new XMLStreamException("Ошибка чтения XML потока", xmlStreamException);
         }
 
+        //noinspection ResultOfMethodCallIgnored
         new File(jsonFileName).createNewFile();
         try (Writer<Collection<MusicGenre>> jsonWriter = new MusicGenresWriter(new FileOutputStream(jsonFileName))) {
             Logger logger = null;
+            //noinspection TryFinallyCanBeTryWithResources
             try {
                 logger = new Logger(new File("json writing log.txt"));
             } catch (IOException logExc) {
@@ -77,8 +79,7 @@ public final class XmlToJsonFileConverter extends FileConverter
         }
     }
 
-    @Override
-    public Collection<MusicGenre> changeStructure(@NotNull Collection<MusicBand> musicBands) {
+    private Collection<MusicGenre> changeStructure(@NotNull Collection<MusicBand> musicBands) {
         Map<String, MusicGenre> musicGenres = new HashMap<>();
 
         for (MusicBand musicBand : musicBands) {

@@ -8,7 +8,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 public abstract class Reader<T> implements AutoCloseable {
-    protected FileInputStream inputStream;
+    protected final FileInputStream inputStream;
 
     public Reader(@NotNull FileInputStream inputStream) {
         this.inputStream = inputStream;

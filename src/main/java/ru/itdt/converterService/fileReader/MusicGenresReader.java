@@ -37,7 +37,7 @@ public final class MusicGenresReader extends Reader<Collection<MusicGenre>> {
 
             Object name = jsonGenre.get("name");
             if (name == null) {
-                System.err.println(String.format("Ключ 'name' не найден в %d-м объекте 'genre'", genresCount));
+                System.err.printf("Ключ 'name' не найден в %d-м объекте 'genre'%n", genresCount);
             } else {
                 genre.setGenreName((String)name);
             }
@@ -64,24 +64,21 @@ public final class MusicGenresReader extends Reader<Collection<MusicGenre>> {
 
             Object name = jsonBand.get("name");
             if (name == null) {
-                System.err.println(
-                        String.format("Ключ 'name' музыкальной группы не найден в %d объекте 'genre'", genresCount));
+                System.err.printf("Ключ 'name' музыкальной группы не найден в %d объекте 'genre'%n", genresCount);
             } else {
                 musicBand.setBandName((String)name);
             }
 
             Object country = jsonBand.get("country");
             if (country == null) {
-                System.err.println(
-                        String.format("Ключ 'country' музыкальной группы не найден в %d объекте 'genre'", genresCount));
+                System.err.printf("Ключ 'country' музыкальной группы не найден в %d объекте 'genre'%n", genresCount);
             } else {
                 musicBand.setCountry((String)country);
             }
 
             Object year = jsonBand.get("year");
             if (year == null) {
-                System.err.println(
-                        String.format("Ключ 'year' музыкальной группы не найден в %d объекте 'genre'", genresCount));
+                System.err.printf("Ключ 'year' музыкальной группы не найден в %d объекте 'genre'%n", genresCount);
             } else {
                 musicBand.setActivateYear(Integer.parseInt((String)year));
             }
@@ -90,7 +87,7 @@ public final class MusicGenresReader extends Reader<Collection<MusicGenre>> {
         }
 
         if (musicBands.isEmpty()) {
-            System.err.println(String.format("Музыкальные группы не найдены в %d объекте 'genre'", genresCount));
+            System.err.printf("Музыкальные группы не найдены в %d объекте 'genre'%n", genresCount);
         }
 
         return musicBands;

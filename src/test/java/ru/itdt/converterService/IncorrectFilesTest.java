@@ -11,7 +11,7 @@ import java.io.File;
 import java.io.IOException;
 
 
-//проверка логов ошибок после ковертирования файлов
+//проверка логов ошибок после конвертирования файлов
 public class IncorrectFilesTest {
     private static final String JSON_PATH = "src/test/resources/incorrectFiles/jsonFiles";
     private static final String XML_PATH = "src/test/resources/incorrectFiles/xmlFiles";

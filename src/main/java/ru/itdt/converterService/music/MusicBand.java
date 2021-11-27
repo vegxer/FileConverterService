@@ -15,19 +15,6 @@ public final class MusicBand {
     private static final Validator<Integer> yearValidator = new YearValidator();
 
 
-    @Override
-    public boolean equals(Object band) {
-        if (!(band instanceof MusicBand musicBand)) {
-            throw new IllegalArgumentException("Необходим объект класса MusicBand");
-        }
-
-        return bandName.equals(musicBand.getBandName()) && country.equals(musicBand.getCountry())
-                && activateYear.equals(musicBand.getActivateYear()) &&
-                (getMusicGenres().isEmpty() && musicBand.getMusicGenres().isEmpty() ||
-                        musicGenres.equals(musicBand.getMusicGenres()));
-    }
-
-
     public String getBandName() {
         return bandName;
     }

@@ -11,18 +11,6 @@ public final class MusicGenre {
     private Collection<MusicBand> musicBands;
 
 
-    @Override
-    public boolean equals(Object genre) {
-        if (!(genre instanceof MusicGenre musicGenre)) {
-            throw new IllegalArgumentException("Необходим объект класса MusicBand");
-        }
-
-        return genreName.equals(musicGenre.getGenreName()) &&
-                (getMusicBands().isEmpty() && musicGenre.getMusicBands().isEmpty() ||
-                        musicBands.equals(musicGenre.getMusicBands()));
-    }
-
-
     public String getGenreName() {
         return genreName;
     }

@@ -10,7 +10,8 @@ public final class Logger implements AutoCloseable {
     private final PrintStream logStream;
 
     public Logger(@NotNull File file) throws IOException {
-        file.createNewFile();
+        if (!file.createNewFile())
+            throw new IOException("Не удалось создать файл");
         logStream = new PrintStream(file);
         System.setErr(logStream);
     }

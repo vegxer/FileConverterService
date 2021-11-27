@@ -8,7 +8,7 @@ import java.io.File;
 import java.io.IOException;
 
 public abstract class FileConverter {
-    protected File file;
+    protected final File file;
 
     public FileConverter(@NotNull File file) {
         this.file = file;

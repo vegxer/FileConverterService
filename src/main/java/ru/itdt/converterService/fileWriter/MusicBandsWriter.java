@@ -60,8 +60,7 @@ public final class MusicBandsWriter extends Writer<Collection<MusicBand>> {
 
             Element name = xmlDoc.createElement("name");
             if (musicBand.getBandName() == null) {
-                System.err.println(
-                        String.format("Значение 'name' не было установлено в %d-м теге Band", bandsCount));
+                System.err.printf("Значение 'name' не было установлено в %d-м теге Band%n", bandsCount);
                 name.setTextContent("");
             } else {
                 name.setTextContent(musicBand.getBandName());
@@ -70,8 +69,7 @@ public final class MusicBandsWriter extends Writer<Collection<MusicBand>> {
 
             Element country = xmlDoc.createElement("country");
             if (musicBand.getCountry() == null) {
-                System.err.println(
-                        String.format("Значение 'country' не было установлено в %d-м теге Band", bandsCount));
+                System.err.printf("Значение 'country' не было установлено в %d-м теге Band%n", bandsCount);
                 country.setTextContent("");
             } else {
                 country.setTextContent(musicBand.getCountry());
@@ -80,8 +78,7 @@ public final class MusicBandsWriter extends Writer<Collection<MusicBand>> {
 
             Element year = xmlDoc.createElement("year");
             if (musicBand.getActivateYear() == null) {
-                System.err.println(
-                        String.format("Значение 'year' не было установлено в %d-м теге Band", bandsCount));
+                System.err.printf("Значение 'year' не было установлено в %d-м теге Band%n", bandsCount);
                 year.setTextContent("");
             } else {
                 year.setTextContent(Integer.toString(musicBand.getActivateYear()));
@@ -99,8 +96,7 @@ public final class MusicBandsWriter extends Writer<Collection<MusicBand>> {
     public Element getBandGenres(Document xmlDoc, MusicBand musicBand, int bandsCount) {
         Element genresElem = xmlDoc.createElement("Genres");
         if (musicBand.getMusicGenres().isEmpty()) {
-            System.err.println(
-                    String.format("Значение 'Genres' не было установлено в %d-м теге Band", bandsCount));
+            System.err.printf("Значение 'Genres' не было установлено в %d-м теге Band%n", bandsCount);
         }
 
         for (MusicGenre musicGenre : musicBand.getMusicGenres()) {
