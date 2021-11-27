@@ -1,12 +1,12 @@
 <Bands>
     <Band>
-        <name>Depeche Mode</name>
-        <country>UK</country>
         <year>1980</year>
         <Genres>
             <genre>rock</genre>
             <genre>new wave</genre>
         </Genres>
+        <country>UK</country>
+        <name>Depeche Mode</name>
     </Band>
     <Band>
         <name>Led Zeppelin</name>

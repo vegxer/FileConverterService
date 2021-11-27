@@ -1,11 +1,11 @@
 <Bands>
     <Band>
-        <name>Daft Punk</name>
-        <country>UK</country>
-        <year>1993</year>
         <Genres>
             <genre>house</genre>
         </Genres>
+        <year>1993</year>
+        <name>Daft Punk</name>
+        <country>UK</country>
     </Band>
     <Band>
         <name>The Rolling Stones</name>

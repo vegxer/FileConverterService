@@ -1,18 +1,18 @@
 <Bands>
     <Band>
-        <name>Depeche Mode</name>
-        <year>1980</year>
         <country>UK</country>
+        <year>1980</year>
+        <name>Depeche Mode</name>
         <Genres>
+            <genre>new wave</genre>
             <genre>electronic</genre>
             <genre>rock</genre>
-            <genre>new wave</genre>
         </Genres>
     </Band>
     <Band>
-        <name>Led Zeppelin</name>
         <year>1968</year>
         <country>UK</country>
+        <name>Led Zeppelin</name>
         <Genres>
             <genre>blues</genre>
             <genre>metal</genre>
