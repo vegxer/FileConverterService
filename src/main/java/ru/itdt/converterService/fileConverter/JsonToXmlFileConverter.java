@@ -74,7 +74,8 @@ public final class JsonToXmlFileConverter extends FileConverter {
                 }
 
                 MusicBand updatedMusicBand = musicBands.get(musicBand.getBandName());
-                updatedMusicBand.getMusicGenres().add(musicGenre);
+                updatedMusicBand.getMusicGenres()
+                        .add(musicGenre);
                 musicBands.put(musicBand.getBandName(), updatedMusicBand);
             }
         }
