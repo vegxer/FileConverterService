@@ -4,14 +4,14 @@ import org.jetbrains.annotations.NotNull;
 import ru.itdt.converterService.validators.Validator;
 import ru.itdt.converterService.validators.YearValidator;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 
 public final class MusicBand {
     private String bandName, country;
     private Integer activateYear;
-    private Collection<MusicGenre> musicGenres;
+    private Set<MusicGenre> musicGenres;
     private static final Validator<Integer> yearValidator = new YearValidator();
 
 
@@ -42,9 +42,9 @@ public final class MusicBand {
         this.activateYear = activateYear;
     }
 
-    public Collection<MusicGenre> getMusicGenres() {
+    public Set<MusicGenre> getMusicGenres() {
         if (musicGenres == null) {
-            musicGenres = new ArrayList<>();
+            musicGenres = new HashSet<>();
         }
 
         return musicGenres;

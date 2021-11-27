@@ -36,25 +36,25 @@
     },
     {
       "genre": {
-        "name": "dance",
+        "name": "house",
         "bands": [
           {
             "country": "UK",
             "year": "2008",
             "name": "Clean Bandit"
-          },
-          {
-            "country": "Sweden",
-            "year": "1972",
-            "name": "ABBA"
           }
         ]
       }
     },
     {
       "genre": {
-        "name": "house",
+        "name": "dance",
         "bands": [
+          {
+            "country": "Sweden",
+            "year": "1972",
+            "name": "ABBA"
+          },
           {
             "country": "UK",
             "year": "2008",

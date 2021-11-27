@@ -32,7 +32,7 @@ public final class MusicGenresWriter extends Writer<Collection<MusicGenre>> {
             writer.write(gson.toJson(new JsonParser().parse(genresObject.toJSONString())));
             writer.flush();
         } catch (IOException writeException) {
-            throw new IOException(String.format("Ошибка записи успешно созданного json документа в файл: ",
+            throw new IOException(String.format("Ошибка записи успешно созданного json документа в файл: %s",
                     writeException.getMessage()), writeException);
         }
     }

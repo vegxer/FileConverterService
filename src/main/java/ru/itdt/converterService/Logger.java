@@ -21,7 +21,7 @@ public final class Logger implements AutoCloseable {
             logStream = new PrintStream(creationPath);
             System.setErr(logStream);
         } catch (IOException fileCreationExc) {
-            throw new FileSystemException(String.format("Не удалось создать файл по пути %s", creationPath));
+            throw new FileSystemException(String.format("Не удалось создать файл логов по пути %s", creationPath));
         }
     }
 

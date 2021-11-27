@@ -31,12 +31,12 @@ public final class MusicBandsWriter extends Writer<Collection<MusicBand>> {
                 writer.write(sw.toString());
                 writer.flush();
             } catch (TransformerException | IOException writeException) {
-                throw new IOException(String.format("Ошибка записи успешно созданного xml документа в файл: ",
+                throw new IOException(String.format("Ошибка записи успешно созданного xml документа в файл: %s",
                         writeException.getMessage()), writeException);
             }
         } catch (IOException writerException) {
             throw new IOException(
-                    String.format("Ошибка создания StringWriter для записи успешно созданного xml документа в файл: ",
+                    String.format("Ошибка создания StringWriter для записи успешно созданного xml документа в файл: %s",
                             writerException.getMessage()), writerException);
         }
     }
