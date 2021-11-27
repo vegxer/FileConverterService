@@ -34,6 +34,7 @@ public final class MusicGenresReader extends Reader<Collection<MusicGenre>> {
             return new ArrayList<>();
         }
 
+        //идём по жанрам (ключ 'genre')
         JSONArray jsonGenres = (JSONArray) genresObj;
         int genresCount = 0;
         Collection<MusicGenre> genres = new ArrayList<>();
@@ -65,6 +66,7 @@ public final class MusicGenresReader extends Reader<Collection<MusicGenre>> {
         JSONArray jsonBands = (JSONArray)jsonGenre.get("bands");
         Collection<MusicBand> musicBands = new ArrayList<>();
 
+        //считываем музыкальные группы, которые исполняют данный музыкальный жанр, в список объектов класса MusicBand
         for (Object band : jsonBands) {
             JSONObject jsonBand = (JSONObject)band;
             MusicBand musicBand = new MusicBand();

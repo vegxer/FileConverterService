@@ -34,6 +34,7 @@ public final class JsonToXmlFileConverter extends FileConverter {
                     String.format("Неподдерживаемое расширение файла %s, необходимо xml", xmlFileName));
         }
 
+        //чтение музыкальных жанров из json файла
         Collection<MusicBand> musicBands;
         try (Reader<Collection<MusicGenre>> jsonReader = new MusicGenresReader(new FileInputStream(file))) {
             try (Logger logger = new Logger("json reading log.txt")) {
@@ -47,6 +48,7 @@ public final class JsonToXmlFileConverter extends FileConverter {
             throw new FileNotFoundException(String.format("Файл %s не найден", file.getName()));
         }
 
+        //запись музыкальных групп в xml файл
         new File(xmlFileName).createNewFile();
         try (Writer<Collection<MusicBand>> xmlWriter = new MusicBandsWriter(new FileOutputStream(xmlFileName))) {
             try (Logger logger = new Logger("xml writing log.txt")) {
@@ -61,6 +63,7 @@ public final class JsonToXmlFileConverter extends FileConverter {
         }
     }
 
+    //преобразование структуры json файла в структуру xml файла
     private Collection<MusicBand> changeStructure(@NotNull Collection<MusicGenre> musicGenres) {
         Map<String, MusicBand> musicBands = new HashMap<>();
 

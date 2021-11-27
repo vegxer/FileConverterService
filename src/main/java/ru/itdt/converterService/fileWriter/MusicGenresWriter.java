@@ -29,7 +29,8 @@ public final class MusicGenresWriter extends Writer<Collection<MusicGenre>> {
         java.io.Writer writer = new OutputStreamWriter(outputStream);
         try {
             //noinspection deprecation
-            writer.write(gson.toJson(new JsonParser().parse(genresObject.toJSONString())));
+            writer.write(gson.toJson(
+                    new JsonParser().parse(genresObject.toJSONString())));
             writer.flush();
         } catch (IOException writeException) {
             throw new IOException(String.format("Ошибка записи успешно созданного json документа в файл: %s",
@@ -39,6 +40,7 @@ public final class MusicGenresWriter extends Writer<Collection<MusicGenre>> {
 
     @SuppressWarnings("unchecked")
     private JSONObject getGenresObject(Collection<MusicGenre> musicGenres) {
+        //создание json объекта, который содержит набор музыкальных жанров
         JSONArray jsonGenres = new JSONArray();
         int genresCount = 0;
         for (MusicGenre musicGenre : musicGenres) {
@@ -71,6 +73,7 @@ public final class MusicGenresWriter extends Writer<Collection<MusicGenre>> {
             System.err.printf("Значение 'bands' не было установлено в %d-м объекте 'genre'%n", genresCount);
         }
 
+        //получение набора музыкальных групп, которые исполняют данный жанр
         for (MusicBand band : musicGenre.getMusicBands()) {
             JSONObject jsonBand = new JSONObject();
 

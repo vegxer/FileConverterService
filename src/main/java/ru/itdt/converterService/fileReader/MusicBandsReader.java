@@ -28,6 +28,7 @@ public final class MusicBandsReader extends Reader<Collection<MusicBand>> {
     private Collection<MusicBand> getMusicBands(XMLEventReader reader) throws XMLStreamException {
         Collection<MusicBand> musicBands = new ArrayList<>();
 
+        //поиск корневого тега Bands
         XMLEvent xmlEvent;
         if (reader.hasNext()) {
             xmlEvent = reader.nextEvent();
@@ -45,6 +46,7 @@ public final class MusicBandsReader extends Reader<Collection<MusicBand>> {
             return musicBands;
         }
 
+        //проход по всем тегам Band
         int bandsCount = 0;
         while (!xmlEvent.isEndDocument() && (!xmlEvent.isEndElement() ||
                 !xmlEvent.asEndElement()
@@ -75,6 +77,7 @@ public final class MusicBandsReader extends Reader<Collection<MusicBand>> {
     private MusicBand getMusicBand(XMLEventReader reader, int bandsCount) throws XMLStreamException {
         MusicBand musicBand = new MusicBand();
 
+        //считывание полей класса MusicBand из тега Band
         XMLEvent xmlEvent;
         do {
             xmlEvent = reader.nextEvent();
@@ -120,6 +123,7 @@ public final class MusicBandsReader extends Reader<Collection<MusicBand>> {
                         .getLocalPart()
                         .equals("Band"));
 
+        //если какая-то информация о группе не находится, то соответствующее сообщение записывается в лог
         if (musicBand.getBandName() == null) {
             System.err.printf("Не найдено название группы в %d-м теге Band%n", bandsCount);
         }
@@ -139,6 +143,7 @@ public final class MusicBandsReader extends Reader<Collection<MusicBand>> {
     private Collection<MusicGenre> getGenres(XMLEventReader reader, int bandsCount) throws XMLStreamException {
         Collection<MusicGenre> musicGenres = new ArrayList<>();
 
+        //считывание музыкальных жанров у музыкальной группы
         XMLEvent xmlEvent;
         do {
             xmlEvent = reader.nextEvent();

@@ -1,7 +1,5 @@
 package ru.itdt.converterService.validators;
 
-import java.util.Calendar;
-
 public final class YearValidator implements Validator<Integer> {
 
     @Override
@@ -9,6 +7,6 @@ public final class YearValidator implements Validator<Integer> {
         if (year == null)
             return false;
 
-        return year >= 0 && year <= Calendar.getInstance().get(Calendar.YEAR);
+        return year >= 0;
     }
 }

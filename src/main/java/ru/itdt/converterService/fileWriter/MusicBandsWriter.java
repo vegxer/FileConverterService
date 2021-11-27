@@ -41,6 +41,7 @@ public final class MusicBandsWriter extends Writer<Collection<MusicBand>> {
         }
     }
 
+    //установка красивой записи в xml файл (с переносами строк и отступами)
     private Transformer getPrettyOutputTransformer() throws TransformerConfigurationException {
         Transformer transformer = TransformerFactory.newInstance()
                 .newTransformer();
@@ -57,6 +58,7 @@ public final class MusicBandsWriter extends Writer<Collection<MusicBand>> {
         Element root = xmlDoc.createElement("Bands");
 
         int bandsCount = 0;
+        //создание xml элементов Band, в каждом из которых хранится информация о группе
         for (MusicBand musicBand : musicBands) {
             ++bandsCount;
             Element musicBandElem = xmlDoc.createElement("Band");
@@ -96,6 +98,7 @@ public final class MusicBandsWriter extends Writer<Collection<MusicBand>> {
         return root;
     }
 
+    //создание элементов, в которых хранятся жанры, исполняемые группой
     public Element getBandGenres(Document xmlDoc, MusicBand musicBand, int bandsCount) {
         Element genresElem = xmlDoc.createElement("Genres");
         if (musicBand.getMusicGenres().isEmpty()) {
