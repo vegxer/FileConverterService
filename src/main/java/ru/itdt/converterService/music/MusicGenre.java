@@ -2,12 +2,13 @@ package ru.itdt.converterService.music;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.Collection;
+
 
 public final class MusicGenre {
     private String genreName;
-    private Set<MusicBand> musicBands;
+    private Collection<MusicBand> musicBands;
 
 
     @Override
@@ -16,7 +17,9 @@ public final class MusicGenre {
             throw new IllegalArgumentException("Необходим объект класса MusicBand");
         }
 
-        return genreName.equals(musicGenre.getGenreName()) && musicBands.equals(musicGenre.getMusicBands());
+        return genreName.equals(musicGenre.getGenreName()) &&
+                (getMusicBands().isEmpty() && musicGenre.getMusicBands().isEmpty() ||
+                        musicBands.equals(musicGenre.getMusicBands()));
     }
 
 
@@ -28,9 +31,9 @@ public final class MusicGenre {
         this.genreName = genreName;
     }
 
-    public Set<MusicBand> getMusicBands() {
+    public Collection<MusicBand> getMusicBands() {
         if (musicBands == null) {
-            musicBands = new HashSet<>();
+            musicBands = new ArrayList<>();
         }
 
         return musicBands;

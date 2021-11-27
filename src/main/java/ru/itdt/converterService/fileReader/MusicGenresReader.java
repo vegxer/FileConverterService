@@ -28,19 +28,21 @@ public final class MusicGenresReader extends Reader<Collection<MusicGenre>> {
         }
 
         JSONArray jsonGenres = (JSONArray) genresObj;
+        int genresCount = 0;
         Collection<MusicGenre> genres = new ArrayList<>();
         for (Object obj : jsonGenres) {
+            ++genresCount;
             JSONObject jsonGenre = (JSONObject) ((JSONObject) obj).get("genre");
             MusicGenre genre = new MusicGenre();
 
             Object name = jsonGenre.get("name");
             if (name == null) {
-                System.err.println("Ключ 'name' не найден");
+                System.err.println(String.format("Ключ 'name' не найден в %d-м объекте 'genre'", genresCount));
             } else {
                 genre.setGenreName((String)name);
             }
 
-            genre.getMusicBands().addAll(getMusicBands(jsonGenre));
+            genre.getMusicBands().addAll(getMusicBands(jsonGenre, genresCount));
 
             genres.add(genre);
         }
@@ -52,7 +54,7 @@ public final class MusicGenresReader extends Reader<Collection<MusicGenre>> {
         return genres;
     }
 
-    private Collection<MusicBand> getMusicBands(JSONObject jsonGenre) {
+    private Collection<MusicBand> getMusicBands(JSONObject jsonGenre, int genresCount) {
         JSONArray jsonBands = (JSONArray)jsonGenre.get("bands");
         Collection<MusicBand> musicBands = new ArrayList<>();
 
@@ -62,21 +64,24 @@ public final class MusicGenresReader extends Reader<Collection<MusicGenre>> {
 
             Object name = jsonBand.get("name");
             if (name == null) {
-                System.err.println("Ключ 'name' не найден");
+                System.err.println(
+                        String.format("Ключ 'name' музыкальной группы не найден в %d объекте 'genre'", genresCount));
             } else {
                 musicBand.setBandName((String)name);
             }
 
             Object country = jsonBand.get("country");
             if (country == null) {
-                System.err.println("Ключ 'country' не найден");
+                System.err.println(
+                        String.format("Ключ 'country' музыкальной группы не найден в %d объекте 'genre'", genresCount));
             } else {
                 musicBand.setCountry((String)country);
             }
 
             Object year = jsonBand.get("year");
             if (year == null) {
-                System.err.println("Ключ 'year' не найден");
+                System.err.println(
+                        String.format("Ключ 'year' музыкальной группы не найден в %d объекте 'genre'", genresCount));
             } else {
                 musicBand.setActivateYear(Integer.parseInt((String)year));
             }
@@ -85,7 +90,7 @@ public final class MusicGenresReader extends Reader<Collection<MusicGenre>> {
         }
 
         if (musicBands.isEmpty()) {
-            System.err.println("Музыкальные группы не найдены");
+            System.err.println(String.format("Музыкальные группы не найдены в %d объекте 'genre'", genresCount));
         }
 
         return musicBands;

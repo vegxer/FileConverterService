@@ -45,6 +45,7 @@ public final class MusicBandsReader extends Reader<Collection<MusicBand>> {
             return musicBands;
         }
 
+        int bandsCount = 0;
         while (!xmlEvent.isEndDocument() && (!xmlEvent.isEndElement() ||
                 !xmlEvent.asEndElement()
                         .getName()
@@ -57,7 +58,7 @@ public final class MusicBandsReader extends Reader<Collection<MusicBand>> {
                         .getLocalPart();
 
                 if ("Band".equals(tagName)) {
-                    musicBands.add(getMusicBand(reader));
+                    musicBands.add(getMusicBand(reader, ++bandsCount));
                 } else {
                     System.err.println(String.format("Необрабатываемый тег %s", tagName));
                 }
@@ -71,7 +72,7 @@ public final class MusicBandsReader extends Reader<Collection<MusicBand>> {
         return musicBands;
     }
 
-    private MusicBand getMusicBand(XMLEventReader reader) throws XMLStreamException {
+    private MusicBand getMusicBand(XMLEventReader reader, int bandsCount) throws XMLStreamException {
         MusicBand musicBand = new MusicBand();
 
         XMLEvent xmlEvent;
@@ -108,8 +109,9 @@ public final class MusicBandsReader extends Reader<Collection<MusicBand>> {
                                     .getData());
                         }
                     }
-                    case "Genres" -> musicBand.getMusicGenres().addAll(getGenres(reader));
-                    default -> System.err.println(String.format("Необрабатываемый тег %s", tagName));
+                    case "Genres" -> musicBand.getMusicGenres().addAll(getGenres(reader, bandsCount));
+                    default -> System.err.println(
+                            String.format("Необрабатываемый тег %s в %d-м теге Band", tagName, bandsCount));
                 }
             }
         }
@@ -120,22 +122,22 @@ public final class MusicBandsReader extends Reader<Collection<MusicBand>> {
                         .equals("Band"));
 
         if (musicBand.getBandName() == null) {
-            System.err.println(String.format("Не найдено название группы"));
+            System.err.println(String.format("Не найдено название группы в %d-м теге Band", bandsCount));
         }
         if (musicBand.getActivateYear() == null) {
-            System.err.println(String.format("Не найден год создания группы"));
+            System.err.println(String.format("Не найден год создания группы в %d-м теге Band", bandsCount));
         }
         if (musicBand.getCountry() == null) {
-            System.err.println(String.format("Не найдена страна группы"));
+            System.err.println(String.format("Не найдена страна группы в %d-м теге Band", bandsCount));
         }
         if (musicBand.getMusicGenres().isEmpty()) {
-            System.err.println(String.format("Не найдены жанры группы"));
+            System.err.println(String.format("Не найдены жанры группы в %d-м теге Band", bandsCount));
         }
 
         return musicBand;
     }
 
-    private Collection<MusicGenre> getGenres(XMLEventReader reader)
+    private Collection<MusicGenre> getGenres(XMLEventReader reader, int bandsCount)
             throws XMLStreamException {
         Collection<MusicGenre> musicGenres = new ArrayList<>();
 
@@ -155,7 +157,8 @@ public final class MusicBandsReader extends Reader<Collection<MusicBand>> {
                             .getData());
                     musicGenres.add(musicGenre);
                 } else {
-                    System.err.println(String.format("Необрабатываемый тег %s", tagName));
+                    System.err.println(
+                            String.format("Необрабатываемый тег %s в %d-м теге Band в теге Genres", tagName, bandsCount));
                 }
             }
         }

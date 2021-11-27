@@ -2,8 +2,8 @@ package ru.itdt.converterService.fileConverter;
 
 import org.apache.commons.io.FilenameUtils;
 import org.jetbrains.annotations.NotNull;
-import ru.itdt.converterService.Validators.FilePathValidator;
-import ru.itdt.converterService.Validators.Validator;
+import ru.itdt.converterService.validators.FilePathValidator;
+import ru.itdt.converterService.validators.Validator;
 
 import java.io.File;
 import java.io.FileNotFoundException;

@@ -23,25 +23,13 @@
         "bands": [
           {
             "country": "UK",
-            "year": "1962",
-            "name": "The Rolling Stones"
+            "year": "1960",
+            "name": "The Beatles"
           },
           {
             "country": "UK",
-            "year": "1960",
-            "name": "The Beatles"
-          }
-        ]
-      }
-    },
-    {
-      "genre": {
-        "name": "house",
-        "bands": [
-          {
-            "country": "UK",
-            "year": "2008",
-            "name": "Clean Bandit"
+            "year": "1962",
+            "name": "The Rolling Stones"
           }
         ]
       }
@@ -51,10 +39,22 @@
         "name": "dance",
         "bands": [
           {
+            "country": "UK",
+            "year": "2008",
+            "name": "Clean Bandit"
+          },
+          {
             "country": "Sweden",
             "year": "1972",
             "name": "ABBA"
-          },
+          }
+        ]
+      }
+    },
+    {
+      "genre": {
+        "name": "house",
+        "bands": [
           {
             "country": "UK",
             "year": "2008",

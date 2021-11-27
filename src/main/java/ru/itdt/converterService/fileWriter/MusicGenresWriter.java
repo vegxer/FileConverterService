@@ -37,17 +37,20 @@ public final class MusicGenresWriter extends Writer<Collection<MusicGenre>> {
     @SuppressWarnings("unchecked")
     private JSONObject getGenresObject(Collection<MusicGenre> musicGenres) {
         JSONArray jsonGenres = new JSONArray();
+        int genresCount = 0;
         for (MusicGenre musicGenre : musicGenres) {
+            ++genresCount;
             JSONObject jsonGenre = new JSONObject();
 
             if (musicGenre.getGenreName() == null) {
-                System.err.println("Значение 'genre' не было установлено");
+                System.err.println(
+                        String.format("Значение 'name' не было установлено в %d-м объекте 'genre'", genresCount));
                 jsonGenre.put("name", "");
             } else {
                 jsonGenre.put("name", musicGenre.getGenreName());
             }
 
-            jsonGenre.put("bands", getMusicBandsArray(musicGenre));
+            jsonGenre.put("bands", getMusicBandsArray(musicGenre, genresCount));
 
             JSONObject genreObject = new JSONObject();
             genreObject.put("genre", jsonGenre);
@@ -60,31 +63,35 @@ public final class MusicGenresWriter extends Writer<Collection<MusicGenre>> {
     }
 
     @SuppressWarnings("unchecked")
-    private JSONArray getMusicBandsArray(MusicGenre musicGenre) {
+    private JSONArray getMusicBandsArray(MusicGenre musicGenre, int genresCount) {
         JSONArray genreArray = new JSONArray();
         if (musicGenre.getMusicBands().isEmpty()) {
-            System.err.println("Значение 'bands' не было установлено");
+            System.err.println(
+                    String.format("Значение 'bands' не было установлено в %d-м объекте 'genre'", genresCount));
         }
 
         for (MusicBand band : musicGenre.getMusicBands()) {
             JSONObject jsonBand = new JSONObject();
 
             if (band.getActivateYear() == null) {
-                System.err.println("Значение 'year' не было установлено");
+                System.err.println(
+                        String.format("Значение 'year' не было установлено в %d-м объекте 'genre'", genresCount));
                 jsonBand.put("year", "");
             } else {
                 jsonBand.put("year", Integer.toString(band.getActivateYear()));
             }
 
             if (band.getCountry() == null) {
-                System.err.println("Значение 'country' не было установлено");
+                System.err.println(
+                        String.format("Значение 'country' не было установлено в %d-м объекте 'genre'", genresCount));
                 jsonBand.put("country", "");
             } else {
                 jsonBand.put("country", band.getCountry());
             }
 
             if (band.getBandName() == null) {
-                System.err.println("Значение 'name' не было установлено");
+                System.err.println(
+                        String.format("Значение 'name' не было установлено в %d-м объекте 'genre'", genresCount));
                 jsonBand.put("name", "");
             } else {
                 jsonBand.put("name", band.getBandName());

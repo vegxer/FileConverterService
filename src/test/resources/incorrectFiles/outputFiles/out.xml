@@ -13,9 +13,9 @@
         <country/>
         <year>2008</year>
         <Genres>
+            <genre>jazz</genre>
             <genre>dance</genre>
             <genre>house</genre>
-            <genre>jazz</genre>
         </Genres>
     </Band>
     <Band>

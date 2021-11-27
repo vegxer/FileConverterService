@@ -1,16 +1,17 @@
 package ru.itdt.converterService.music;
 
 import org.jetbrains.annotations.NotNull;
-import ru.itdt.converterService.Validators.Validator;
-import ru.itdt.converterService.Validators.YearValidator;
+import ru.itdt.converterService.validators.Validator;
+import ru.itdt.converterService.validators.YearValidator;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.Collection;
+
 
 public final class MusicBand {
     private String bandName, country;
     private Integer activateYear;
-    private Set<MusicGenre> musicGenres;
+    private Collection<MusicGenre> musicGenres;
     private static final Validator<Integer> yearValidator = new YearValidator();
 
 
@@ -21,7 +22,9 @@ public final class MusicBand {
         }
 
         return bandName.equals(musicBand.getBandName()) && country.equals(musicBand.getCountry())
-                && activateYear.equals(musicBand.getActivateYear()) && musicGenres.equals(musicBand.getMusicGenres());
+                && activateYear.equals(musicBand.getActivateYear()) &&
+                (getMusicGenres().isEmpty() && musicBand.getMusicGenres().isEmpty() ||
+                        musicGenres.equals(musicBand.getMusicGenres()));
     }
 
 
@@ -52,9 +55,9 @@ public final class MusicBand {
         this.activateYear = activateYear;
     }
 
-    public Set<MusicGenre> getMusicGenres() {
+    public Collection<MusicGenre> getMusicGenres() {
         if (musicGenres == null) {
-            musicGenres = new HashSet<>();
+            musicGenres = new ArrayList<>();
         }
 
         return musicGenres;

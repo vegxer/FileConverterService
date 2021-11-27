@@ -1,22 +1,22 @@
 <Bands>
     <Band>
         <name>Depeche Mode</name>
-        <country>UK</country>
         <year>1980</year>
+        <country>UK</country>
         <Genres>
+            <genre>electronic</genre>
             <genre>rock</genre>
             <genre>new wave</genre>
-            <genre>electronic</genre>
         </Genres>
     </Band>
     <Band>
         <name>Led Zeppelin</name>
-        <country>UK</country>
         <year>1968</year>
+        <country>UK</country>
         <Genres>
-            <genre>rock</genre>
             <genre>blues</genre>
             <genre>metal</genre>
+            <genre>rock</genre>
         </Genres>
     </Band>
     <Band>
@@ -24,10 +24,10 @@
         <country>UK</country>
         <year>1993</year>
         <Genres>
-            <genre>electronic</genre>
-            <genre>disco</genre>
             <genre>dance</genre>
             <genre>house</genre>
+            <genre>electronic</genre>
+            <genre>disco</genre>
         </Genres>
     </Band>
     <Band>
@@ -35,9 +35,9 @@
         <country>UK</country>
         <year>2008</year>
         <Genres>
-            <genre>electronic</genre>
-            <genre>pop</genre>
             <genre>house</genre>
+            <genre>pop</genre>
+            <genre>electronic</genre>
         </Genres>
     </Band>
     <Band>

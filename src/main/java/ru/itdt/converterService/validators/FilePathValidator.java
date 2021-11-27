@@ -1,4 +1,4 @@
-package ru.itdt.converterService.Validators;
+package ru.itdt.converterService.validators;
 
 import java.io.File;
 
