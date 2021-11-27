@@ -25,7 +25,7 @@ public final class MusicGenresWriter extends Writer<Collection<MusicGenre>> {
 
         Gson gson = new GsonBuilder().setPrettyPrinting()
                 .create();
-        OutputStreamWriter writer = new OutputStreamWriter(outputStream);
+        java.io.Writer writer = new OutputStreamWriter(outputStream);
         try {
             writer.write(gson.toJson(new JsonParser().parse(genresObject.toJSONString())));
             writer.flush();

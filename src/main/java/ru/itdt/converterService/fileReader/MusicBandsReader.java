@@ -25,8 +25,8 @@ public final class MusicBandsReader extends Reader<Collection<MusicBand>> {
         return getMusicBands(reader);
     }
 
-    private ArrayList<MusicBand> getMusicBands(XMLEventReader reader) throws XMLStreamException {
-        ArrayList<MusicBand> musicBands = new ArrayList<>();
+    private Collection<MusicBand> getMusicBands(XMLEventReader reader) throws XMLStreamException {
+        Collection<MusicBand> musicBands = new ArrayList<>();
 
         XMLEvent xmlEvent;
         if (reader.hasNext()) {
@@ -71,8 +71,7 @@ public final class MusicBandsReader extends Reader<Collection<MusicBand>> {
         return musicBands;
     }
 
-    private MusicBand getMusicBand(XMLEventReader reader)
-            throws XMLStreamException {
+    private MusicBand getMusicBand(XMLEventReader reader) throws XMLStreamException {
         MusicBand musicBand = new MusicBand();
 
         XMLEvent xmlEvent;
@@ -136,9 +135,9 @@ public final class MusicBandsReader extends Reader<Collection<MusicBand>> {
         return musicBand;
     }
 
-    private ArrayList<MusicGenre> getGenres(XMLEventReader reader)
+    private Collection<MusicGenre> getGenres(XMLEventReader reader)
             throws XMLStreamException {
-        ArrayList<MusicGenre> musicGenres = new ArrayList<>();
+        Collection<MusicGenre> musicGenres = new ArrayList<>();
 
         XMLEvent xmlEvent;
         do {

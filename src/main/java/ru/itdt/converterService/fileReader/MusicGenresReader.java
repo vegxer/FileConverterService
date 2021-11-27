@@ -28,7 +28,7 @@ public final class MusicGenresReader extends Reader<Collection<MusicGenre>> {
         }
 
         JSONArray jsonGenres = (JSONArray) genresObj;
-        ArrayList<MusicGenre> genres = new ArrayList<>();
+        Collection<MusicGenre> genres = new ArrayList<>();
         for (Object obj : jsonGenres) {
             JSONObject jsonGenre = (JSONObject) ((JSONObject) obj).get("genre");
             MusicGenre genre = new MusicGenre();
@@ -52,9 +52,9 @@ public final class MusicGenresReader extends Reader<Collection<MusicGenre>> {
         return genres;
     }
 
-    private ArrayList<MusicBand> getMusicBands(JSONObject jsonGenre) {
+    private Collection<MusicBand> getMusicBands(JSONObject jsonGenre) {
         JSONArray jsonBands = (JSONArray)jsonGenre.get("bands");
-        ArrayList<MusicBand> musicBands = new ArrayList<>();
+        Collection<MusicBand> musicBands = new ArrayList<>();
 
         for (Object band : jsonBands) {
             JSONObject jsonBand = (JSONObject)band;

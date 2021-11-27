@@ -1,4 +1,4 @@
-package ru.itdt.converterService.fileConverter;
+package ru.itdt.converterService;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 
-public class Logger implements AutoCloseable {
+public final class Logger implements AutoCloseable {
     private final PrintStream logStream;
 
     public Logger(@NotNull File file) throws IOException {

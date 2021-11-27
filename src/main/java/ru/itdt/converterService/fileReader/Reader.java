@@ -14,7 +14,7 @@ public abstract class Reader<T> implements AutoCloseable {
         this.inputStream = inputStream;
     }
 
-    public abstract T readFile() throws IOException, XMLStreamException,  ParseException;
+    public abstract T readFile() throws IOException, XMLStreamException, ParseException;
 
     @Override
     public void close() throws IOException {

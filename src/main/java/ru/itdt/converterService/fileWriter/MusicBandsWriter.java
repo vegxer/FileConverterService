@@ -24,8 +24,8 @@ public final class MusicBandsWriter extends Writer<Collection<MusicBand>> {
         Document xmlDoc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
         xmlDoc.appendChild(getMusicBands(xmlDoc, musicBands));
 
-        try (StringWriter sw = new StringWriter()) {
-            OutputStreamWriter writer = new OutputStreamWriter(outputStream);
+        try (java.io.Writer sw = new StringWriter()) {
+            java.io.Writer writer = new OutputStreamWriter(outputStream);
             try {
                 getPrettyOutputTransformer().transform(new DOMSource(xmlDoc), new StreamResult(sw));
                 writer.write(sw.toString());

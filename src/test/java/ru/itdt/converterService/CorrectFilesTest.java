@@ -14,8 +14,10 @@ import org.xml.sax.SAXException;
 import ru.itdt.converterService.fileConverter.FileConverterFactory;
 
 import javax.xml.stream.XMLStreamException;
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 
 public class CorrectFilesTest {
     private static final String JSON_PATH = "src/test/resources/correctFiles/controlFiles/jsonFiles";
@@ -49,10 +51,9 @@ public class CorrectFilesTest {
         testEquality(XML_PATH + "/initial.xml", JSON_PATH + "/initial.json");
     }
 
-    //конвертация из xml в json (и наоборот) и сверение конвертированного файла с корректным
+    //конвертирование из xml в json (и наоборот) и сверение конвертированного файла с эталонным
     private void testEquality(String xmlPath, String jsonPath) throws IOException, XMLStreamException, ParseException,
             SAXException, JSONException {
-
         FileConverterFactory.create(jsonPath)
                 .convert(OUTPUT_PATH + "/out.xml");
         Diff diff = new Diff(

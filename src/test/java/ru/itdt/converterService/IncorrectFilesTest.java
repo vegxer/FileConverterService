@@ -8,6 +8,7 @@ import ru.itdt.converterService.fileConverter.FileConverterFactory;
 
 import javax.xml.stream.XMLStreamException;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 
 public class IncorrectFilesTest {

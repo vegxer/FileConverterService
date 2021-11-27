@@ -4,15 +4,20 @@ package ru.itdt.converterService.fileConverter;
 import org.apache.commons.io.FilenameUtils;
 import org.jetbrains.annotations.NotNull;
 import org.json.simple.parser.ParseException;
+import ru.itdt.converterService.Logger;
 import ru.itdt.converterService.fileReader.MusicGenresReader;
+import ru.itdt.converterService.fileReader.Reader;
 import ru.itdt.converterService.fileWriter.MusicBandsWriter;
+import ru.itdt.converterService.fileWriter.Writer;
 import ru.itdt.converterService.music.MusicBand;
 import ru.itdt.converterService.music.MusicGenre;
 
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.stream.XMLStreamException;
 import java.io.*;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Map;
 
 public final class JsonToXmlFileConverter extends FileConverter
         implements StructureChanger<Collection<MusicBand>, Collection<MusicGenre>> {
@@ -21,14 +26,15 @@ public final class JsonToXmlFileConverter extends FileConverter
     }
 
     @Override
-    public void convert(@NotNull String xmlFileName) throws ParseException, IOException {
+    public void convert(@NotNull String xmlFileName) throws ParseException, IOException, XMLStreamException {
         if (!FilenameUtils.getExtension(xmlFileName)
                 .equals("xml")) {
-            throw new IllegalArgumentException(String.format("Неверное расширение файла %s, необходимо xml", xmlFileName));
+            throw new IllegalArgumentException(
+                    String.format("Неподдерживаемое расширение файла %s, необходимо xml", xmlFileName));
         }
 
         Collection<MusicBand> musicBands = null;
-        try (MusicGenresReader jsonReader = new MusicGenresReader(new FileInputStream(file))) {
+        try (Reader<Collection<MusicGenre>> jsonReader = new MusicGenresReader(new FileInputStream(file))) {
             Logger logger = null;
             try {
                 logger = new Logger(new File("json reading log.txt"));
@@ -46,7 +52,7 @@ public final class JsonToXmlFileConverter extends FileConverter
         }
 
         new File(xmlFileName).createNewFile();
-        try (MusicBandsWriter xmlWriter = new MusicBandsWriter(new FileOutputStream(xmlFileName))) {
+        try (Writer<Collection<MusicBand>> xmlWriter = new MusicBandsWriter(new FileOutputStream(xmlFileName))) {
             Logger logger = null;
             try {
                 logger = new Logger(new File("xml writing log.txt"));
@@ -70,7 +76,7 @@ public final class JsonToXmlFileConverter extends FileConverter
 
     @Override
     public Collection<MusicBand> changeStructure(@NotNull Collection<MusicGenre> musicGenres) {
-        HashMap<String, MusicBand> musicBands = new HashMap<>();
+        Map<String, MusicBand> musicBands = new HashMap<>();
 
         for (MusicGenre musicGenre : musicGenres) {
             for (MusicBand musicBand : musicGenre.getMusicBands()) {
@@ -78,8 +84,6 @@ public final class JsonToXmlFileConverter extends FileConverter
                     musicBands.put(musicBand.getBandName(), musicBand);
                 }
 
-                /*MusicGenre genre = new MusicGenre();
-                genre.setGenreName(musicGenre.getGenreName());*/
                 MusicBand updatedMusicBand = musicBands.get(musicBand.getBandName());
                 updatedMusicBand.getMusicGenres().add(musicGenre);
                 musicBands.put(musicBand.getBandName(), updatedMusicBand);
