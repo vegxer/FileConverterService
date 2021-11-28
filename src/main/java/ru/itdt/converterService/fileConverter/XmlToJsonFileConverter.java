@@ -45,7 +45,7 @@ public final class XmlToJsonFileConverter extends FileConverter {
                 musicGenres = changeStructure(xmlReader.readFile());
             }
         } catch (FileNotFoundException fileNotFoundException) {
-            throw new FileNotFoundException(String.format("Файл %s не найден", file.getName()));
+            throw new FileNotFoundException(String.format("Файл %s для чтения не найден", file.getName()));
         }
 
         //запись музыкальных жанров в json файл

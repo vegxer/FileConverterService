@@ -45,7 +45,7 @@ public final class JsonToXmlFileConverter extends FileConverter {
                 musicBands = changeStructure(jsonReader.readFile());
             }
         } catch (FileNotFoundException fileNotFoundException) {
-            throw new FileNotFoundException(String.format("Файл %s не найден", file.getName()));
+            throw new FileNotFoundException(String.format("Файл %s для чтения не найден", file.getName()));
         }
 
         //запись музыкальных групп в xml файл
@@ -59,7 +59,7 @@ public final class JsonToXmlFileConverter extends FileConverter {
                 xmlWriter.write(musicBands);
             }
         } catch (FileNotFoundException fileNotFoundException) {
-            throw new FileNotFoundException(String.format("Не удалось создать выходной файл %s", xmlFileName));
+            throw new FileNotFoundException(String.format("Не удалось создать файл для записи %s", xmlFileName));
         }
     }
 
