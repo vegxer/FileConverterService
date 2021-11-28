@@ -15,5 +15,5 @@ public abstract class FileConverter {
         this.file = file;
     }
 
-    public abstract void convert(String fileName) throws XMLStreamException, ParseException, IOException, ParserConfigurationException;
+    public abstract void convertTo(String fileName) throws XMLStreamException, ParseException, IOException, ParserConfigurationException;
 }

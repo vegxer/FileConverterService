@@ -4,8 +4,8 @@
         <country>UK</country>
         <year>1993</year>
         <Genres>
-            <genre>dance</genre>
             <genre>house</genre>
+            <genre>dance</genre>
         </Genres>
     </Band>
     <Band>
@@ -13,9 +13,9 @@
         <country/>
         <year>2008</year>
         <Genres>
-            <genre>dance</genre>
-            <genre>house</genre>
             <genre>jazz</genre>
+            <genre>house</genre>
+            <genre>dance</genre>
         </Genres>
     </Band>
     <Band>

@@ -26,7 +26,7 @@ public final class XmlToJsonFileConverter extends FileConverter {
 
     @SuppressWarnings({"ResultOfMethodCallIgnored"})
     @Override
-    public void convert(@NotNull String jsonFileName) throws XMLStreamException, IOException, ParseException,
+    public void convertTo(@NotNull String jsonFileName) throws XMLStreamException, IOException, ParseException,
             ParserConfigurationException {
         if (!FilenameUtils.getExtension(jsonFileName)
                 .equals("json")) {

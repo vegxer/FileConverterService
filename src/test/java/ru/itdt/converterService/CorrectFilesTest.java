@@ -53,7 +53,7 @@ public class CorrectFilesTest {
     private void testEquality(String xmlPath, String jsonPath) throws IOException, XMLStreamException, ParseException,
             JSONException, ParserConfigurationException {
         FileConverterFactory.create(jsonPath)
-                .convert(OUTPUT_PATH + "/out.xml");
+                .convertTo(OUTPUT_PATH + "/out.xml");
         MatcherAssert.assertThat(
                 FileUtils.readFileToString(new File(OUTPUT_PATH + "/out.xml"), "utf-8"),
                 CompareMatcher.isSimilarTo(FileUtils.readFileToString(new File(xmlPath), "utf-8"))
@@ -63,7 +63,7 @@ public class CorrectFilesTest {
                         .withNodeMatcher(new DefaultNodeMatcher(ElementSelectors.byNameAndText)));
 
         FileConverterFactory.create(xmlPath)
-                .convert(OUTPUT_PATH + "/out.json");
+                .convertTo(OUTPUT_PATH + "/out.json");
         JSONAssert.assertEquals(FileUtils.readFileToString(new File(jsonPath), "utf-8"),
                 FileUtils.readFileToString(new File(OUTPUT_PATH + "/out.json"), "utf-8"),
                 JSONCompareMode.NON_EXTENSIBLE);

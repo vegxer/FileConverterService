@@ -5,14 +5,14 @@
         "name": "jazz",
         "bands": [
           {
-            "country": "UK",
-            "year": "2008",
-            "name": "Clean Bandit"
-          },
-          {
             "country": "USA",
             "year": "1955",
             "name": "The Jazz Messengers"
+          },
+          {
+            "country": "UK",
+            "year": "2008",
+            "name": "Clean Bandit"
           }
         ]
       }
@@ -36,8 +36,13 @@
     },
     {
       "genre": {
-        "name": "house",
+        "name": "dance",
         "bands": [
+          {
+            "country": "Sweden",
+            "year": "1972",
+            "name": "ABBA"
+          },
           {
             "country": "UK",
             "year": "2008",
@@ -48,13 +53,8 @@
     },
     {
       "genre": {
-        "name": "dance",
+        "name": "house",
         "bands": [
-          {
-            "country": "Sweden",
-            "year": "1972",
-            "name": "ABBA"
-          },
           {
             "country": "UK",
             "year": "2008",

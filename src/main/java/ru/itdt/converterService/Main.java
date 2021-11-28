@@ -22,7 +22,7 @@ public class Main {
 
         try {
             FileConverterFactory.create(args[0])
-                    .convert(args[1]);
+                    .convertTo(args[1]);
             System.out.printf("Преобразование прошло успешно, файл %s создан%n", args[1]);
         //вывод комплексного сообщения о возникшем исключении
         } catch (ParserConfigurationException jsonWriteException) {

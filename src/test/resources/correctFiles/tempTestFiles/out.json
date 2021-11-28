@@ -5,14 +5,14 @@
         "name": "jazz",
         "bands": [
           {
-            "country": "USA",
-            "year": "1955",
-            "name": "The Jazz Messengers"
-          },
-          {
             "country": "UK",
             "year": "2008",
             "name": "Clean Bandit"
+          },
+          {
+            "country": "USA",
+            "year": "1955",
+            "name": "The Jazz Messengers"
           }
         ]
       }
@@ -23,13 +23,13 @@
         "bands": [
           {
             "country": "UK",
-            "year": "1960",
-            "name": "The Beatles"
+            "year": "1962",
+            "name": "The Rolling Stones"
           },
           {
             "country": "UK",
-            "year": "1962",
-            "name": "The Rolling Stones"
+            "year": "1960",
+            "name": "The Beatles"
           }
         ]
       }
