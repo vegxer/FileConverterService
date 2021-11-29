@@ -9,7 +9,7 @@ import java.io.FileNotFoundException;
 public final class FileConverterFactory {
 
     public static FileConverter create(@NotNull String fileName) throws FileNotFoundException {
-        if (validateFilePath(fileName))
+        if (!validateFilePath(fileName))
             throw new FileNotFoundException(String.format("Файл %s не найден", fileName));
 
         File file = new File(fileName);

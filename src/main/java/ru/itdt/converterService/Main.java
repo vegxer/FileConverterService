@@ -5,6 +5,7 @@ import ru.itdt.converterService.fileConverter.FileConverterFactory;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.stream.XMLStreamException;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -37,6 +38,14 @@ public class Main {
             System.out.printf("Ошибка нахождения файла: %s%n", fileNotFoundException.getMessage());
         } catch (IOException ioException) {
             System.out.println(ioException.getMessage());
+        } finally {
+            try {
+                Logger.writeTo(new File("out/logs/converting log.txt"));
+            } catch (IOException logsWriteExc) {
+                System.out.println("Не удалось записать логи: " + logsWriteExc.getMessage());
+            } finally {
+                Logger.clear();
+            }
         }
     }
 }

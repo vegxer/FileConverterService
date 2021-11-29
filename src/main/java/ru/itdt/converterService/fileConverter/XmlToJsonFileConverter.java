@@ -2,22 +2,18 @@ package ru.itdt.converterService.fileConverter;
 
 import org.apache.commons.io.FilenameUtils;
 import org.jetbrains.annotations.NotNull;
-import org.json.simple.parser.ParseException;
-import ru.itdt.converterService.Logger;
 import ru.itdt.converterService.fileReader.MusicBandsReader;
-import ru.itdt.converterService.fileReader.Reader;
 import ru.itdt.converterService.fileWriter.MusicGenresWriter;
-import ru.itdt.converterService.fileWriter.Writer;
 import ru.itdt.converterService.music.MusicBand;
 import ru.itdt.converterService.music.MusicGenre;
 
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.stream.XMLStreamException;
-import java.io.*;
-import java.nio.file.FileSystemException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Map;
 
 public final class XmlToJsonFileConverter extends FileConverter {
     public XmlToJsonFileConverter(File file) {
@@ -25,8 +21,7 @@ public final class XmlToJsonFileConverter extends FileConverter {
     }
 
     @Override
-    public void convertTo(@NotNull String jsonFileName) throws XMLStreamException, IOException, ParseException,
-            ParserConfigurationException {
+    public void convertTo(@NotNull String jsonFileName) throws XMLStreamException, IOException {
         if (!FilenameUtils.getExtension(jsonFileName)
                 .equals("json")) {
             throw new IllegalArgumentException(
@@ -35,31 +30,19 @@ public final class XmlToJsonFileConverter extends FileConverter {
 
         //чтение музыкальных групп из xml файла
         Collection<MusicGenre> musicGenres;
-        try (Reader<Collection<MusicBand>> xmlReader = new MusicBandsReader(new FileInputStream(file))) {
-            try (Logger logger = new Logger("xml reading log.txt")) {
-                musicGenres = changeStructure(xmlReader.readFile());
-            } catch (FileSystemException logExc) {
-                System.out.printf("Ошибка логирования процесса чтения файла %s. " +
-                        "Процесс продолжится без логирования%n", file.getName());
-                musicGenres = changeStructure(xmlReader.readFile());
-            }
+        try (MusicBandsReader xmlReader = new MusicBandsReader(new FileInputStream(file))) {
+            musicGenres = changeStructure(xmlReader.readFile());
         }
 
         //запись музыкальных жанров в json файл
-        try (Writer<Collection<MusicGenre>> jsonWriter = new MusicGenresWriter(new FileOutputStream(jsonFileName))) {
-            try (Logger logger = new Logger("json writing log.txt")) {
-                jsonWriter.write(musicGenres);
-            } catch (FileSystemException logExc) {
-                System.out.printf("Ошибка логирования процесса записи файла %s. " +
-                        "Процесс продолжится без логирования%n", jsonFileName);
-                jsonWriter.write(musicGenres);
-            }
+        try (MusicGenresWriter jsonWriter = new MusicGenresWriter(new FileOutputStream(jsonFileName))) {
+            jsonWriter.write(musicGenres);
         }
     }
 
     //преобразование структуры xml файла в структуру json файла
     private Collection<MusicGenre> changeStructure(@NotNull Collection<MusicBand> musicBands) {
-        Map<String, MusicGenre> musicGenres = new HashMap<>();
+        HashMap<String, MusicGenre> musicGenres = new HashMap<>();
 
         for (MusicBand musicBand : musicBands) {
             for (MusicGenre musicGenre : musicBand.getMusicGenres()) {

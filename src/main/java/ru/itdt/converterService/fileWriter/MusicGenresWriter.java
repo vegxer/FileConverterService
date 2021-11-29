@@ -6,6 +6,7 @@ import com.google.gson.JsonParser;
 import org.jetbrains.annotations.NotNull;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import ru.itdt.converterService.Logger;
 import ru.itdt.converterService.music.MusicBand;
 import ru.itdt.converterService.music.MusicGenre;
 
@@ -46,7 +47,8 @@ public final class MusicGenresWriter extends Writer<Collection<MusicGenre>> {
             JSONObject jsonGenre = new JSONObject();
 
             if (musicGenre.getGenreName() == null) {
-                System.err.printf("Значение 'name' не было установлено в %d-м объекте 'genre'%n", genresCount);
+                Logger.addError(
+                        String.format("Значение 'name' не было установлено в %d-м объекте 'genre'", genresCount));
                 jsonGenre.put("name", "");
             } else {
                 jsonGenre.put("name", musicGenre.getGenreName());
@@ -68,7 +70,8 @@ public final class MusicGenresWriter extends Writer<Collection<MusicGenre>> {
     private JSONArray getMusicBandsArray(MusicGenre musicGenre, int genresCount) {
         JSONArray genreArray = new JSONArray();
         if (musicGenre.getMusicBands().isEmpty()) {
-            System.err.printf("Значение 'bands' не было установлено в %d-м объекте 'genre'%n", genresCount);
+            Logger.addError(
+                    String.format("Значение 'bands' не было установлено в %d-м объекте 'genre'", genresCount));
         }
 
         //получение набора музыкальных групп, которые исполняют данный жанр
@@ -76,21 +79,24 @@ public final class MusicGenresWriter extends Writer<Collection<MusicGenre>> {
             JSONObject jsonBand = new JSONObject();
 
             if (band.getActivateYear() == null) {
-                System.err.printf("Значение 'year' не было установлено в %d-м объекте 'genre'%n", genresCount);
+                Logger.addError(
+                        String.format("Значение 'year' не было установлено в %d-м объекте 'genre'", genresCount));
                 jsonBand.put("year", "");
             } else {
                 jsonBand.put("year", Integer.toString(band.getActivateYear()));
             }
 
             if (band.getCountry() == null) {
-                System.err.printf("Значение 'country' не было установлено в %d-м объекте 'genre'%n", genresCount);
+                Logger.addError(
+                        String.format("Значение 'country' не было установлено в %d-м объекте 'genre'", genresCount));
                 jsonBand.put("country", "");
             } else {
                 jsonBand.put("country", band.getCountry());
             }
 
             if (band.getBandName() == null) {
-                System.err.printf("Значение 'name' не было установлено в %d-м объекте 'genre'%n", genresCount);
+                Logger.addError(
+                        String.format("Значение 'name' не было установлено в %d-м объекте 'genre'", genresCount));
                 jsonBand.put("name", "");
             } else {
                 jsonBand.put("name", band.getBandName());

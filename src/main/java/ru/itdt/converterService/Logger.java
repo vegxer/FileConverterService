@@ -1,32 +1,35 @@
 package ru.itdt.converterService;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintStream;
-import java.nio.file.FileSystemException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
-public final class Logger implements AutoCloseable {
-    private final PrintStream logStream;
-    private static final String PATH = "out/logs";
+public final class Logger {
+    private static List<String> errors;
 
-    @SuppressWarnings("ResultOfMethodCallIgnored")
-    public Logger(@NotNull String fileName) throws FileSystemException {
-        String creationPath = PATH + "/" + fileName;
-
-        try {
-            new File(PATH).mkdirs();
-            new File(creationPath).createNewFile();
-            logStream = new PrintStream(creationPath);
-            System.setErr(logStream);
-        } catch (IOException fileCreationExc) {
-            throw new FileSystemException(String.format("Не удалось создать файл логов по пути %s", creationPath));
-        }
+    public static void addError(String errorMessage) {
+        getErrors().add(errorMessage);
     }
 
-    @Override
-    public void close(){
-        logStream.close();
+    public static List<String> getErrors() {
+        if (errors == null) {
+            errors = new ArrayList<>();
+        }
+
+        return errors;
+    }
+
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    public static void writeTo(File file) throws IOException {
+        file.getParentFile().mkdirs();
+        Files.write(Paths.get(file.getAbsolutePath()), getErrors(), StandardCharsets.UTF_8);
+    }
+
+    public static void clear() {
+        getErrors().clear();
     }
 }

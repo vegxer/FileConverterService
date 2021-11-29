@@ -1,5 +1,6 @@
 package ru.itdt.converterService.fileWriter;
 
+import ru.itdt.converterService.Logger;
 import ru.itdt.converterService.music.MusicBand;
 import ru.itdt.converterService.music.MusicGenre;
 import org.jetbrains.annotations.NotNull;
@@ -60,7 +61,8 @@ public final class MusicBandsWriter extends Writer<Collection<MusicBand>> {
 
             Element name = xmlDoc.createElement("name");
             if (musicBand.getBandName() == null) {
-                System.err.printf("Значение 'name' не было установлено в %d-м теге Band%n", bandsCount);
+                Logger.addError(
+                        String.format("Значение 'name' не было установлено в %d-м теге Band", bandsCount));
                 name.setTextContent("");
             } else {
                 name.setTextContent(musicBand.getBandName());
@@ -69,7 +71,8 @@ public final class MusicBandsWriter extends Writer<Collection<MusicBand>> {
 
             Element country = xmlDoc.createElement("country");
             if (musicBand.getCountry() == null) {
-                System.err.printf("Значение 'country' не было установлено в %d-м теге Band%n", bandsCount);
+                Logger.addError(
+                        String.format("Значение 'country' не было установлено в %d-м теге Band", bandsCount));
                 country.setTextContent("");
             } else {
                 country.setTextContent(musicBand.getCountry());
@@ -78,7 +81,8 @@ public final class MusicBandsWriter extends Writer<Collection<MusicBand>> {
 
             Element year = xmlDoc.createElement("year");
             if (musicBand.getActivateYear() == null) {
-                System.err.printf("Значение 'year' не было установлено в %d-м теге Band%n", bandsCount);
+                Logger.addError(
+                        String.format("Значение 'year' не было установлено в %d-м теге Band", bandsCount));
                 year.setTextContent("");
             } else {
                 year.setTextContent(Integer.toString(musicBand.getActivateYear()));
@@ -97,7 +101,7 @@ public final class MusicBandsWriter extends Writer<Collection<MusicBand>> {
     public Element getBandGenres(Document xmlDoc, MusicBand musicBand, int bandsCount) {
         Element genresElem = xmlDoc.createElement("Genres");
         if (musicBand.getMusicGenres().isEmpty()) {
-            System.err.printf("Значение 'Genres' не было установлено в %d-м теге Band%n", bandsCount);
+            Logger.addError(String.format("Значение 'Genres' не было установлено в %d-м теге Band", bandsCount));
         }
 
         for (MusicGenre musicGenre : musicBand.getMusicGenres()) {

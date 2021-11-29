@@ -5,14 +5,14 @@
         "name": "jazz",
         "bands": [
           {
-            "country": "UK",
-            "year": "2008",
-            "name": "Clean Bandit"
-          },
-          {
             "country": "USA",
             "year": "1955",
             "name": "The Jazz Messengers"
+          },
+          {
+            "country": "UK",
+            "year": "2008",
+            "name": "Clean Bandit"
           }
         ]
       }
@@ -23,30 +23,13 @@
         "bands": [
           {
             "country": "UK",
-            "year": "1962",
-            "name": "The Rolling Stones"
-          },
-          {
-            "country": "UK",
             "year": "1960",
             "name": "The Beatles"
-          }
-        ]
-      }
-    },
-    {
-      "genre": {
-        "name": "house",
-        "bands": [
-          {
-            "country": "UK",
-            "year": "2008",
-            "name": "Clean Bandit"
           },
           {
             "country": "UK",
-            "year": "1993",
-            "name": "Daft Punk"
+            "year": "1962",
+            "name": "The Rolling Stones"
           }
         ]
       }
@@ -64,6 +47,23 @@
             "country": "Sweden",
             "year": "1972",
             "name": "ABBA"
+          },
+          {
+            "country": "UK",
+            "year": "1993",
+            "name": "Daft Punk"
+          }
+        ]
+      }
+    },
+    {
+      "genre": {
+        "name": "house",
+        "bands": [
+          {
+            "country": "UK",
+            "year": "2008",
+            "name": "Clean Bandit"
           },
           {
             "country": "UK",

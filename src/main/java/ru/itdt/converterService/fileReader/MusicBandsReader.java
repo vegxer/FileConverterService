@@ -1,5 +1,6 @@
 package ru.itdt.converterService.fileReader;
 
+import ru.itdt.converterService.Logger;
 import ru.itdt.converterService.music.MusicBand;
 import ru.itdt.converterService.music.MusicGenre;
 
@@ -38,11 +39,11 @@ public final class MusicBandsReader extends Reader<Collection<MusicBand>> {
                     .getName()
                     .getLocalPart()
                     .equals("Bands")) {
-                System.err.println("Тег Bands должен быть корневым тегом файла");
+                Logger.addError("Тег Bands должен быть корневым тегом файла");
             }
         }
         else {
-            System.err.println("Файл пустой");
+            Logger.addError("Файл пустой");
             return musicBands;
         }
 
@@ -62,13 +63,14 @@ public final class MusicBandsReader extends Reader<Collection<MusicBand>> {
                 if ("Band".equals(tagName)) {
                     musicBands.add(getMusicBand(reader, ++bandsCount));
                 } else {
-                    System.err.printf("Необрабатываемый тег %s%n", tagName);
+                    Logger.addError(
+                            String.format("Необрабатываемый тег %s", tagName));
                 }
             }
         }
 
         if (musicBands.isEmpty()) {
-            System.err.println("Пустой тег Bands");
+            Logger.addError("Пустой тег Bands");
         }
 
         return musicBands;
@@ -113,7 +115,8 @@ public final class MusicBandsReader extends Reader<Collection<MusicBand>> {
                         }
                     }
                     case "Genres" -> musicBand.getMusicGenres().addAll(getGenres(reader, bandsCount));
-                    default -> System.err.printf("Необрабатываемый тег %s в %d-м теге Band%n", tagName, bandsCount);
+                    default -> Logger.addError(
+                            String.format("Необрабатываемый тег %s в %d-м теге Band", tagName, bandsCount));
                 }
             }
         }
@@ -125,16 +128,20 @@ public final class MusicBandsReader extends Reader<Collection<MusicBand>> {
 
         //если какая-то информация о группе не находится, то соответствующее сообщение записывается в лог
         if (musicBand.getBandName() == null) {
-            System.err.printf("Не найдено название группы в %d-м теге Band%n", bandsCount);
+            Logger.addError(
+                    String.format("Не найдено название группы в %d-м теге Band", bandsCount));
         }
         if (musicBand.getActivateYear() == null) {
-            System.err.printf("Не найден год создания группы в %d-м теге Band%n", bandsCount);
+            Logger.addError(
+                    String.format("Не найден год создания группы в %d-м теге Band", bandsCount));
         }
         if (musicBand.getCountry() == null) {
-            System.err.printf("Не найдена страна группы в %d-м теге Band%n", bandsCount);
+            Logger.addError(
+                    String.format("Не найдена страна группы в %d-м теге Band", bandsCount));
         }
         if (musicBand.getMusicGenres().isEmpty()) {
-            System.err.printf("Не найдены жанры группы в %d-м теге Band%n", bandsCount);
+            Logger.addError(
+                    String.format("Не найдены жанры группы в %d-м теге Band", bandsCount));
         }
 
         return musicBand;
@@ -160,7 +167,8 @@ public final class MusicBandsReader extends Reader<Collection<MusicBand>> {
                             .getData());
                     musicGenres.add(musicGenre);
                 } else {
-                    System.err.printf("Необрабатываемый тег %s в %d-м теге Band в теге Genres%n", tagName, bandsCount);
+                    Logger.addError(
+                            String.format("Необрабатываемый тег %s в %d-м теге Band в теге Genres", tagName, bandsCount));
                 }
             }
         }

@@ -13,8 +13,8 @@
         <country>UK</country>
         <year>2008</year>
         <Genres>
-            <genre>jazz</genre>
             <genre>house</genre>
+            <genre>jazz</genre>
             <genre>dance</genre>
         </Genres>
     </Band>
