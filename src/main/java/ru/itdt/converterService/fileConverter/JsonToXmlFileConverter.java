@@ -24,8 +24,7 @@ public final class JsonToXmlFileConverter extends FileConverter {
 
     @Override
     public void convertTo(@NotNull String xmlFileName) throws ParseException, ParserConfigurationException, IOException {
-        if (!FilenameUtils.getExtension(xmlFileName)
-                .equals("xml")) {
+        if (!"xml".equals(FilenameUtils.getExtension(xmlFileName))) {
             throw new IllegalArgumentException(
                     String.format("Неподдерживаемое расширение файла %s, необходимо xml", xmlFileName));
         }

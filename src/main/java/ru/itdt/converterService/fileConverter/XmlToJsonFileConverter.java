@@ -22,8 +22,7 @@ public final class XmlToJsonFileConverter extends FileConverter {
 
     @Override
     public void convertTo(@NotNull String jsonFileName) throws XMLStreamException, IOException {
-        if (!FilenameUtils.getExtension(jsonFileName)
-                .equals("json")) {
+        if (!"json".equals(FilenameUtils.getExtension(jsonFileName))) {
             throw new IllegalArgumentException(
                     String.format("Неподдерживамое расширение файла %s, необходимо json", jsonFileName));
         }
