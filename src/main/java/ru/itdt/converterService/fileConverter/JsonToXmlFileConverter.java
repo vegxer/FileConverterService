@@ -25,7 +25,6 @@ public final class JsonToXmlFileConverter extends FileConverter {
         super(file);
     }
 
-    @SuppressWarnings({"ResultOfMethodCallIgnored"})
     @Override
     public void convertTo(@NotNull String xmlFileName) throws ParseException, XMLStreamException, ParserConfigurationException, IOException {
         if (!FilenameUtils.getExtension(xmlFileName)
@@ -44,12 +43,9 @@ public final class JsonToXmlFileConverter extends FileConverter {
                         "Процесс продолжится без логирования%n", file.getName());
                 musicBands = changeStructure(jsonReader.readFile());
             }
-        } catch (FileNotFoundException fileNotFoundException) {
-            throw new FileNotFoundException(String.format("Файл %s для чтения не найден", file.getName()));
         }
 
         //запись музыкальных групп в xml файл
-        new File(xmlFileName).createNewFile();
         try (Writer<Collection<MusicBand>> xmlWriter = new MusicBandsWriter(new FileOutputStream(xmlFileName))) {
             try (Logger logger = new Logger("xml writing log.txt")) {
                 xmlWriter.write(musicBands);
@@ -58,8 +54,6 @@ public final class JsonToXmlFileConverter extends FileConverter {
                         "Процесс продолжится без логирования%n", xmlFileName);
                 xmlWriter.write(musicBands);
             }
-        } catch (FileNotFoundException fileNotFoundException) {
-            throw new FileNotFoundException(String.format("Не удалось создать файл для записи %s", xmlFileName));
         }
     }
 
