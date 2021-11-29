@@ -26,12 +26,10 @@ public final class MusicGenresWriter extends Writer<Collection<MusicGenre>> {
 
         Gson gson = new GsonBuilder().setPrettyPrinting()
                 .create();
-        java.io.Writer writer = new OutputStreamWriter(outputStream);
-        try {
+        try (OutputStreamWriter writer = new OutputStreamWriter(outputStream)) {
             //noinspection deprecation
             writer.write(gson.toJson(
                     new JsonParser().parse(genresObject.toJSONString())));
-            writer.flush();
         } catch (IOException writeException) {
             throw new IOException(String.format("Ошибка записи успешно созданного json документа в файл: %s",
                     writeException.getMessage()), writeException);

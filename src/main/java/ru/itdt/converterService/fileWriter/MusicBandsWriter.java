@@ -24,20 +24,15 @@ public final class MusicBandsWriter extends Writer<Collection<MusicBand>> {
         Document xmlDoc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
         xmlDoc.appendChild(getMusicBands(xmlDoc, musicBands));
 
-        try (java.io.Writer sw = new StringWriter()) {
-            java.io.Writer writer = new OutputStreamWriter(outputStream);
-            try {
-                getPrettyOutputTransformer().transform(new DOMSource(xmlDoc), new StreamResult(sw));
-                writer.write(sw.toString());
-                writer.flush();
-            } catch (TransformerException | IOException writeException) {
-                throw new IOException(String.format("Ошибка записи успешно созданного xml документа в файл: %s",
-                        writeException.getMessage()), writeException);
-            }
+        try (OutputStreamWriter writer = new OutputStreamWriter(outputStream)) {
+            getPrettyOutputTransformer().transform(new DOMSource(xmlDoc), new StreamResult(writer));
         } catch (IOException writerException) {
             throw new IOException(
-                    String.format("Ошибка создания StringWriter для записи успешно созданного xml документа в файл: %s",
+                    String.format("Ошибка создания Writer для записи успешно созданного xml документа в файл: %s",
                             writerException.getMessage()), writerException);
+        } catch (TransformerException writeException) {
+            throw new IOException(String.format("Ошибка записи успешно созданного xml документа в файл: %s",
+                    writeException.getMessage()), writeException);
         }
     }
 
