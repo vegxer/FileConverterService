@@ -14,7 +14,7 @@ C:\Program Files или же в удобную для себя директор�
 ### Создание JAR файла
 1) Перейдите в директорию FileConverterService и введите в командную строку
    ```
-   mvn package -Dmaven.test.skip 
+   mvn package
    ```
    Эта команда создаст jar файл по пути target/FileConverterService-1-jar-with-dependencies.jar
 
