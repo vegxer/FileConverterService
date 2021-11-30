@@ -1,4 +1,4 @@
-package ru.itdt.converterService.fileReader;
+package ru.itdt.converterService.file.reader;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;

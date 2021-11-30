@@ -1,4 +1,4 @@
-package ru.itdt.converterService.fileConverter;
+package ru.itdt.converterService.file.converter;
 
 import org.apache.commons.io.FilenameUtils;
 import org.jetbrains.annotations.NotNull;

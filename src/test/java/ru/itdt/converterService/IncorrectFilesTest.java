@@ -3,7 +3,7 @@ package ru.itdt.converterService;
 import org.json.simple.parser.ParseException;
 import org.junit.Assert;
 import org.junit.Test;
-import ru.itdt.converterService.fileConverter.FileConverterFactory;
+import ru.itdt.converterService.file.converter.FileConverterFactory;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.stream.XMLStreamException;

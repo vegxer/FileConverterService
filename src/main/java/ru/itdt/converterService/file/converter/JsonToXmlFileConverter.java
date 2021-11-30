@@ -1,11 +1,11 @@
-package ru.itdt.converterService.fileConverter;
+package ru.itdt.converterService.file.converter;
 
 
 import org.apache.commons.io.FilenameUtils;
 import org.jetbrains.annotations.NotNull;
 import org.json.simple.parser.ParseException;
-import ru.itdt.converterService.fileReader.MusicGenresReader;
-import ru.itdt.converterService.fileWriter.MusicBandsWriter;
+import ru.itdt.converterService.file.reader.MusicGenresReader;
+import ru.itdt.converterService.file.writer.MusicBandsWriter;
 import ru.itdt.converterService.music.MusicBand;
 import ru.itdt.converterService.music.MusicGenre;
 

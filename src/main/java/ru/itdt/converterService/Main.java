@@ -1,7 +1,7 @@
 package ru.itdt.converterService;
 
 import org.json.simple.parser.ParseException;
-import ru.itdt.converterService.fileConverter.FileConverterFactory;
+import ru.itdt.converterService.file.converter.FileConverterFactory;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.stream.XMLStreamException;

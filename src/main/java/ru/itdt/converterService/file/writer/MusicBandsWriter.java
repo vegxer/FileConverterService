@@ -1,4 +1,4 @@
-package ru.itdt.converterService.fileWriter;
+package ru.itdt.converterService.file.writer;
 
 import ru.itdt.converterService.Logger;
 import ru.itdt.converterService.music.MusicBand;

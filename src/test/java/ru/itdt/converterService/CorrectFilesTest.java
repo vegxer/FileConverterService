@@ -10,7 +10,7 @@ import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.xmlunit.diff.DefaultNodeMatcher;
 import org.xmlunit.diff.ElementSelectors;
 import org.xmlunit.matchers.CompareMatcher;
-import ru.itdt.converterService.fileConverter.FileConverterFactory;
+import ru.itdt.converterService.file.converter.FileConverterFactory;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.stream.XMLStreamException;

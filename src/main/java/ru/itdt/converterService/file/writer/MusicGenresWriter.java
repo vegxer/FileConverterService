@@ -1,4 +1,4 @@
-package ru.itdt.converterService.fileWriter;
+package ru.itdt.converterService.file.writer;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
